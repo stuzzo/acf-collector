@@ -1,0 +1,25 @@
+{
+    "name": "stuzzo/acf-formatter",
+    "type": "wordpress-plugin",
+    "authors": [
+        {
+            "name": "Alfredo Aiello",
+            "email": "stuzzo@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "ACFFormatter\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ACFFormatter\\Tests\\": "tests/"
+        }
+    },
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^7",
+        "10up/wp_mock": "0.3.0"
+    }
+}

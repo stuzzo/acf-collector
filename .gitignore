@@ -1,3 +1,4 @@
-vendor
+vendor/*
+!vendor/.gitkeep
 !vendor/autoload.php
 !vendor/composer

@@ -27,9 +27,9 @@ class PluginI18N
      *
      * @since    1.0.0
      */
-    public function load_plugin_textdomain(): void
+    public function loadPluginTextdomain(): void
     {
-        load_plugin_textdomain(
+        \load_plugin_textdomain(
             'acf-formatter',
             false,
             dirname(__DIR__) . '/languages/'

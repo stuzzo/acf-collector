@@ -11,6 +11,9 @@
 
 namespace ACFFormatter\Main;
 
+use ACFFormatter\Handler\RestAPIHandler;
+use ACFFormatter\Handler\TemplateHandler;
+
 /**
  * The core plugin class.
  *
@@ -20,24 +23,6 @@ namespace ACFFormatter\Main;
  */
 class PluginKernel
 {
-
-    /**
-     * The class responsible for orchestrating the actions and filters of the
-     * core plugin.
-     *
-     * @since    1.0.0
-     * @var      PluginLoader $loader Maintains and registers all hooks for the plugin.
-     */
-    private $loader;
-
-    /**
-     * The class responsible for defining internationalization functionality
-     * of the plugin.
-     *
-     * @since    1.0.0
-     * @var PluginI18N
-     */
-    private $i18n;
 
     /**
      * The unique identifier of this plugin.
@@ -55,13 +40,37 @@ class PluginKernel
      */
     private $version;
 
+    /**
+     * @since    1.0.0
+     * @var \ACFFormatter\Main\PluginI18N
+     */
+    private $i18n;
 
+    /**
+     * @since    1.0.0
+     * @var \ACFFormatter\Handler\RestAPIHandler
+     */
+    private $apiHandler;
 
-    public function __construct(PluginLoader $loader, PluginI18N $i18n)
+    /**
+     * @since    1.0.0
+     * @var \ACFFormatter\Handler\TemplateHandler
+     */
+    private $templateHandler;
+
+    /**
+     * @since    1.0.0
+     * @var \ACFFormatter\Main\PluginLoader
+     */
+    private $loader;
+
+    public function __construct(PluginI18N $i18n, RestAPIHandler $apiHandler, TemplateHandler $templateHandler, PluginLoader $loader)
     {
-        add_action('plugins_loaded', array($this, 'init'));
-        $this->loader = $loader;
+        add_action('plugins_loaded', [$this, 'init']);
         $this->i18n = $i18n;
+        $this->apiHandler = $apiHandler;
+        $this->templateHandler = $templateHandler;
+        $this->loader = $loader;
     }
 
     /**
@@ -73,7 +82,7 @@ class PluginKernel
      *
      * @since    1.0.0
      */
-    public function init()
+    public function init(): void
     {
         if (defined('PLUGIN_NAME_VERSION')) {
             $this->version = PLUGIN_NAME_VERSION;
@@ -81,12 +90,10 @@ class PluginKernel
             $this->version = '1.0.0';
         }
         $this->pluginName = 'acf-formatter';
-        $this->i18n->load_plugin_textdomain();
-//
-//        $this->load_dependencies();
-//                $this->define_admin_hooks();
-////        $this->define_public_hooks();
-//        $this->define_api_hooks();
+        $this->loadTextDomain();
+        $this->initAPIHandler();
+        $this->initTemplateHandler();
+        $this->initLoader();
     }
 
     /**
@@ -113,50 +120,23 @@ class PluginKernel
     }
 
     /**
-     * Load the required dependencies for this plugin.
-     *
-     * Include the following files that make up the plugin:
-     *
-     * - ACF_Formatter_Loader. Orchestrates the hooks of the plugin.
-     * - ACF_Formatter_i18n. Defines internationalization functionality.
-     * - ACF_Formatter_Admin. Defines all hooks for the admin area.
-     * - ACF_Formatter_Public. Defines all hooks for the public side of the site.
-     *
-     * Create an instance of the loader which will be used to register the hooks
-     * with WordPress.
+     * Initialize i18n text domain.
      *
      * @since    1.0.0
-     * @access   private
      */
-    private function load_dependencies()
+    private function loadTextDomain(): void
     {
-
-        /**
-         * The class responsible for defining all actions that occur in the admin area.
-         */
-//        require_once plugin_dir_path(__DIR__) . 'admin/class-acf-formatter-admin.php';
-
-        /**
-         * The class responsible for defining all actions that occur in the public-facing
-         * side of the site.
-         */
-//        require_once plugin_dir_path(__DIR__) . 'public/class-acf-formatter-public.php';
-
+        $this->i18n->loadPluginTextdomain();
     }
 
     /**
-     * Register all of the hooks related to the admin area functionality
-     * of the plugin.
+     * Initialize rest api handler
      *
      * @since    1.0.0
-     * @access   private
      */
-    private function define_admin_hooks()
+    private function initAPIHandler(): void
     {
-        $plugin_admin = new ACF_Formatter_Admin($this->getPluginName(), $this->getVersion());
-
-        $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
-        $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
+        $this->apiHandler->init();
     }
 
     /**
@@ -164,29 +144,10 @@ class PluginKernel
      * of the plugin.
      *
      * @since    1.0.0
-     * @access   private
      */
-    private function define_public_hooks()
+    private function initTemplateHandler(): void
     {
-        $plugin_public = new ACF_Formatter_Public($this->getPluginName(), $this->getVersion());
-
-        $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
-        $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
-        $this->loader->add_filter('template_redirect', $plugin_public, 'register_template_hook');
-    }
-
-    /**
-     * Register all of the hooks related to the rest api functionality
-     * of the plugin.
-     *
-     * @since    1.0.0
-     * @access   private
-     */
-    private function define_api_hooks()
-    {
-        $plugin_api = new ACF_Formatter_Rest_API_Handler($this->getPluginName(), $this->getVersion());
-
-        $this->loader->add_filter('rest_api_init', $plugin_api, 'init_api');
+        $this->templateHandler->init();
     }
 
     /**
@@ -194,24 +155,8 @@ class PluginKernel
      *
      * @since    1.0.0
      */
-    public function run()
+    private function initLoader(): void
     {
         $this->loader->run();
     }
-
-
-
-    /**
-     * The reference to the class that orchestrates the hooks with the plugin.
-     *
-     * @since     1.0.0
-     * @return    ACF_Formatter_Loader    Orchestrates the hooks of the plugin.
-     */
-    public function get_loader()
-    {
-        return $this->loader;
-    }
-
-
-
 }

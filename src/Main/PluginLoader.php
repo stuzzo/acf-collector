@@ -40,6 +40,14 @@ class PluginLoader
     protected $filters;
 
     /**
+     * The array of rest fields registered with WordPress.
+     *
+     * @since    1.0.0
+     * @var      array $restFields The rest fields registered with WordPress to fire when the plugin loads.
+     */
+    protected $restFields;
+
+    /**
      * Initialize the collections used to maintain the actions and filters.
      *
      * @since    1.0.0
@@ -48,6 +56,7 @@ class PluginLoader
     {
         $this->actions = array();
         $this->filters = array();
+        $this->restFields = array();
     }
 
     /**
@@ -61,7 +70,7 @@ class PluginLoader
      * @param    int    $priority      Optional. The priority at which the function should be fired. Default is 10.
      * @param    int    $accepted_args Optional. The number of arguments that should be passed to the $callback. Default is 1.
      */
-    public function add_action($hook, $component, $callback, $priority = 10, $accepted_args = 1)
+    public function addAction($hook, $component, $callback, $priority = 10, $accepted_args = 1): void
     {
         $this->actions = $this->add($this->actions, $hook, $component, $callback, $priority, $accepted_args);
     }
@@ -77,7 +86,7 @@ class PluginLoader
      * @param    int    $priority      Optional. The priority at which the function should be fired. Default is 10.
      * @param    int    $accepted_args Optional. The number of arguments that should be passed to the $callback. Default is 1
      */
-    public function add_filter($hook, $component, $callback, $priority = 10, $accepted_args = 1)
+    public function addFilter($hook, $component, $callback, $priority = 10, $accepted_args = 1): void
     {
         $this->filters = $this->add($this->filters, $hook, $component, $callback, $priority, $accepted_args);
     }
@@ -112,6 +121,24 @@ class PluginLoader
     }
 
     /**
+     * Add a new rest field named as $attribute to the $objectType requests with $args arguments
+     *
+     * @since    1.0.0
+     *
+     * @param string $objectType
+     * @param string $attribute
+     * @param array  $args
+     */
+    public function addRestField(string $objectType, string $attribute, array $args): void
+    {
+        $this->restFields[] = [
+            'objectType' => $objectType,
+            'attribute' => $attribute,
+            'args' => $args,
+        ];
+    }
+
+    /**
      * Register the filters and actions with WordPress.
      *
      * @since    1.0.0
@@ -119,11 +146,15 @@ class PluginLoader
     public function run()
     {
         foreach ($this->filters as $hook) {
-            add_filter($hook['hook'], array($hook['component'], $hook['callback']), $hook['priority'], $hook['accepted_args']);
+            \add_filter($hook['hook'], array($hook['component'], $hook['callback']), $hook['priority'], $hook['accepted_args']);
         }
 
         foreach ($this->actions as $hook) {
-            add_action($hook['hook'], array($hook['component'], $hook['callback']), $hook['priority'], $hook['accepted_args']);
+            \add_action($hook['hook'], array($hook['component'], $hook['callback']), $hook['priority'], $hook['accepted_args']);
+        }
+
+        foreach ($this->restFields as $field) {
+            \register_rest_field($field['objectType'], $field['attribute'], $field['args']);
         }
     }
 

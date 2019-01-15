@@ -35,6 +35,8 @@
  */
 
 // If this file is called directly, abort.
+use ACFFormatter\Main\PluginActivator;
+use ACFFormatter\Main\PluginDeactivator;
 use ACFFormatter\Main\PluginKernel;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -51,29 +53,27 @@ if (!defined('WPINC')) {
  */
 define('PLUGIN_NAME_VERSION', '1.0.0');
 
+require plugin_dir_path(__FILE__) . '/vendor/autoload.php';
+
 /**
  * The code that runs during plugin activation.
- * This action is documented in includes/class-acf-formatter-activator.php
  */
 function activate_acf_formatter()
 {
-    require_once plugin_dir_path(__FILE__) . 'includes/class-acf-formatter-activator.php';
-    ACF_Formatter_Activator::activate();
+    PluginActivator::activate();
 }
 register_activation_hook(__FILE__, 'activate_acf_formatter');
 
 /**
  * The code that runs during plugin deactivation.
- * This action is documented in includes/class-acf-formatter-deactivator.php
  */
 function deactivate_acf_formatter()
 {
-    require_once plugin_dir_path(__FILE__) . 'includes/class-acf-formatter-deactivator.php';
-    ACF_Formatter_Deactivator::deactivate();
+    PluginDeactivator::deactivate();
 }
 register_deactivation_hook(__FILE__, 'deactivate_acf_formatter');
 
-require plugin_dir_path(__FILE__) . '/vendor/autoload.php';
+
 
 // Initialize service container
 $container = new ContainerBuilder();

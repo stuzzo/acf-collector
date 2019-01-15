@@ -2,16 +2,24 @@
 
 namespace ACFFormatter\Tests;
 
-class ACFFormatterTestCase extends \WP_Mock\Tools\TestCase
+use function Brain\Monkey\setUp;
+use function Brain\Monkey\tearDown;
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+
+class ACFFormatterTestCase extends \PHPUnit\Framework\TestCase
 {
+    // Adds Mockery expectations to the PHPUnit assertions count.
+    use MockeryPHPUnitIntegration;
 
     public function setUp()
     {
-        \WP_Mock::setUp();
+        parent::setUp();
+        setUp();
     }
 
     public function tearDown()
     {
-        \WP_Mock::tearDown();
+        tearDown();
+        parent::tearDown();
     }
 }

@@ -9,6 +9,7 @@ class ComposerStaticInit9aaac2641ad8f906c9020501cc571b07
     public static $files = array (
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
+        '051bafe20e2674435a162870efa2d2a7' => __DIR__ . '/..' . '/brain/monkey/inc/api.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -19,16 +20,27 @@ class ComposerStaticInit9aaac2641ad8f906c9020501cc571b07
         'W' => 
         array (
             'Webmozart\\Assert\\' => 17,
-            'WP_Mock\\' => 8,
         ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Ctype\\' => 23,
+            'Symfony\\Contracts\\' => 18,
+            'Symfony\\Component\\Filesystem\\' => 29,
+            'Symfony\\Component\\DependencyInjection\\' => 38,
+            'Symfony\\Component\\Config\\' => 25,
+        ),
+        'P' => 
+        array (
+            'Psr\\Container\\' => 14,
         ),
         'D' => 
         array (
             'Doctrine\\Instantiator\\' => 22,
             'DeepCopy\\' => 9,
+        ),
+        'B' => 
+        array (
+            'Brain\\Monkey\\' => 13,
         ),
         'A' => 
         array (
@@ -48,13 +60,29 @@ class ComposerStaticInit9aaac2641ad8f906c9020501cc571b07
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
         ),
-        'WP_Mock\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/10up/wp_mock/php/WP_Mock',
-        ),
         'Symfony\\Polyfill\\Ctype\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
+        ),
+        'Symfony\\Contracts\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/contracts',
+        ),
+        'Symfony\\Component\\Filesystem\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/filesystem',
+        ),
+        'Symfony\\Component\\DependencyInjection\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/dependency-injection',
+        ),
+        'Symfony\\Component\\Config\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/config',
+        ),
+        'Psr\\Container\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/container/src',
         ),
         'Doctrine\\Instantiator\\' => 
         array (
@@ -63,6 +91,10 @@ class ComposerStaticInit9aaac2641ad8f906c9020501cc571b07
         'DeepCopy\\' => 
         array (
             0 => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy',
+        ),
+        'Brain\\Monkey\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/brain/monkey/src',
         ),
         'ACFFormatter\\Tests\\' => 
         array (
@@ -703,7 +735,6 @@ class ComposerStaticInit9aaac2641ad8f906c9020501cc571b07
         'TheSeer\\Tokenizer\\TokenCollectionException' => __DIR__ . '/..' . '/theseer/tokenizer/src/TokenCollectionException.php',
         'TheSeer\\Tokenizer\\Tokenizer' => __DIR__ . '/..' . '/theseer/tokenizer/src/Tokenizer.php',
         'TheSeer\\Tokenizer\\XMLSerializer' => __DIR__ . '/..' . '/theseer/tokenizer/src/XMLSerializer.php',
-        'WP_Mock' => __DIR__ . '/..' . '/10up/wp_mock/php/WP_Mock.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

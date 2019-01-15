@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the ACF Formatter plugin.
+ *
+ * (c) Alfredo Aiello <stuzzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 /**
  * The plugin bootstrap file
  *
@@ -15,11 +24,11 @@
  * @wordpress-plugin
  * Plugin Name:       Advanced Custom Fields Formatter
  * Plugin URI:        https://www.google.it
- * Description:       It appends to the current requests all the custom fields used.
+ * Description:       It appends automatically to the current request all the custom field used in the current content (e.g. Pages, Posts, etc.)
  * Version:           1.0.0
- * Author:            Alfredo Aiello
+ * Author:            Alfredo Aiello <stuzzo@gmail.com>
  * Author URI:        https://www.google.it
- * License:           GPL-2.0+
+ * License:           MIT
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       acf-formatter
  * Domain Path:       /languages
@@ -27,6 +36,9 @@
 
 // If this file is called directly, abort.
 use ACFFormatter\Main\PluginKernel;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 
 if (!defined('WPINC')) {
     die;
@@ -48,6 +60,7 @@ function activate_acf_formatter()
     require_once plugin_dir_path(__FILE__) . 'includes/class-acf-formatter-activator.php';
     ACF_Formatter_Activator::activate();
 }
+register_activation_hook(__FILE__, 'activate_acf_formatter');
 
 /**
  * The code that runs during plugin deactivation.
@@ -58,29 +71,19 @@ function deactivate_acf_formatter()
     require_once plugin_dir_path(__FILE__) . 'includes/class-acf-formatter-deactivator.php';
     ACF_Formatter_Deactivator::deactivate();
 }
+register_deactivation_hook(__FILE__, 'deactivate_acf_formatter');
 
-//register_activation_hook(__FILE__, 'activate_acf_formatter');
-//register_deactivation_hook(__FILE__, 'deactivate_acf_formatter');
+require plugin_dir_path(__FILE__) . '/vendor/autoload.php';
 
-/**
- * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and public-facing site hooks.
- */
-//require plugin_dir_path(__FILE__) . 'includes/class-acf-formatter.php';
+// Initialize service container
+$container = new ContainerBuilder();
 
-/**
- * Begins execution of the plugin.
- *
- * Since everything within the plugin is registered via hooks,
- * then kicking off the plugin from this point in the file does
- * not affect the page life cycle.
- *
- * @since    1.0.0
- */
-function run_acf_formatter()
-{
-    require plugin_dir_path(__FILE__) . '/vendor/autoload.php';
+// Load configuration
+$phpLoader = new PhpFileLoader($container, new FileLocator(__DIR__.'/config'));
+$phpLoader->load('services.php');
 
-    new PluginKernel();
-}
-run_acf_formatter();
+$container->compile();
+
+/** @var PluginKernel $pluginKernel */
+$pluginKernel = $container->get(PluginKernel::class);
+$pluginKernel->init();

@@ -17,9 +17,13 @@
             "ACFFormatter\\Tests\\": "tests/"
         }
     },
-    "require": {},
+    "require": {
+        "php": "^7.1.3",
+        "symfony/dependency-injection": "^4.2",
+        "symfony/config": "^4.2"
+    },
     "require-dev": {
         "phpunit/phpunit": "^7",
-        "10up/wp_mock": "0.3.0"
+        "brain/monkey": "2.*"
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the ACF Formatter plugin.
+ * This file is part of the ACF Collector plugin.
  *
  * (c) Alfredo Aiello <stuzzo@gmail.com>
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace ACFFormatter\Main;
+namespace ACFCollector\Main;
 
 /**
  * Register all actions and filters for the plugin.
@@ -70,7 +70,7 @@ class PluginLoader
      * @param    int    $priority      Optional. The priority at which the function should be fired. Default is 10.
      * @param    int    $accepted_args Optional. The number of arguments that should be passed to the $callback. Default is 1.
      */
-    public function addAction($hook, $component, $callback, $priority = 10, $accepted_args = 1): void
+    public function addAction($hook, $component, $callback, $priority = 10, $accepted_args = 1)
     {
         $this->actions = $this->add($this->actions, $hook, $component, $callback, $priority, $accepted_args);
     }
@@ -86,7 +86,7 @@ class PluginLoader
      * @param    int    $priority      Optional. The priority at which the function should be fired. Default is 10.
      * @param    int    $accepted_args Optional. The number of arguments that should be passed to the $callback. Default is 1
      */
-    public function addFilter($hook, $component, $callback, $priority = 10, $accepted_args = 1): void
+    public function addFilter($hook, $component, $callback, $priority = 10, $accepted_args = 1)
     {
         $this->filters = $this->add($this->filters, $hook, $component, $callback, $priority, $accepted_args);
     }
@@ -129,7 +129,7 @@ class PluginLoader
      * @param string $attribute
      * @param array  $args
      */
-    public function addRestField(string $objectType, string $attribute, array $args): void
+    public function addRestField($objectType, $attribute, array $args)
     {
         $this->restFields[] = [
             'objectType' => $objectType,

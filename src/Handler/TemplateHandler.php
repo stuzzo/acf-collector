@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the ACF Formatter plugin.
+ * This file is part of the ACF Collector plugin.
  *
  * (c) Alfredo Aiello <stuzzo@gmail.com>
  *
@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace ACFFormatter\Handler;
+namespace ACFCollector\Handler;
 
-use ACFFormatter\Main\PluginLoader;
+use ACFCollector\Main\PluginLoader;
 
 /**
  * The public-facing functionality of the plugin.
@@ -39,7 +39,7 @@ class TemplateHandler
      *
      * @since    1.0.0
      */
-    public function init(): void
+    public function init()
     {
         $this->loader->addFilter('template_redirect', $this, 'register_template_hook');
     }

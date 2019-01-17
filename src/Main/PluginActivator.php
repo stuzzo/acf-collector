@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the ACF Formatter plugin.
+ * This file is part of the ACF Collector plugin.
  *
  * (c) Alfredo Aiello <stuzzo@gmail.com>
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace ACFFormatter\Main;
+namespace ACFCollector\Main;
 
 /**
  * Fired during plugin activation.

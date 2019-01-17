@@ -1,31 +1,28 @@
 <?php
 
+/*
+ * This file is part of the ACF Collector plugin.
+ *
+ * (c) Alfredo Aiello <stuzzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace ACFCollector\Handler;
+
+use ACFCollector\Exception\FieldNotImplementedException;
+
 /**
  * @since      1.0.0
- * @package    ACF_Formatter
- * @subpackage ACF_Formatter/handler
- * @author     Alfredo Aiello <stuzzo@gmail.com>
  */
-class ACF_Formatter_Fields_Handler
+class ACFHandler
 {
     const FORMATTERS_CLASS_PREFIX = 'ACF_Formatter_Input_';
 
-    private function __construct()
-    {
-    }
-
-    public static function getInstance()
-    {
-        static $inst = null;
-        if ($inst === null) {
-            $inst = new self();
-        }
-        return $inst;
-    }
-
     public function getFieldsFormattedFromObjectId($objectId)
     {
-        $formattedFields = array();
+        $formattedFields = [];
         $fields = get_field_objects($objectId);
         if (empty($fields)) {
             return $formattedFields;
@@ -36,7 +33,7 @@ class ACF_Formatter_Fields_Handler
 
     private function formatFields(array $fields)
     {
-        $formattedFields = array();
+        $formattedFields = [];
         foreach ($fields as $field) {
             $formattedFields += $this->formatField($field);
         }
@@ -48,7 +45,7 @@ class ACF_Formatter_Fields_Handler
     {
         try {
             $formattedField = $this->formatFieldByType($field);
-        } catch (ACF_Formatter_Field_Not_Implemented_Exception $exception) {
+        } catch (FieldNotImplementedException $exception) {
             $formattedField[$field['name']] = $exception->getMessage();
         }
 
@@ -60,7 +57,7 @@ class ACF_Formatter_Fields_Handler
     {
         $formatter_class = sprintf('%s%s', self::FORMATTERS_CLASS_PREFIX, ucfirst($field['type']));
         if (!class_exists($formatter_class)) {
-            throw new ACF_Formatter_Field_Not_Implemented_Exception($field['type']);
+            throw new FieldNotImplementedException($field['type']);
         }
 
 

@@ -2,8 +2,10 @@
 
 namespace ACFFormatter\Tests\Main;
 
+use ACFFormatter\Handler\TemplateHandler;
 use ACFFormatter\Main\PluginLoader;
 use ACFFormatter\Tests\ACFFormatterTestCase;
+use function has_filter;
 
 class PluginLoaderTest extends ACFFormatterTestCase
 {
@@ -12,28 +14,16 @@ class PluginLoaderTest extends ACFFormatterTestCase
         return new PluginLoader();
     }
 
-    private function getActionConfig(): array
+    public function testAddFilter(): void
     {
-        return [
-            'admin_enqueue_scripts', new \stdClass(), 'enqueue_styles',
-        ];
-    }
-
-    public function testAddAction(): void
-    {
-        $action = $this->getActionConfig();
         $pluginLoader = $this->getPluginLoader();
-        $pluginLoader->addAction($action[0], $action[1], $action[2]);
 
-        self::assertTrue(has_action('admin_enqueue_scripts', [MyClass::class, 'enqueue_styles']));
-    }
+        $templateHandler = new TemplateHandler($pluginLoader);
+        $templateHandler->init();
 
-    public function testPluginName(): void
-    {
-        $pluginKernel = $this->getPluginKernel();
-        $pluginKernel->init();
+        $pluginLoader->run();
 
-        $this->assertEquals(self::PLUGIN_NAME, $pluginKernel->getPluginName());
+        self::assertTrue(has_filter('template_redirect', [$templateHandler, 'register_template_hook']));
     }
 
 }

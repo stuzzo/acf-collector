@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the ACF Formatter plugin.
+ * This file is part of the ACF Collector plugin.
  *
  * (c) Alfredo Aiello <stuzzo@gmail.com>
  *
@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace ACFFormatter\Handler;
+namespace ACFCollector\Handler;
 
-use ACFFormatter\Main\PluginLoader;
+use ACFCollector\Main\PluginLoader;
 
 /**
  * The api-facing functionality of the plugin.
@@ -39,28 +39,28 @@ class RestAPIHandler
      *
      * @since    1.0.0
      */
-    public function init(): void
+    public function init()
     {
         $this->initPageResponse();
         $this->initPostResponse();
     }
 
-    private function initPageResponse(): void
+    private function initPageResponse()
     {
         $this->loader->addRestField('page', 'acf_formatter_fields', ['get_callback' => [$this, 'get_object_custom_fields']]);
     }
 
-    private function initPostResponse(): void
+    private function initPostResponse()
     {
         $this->loader->addRestField('post', 'acf_formatter_fields', ['get_callback' => [$this, 'get_object_custom_fields']]);
     }
 
-    //    public function get_object_custom_fields($object)
-    //    {
-    //        $fieldsHandler = ACF_Formatter_Fields_Handler::getInstance();
-    //        $fields = $fieldsHandler->getFieldsFormattedFromObjectId($object['id']);
-    //
-    //        return $fields;
-    //    }
+    public function get_object_custom_fields($object)
+    {
+        $fieldsHandler = ACF_Formatter_Fields_Handler::getInstance();
+        $fields = $fieldsHandler->getFieldsFormattedFromObjectId($object['id']);
+
+        return $fields;
+    }
 
 }

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the ACF Formatter plugin.
+ * This file is part of the ACF Collector plugin.
  *
  * (c) Alfredo Aiello <stuzzo@gmail.com>
  *
@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace ACFFormatter\Main;
+namespace ACFCollector\Main;
 
-use ACFFormatter\Handler\RestAPIHandler;
-use ACFFormatter\Handler\TemplateHandler;
+use ACFCollector\Handler\RestAPIHandler;
+use ACFCollector\Handler\TemplateHandler;
 
 /**
  * The core plugin class.
@@ -42,25 +42,25 @@ class PluginKernel
 
     /**
      * @since    1.0.0
-     * @var \ACFFormatter\Main\PluginI18N
+     * @var \ACFCollector\Main\PluginI18N
      */
     private $i18n;
 
     /**
      * @since    1.0.0
-     * @var \ACFFormatter\Handler\RestAPIHandler
+     * @var \ACFCollector\Handler\RestAPIHandler
      */
     private $apiHandler;
 
     /**
      * @since    1.0.0
-     * @var \ACFFormatter\Handler\TemplateHandler
+     * @var \ACFCollector\Handler\TemplateHandler
      */
     private $templateHandler;
 
     /**
      * @since    1.0.0
-     * @var \ACFFormatter\Main\PluginLoader
+     * @var \ACFCollector\Main\PluginLoader
      */
     private $loader;
 
@@ -82,14 +82,14 @@ class PluginKernel
      *
      * @since    1.0.0
      */
-    public function init(): void
+    public function init()
     {
-        if (defined('PLUGIN_NAME_VERSION')) {
-            $this->version = PLUGIN_NAME_VERSION;
+        if (defined('ACF_COLLECTOR_VERSION')) {
+            $this->version = ACF_COLLECTOR_VERSION;
         } else {
             $this->version = '1.0.0';
         }
-        $this->pluginName = 'acf-formatter';
+        $this->pluginName = 'acf-collector';
         $this->loadTextDomain();
         $this->initAPIHandler();
         $this->initTemplateHandler();
@@ -103,7 +103,7 @@ class PluginKernel
      * @since     1.0.0
      * @return    string    The name of the plugin.
      */
-    public function getPluginName(): string
+    public function getPluginName()
     {
         return $this->pluginName;
     }
@@ -114,7 +114,7 @@ class PluginKernel
      * @since     1.0.0
      * @return    string    The version number of the plugin.
      */
-    public function getVersion(): string
+    public function getVersion()
     {
         return $this->version;
     }
@@ -124,7 +124,7 @@ class PluginKernel
      *
      * @since    1.0.0
      */
-    private function loadTextDomain(): void
+    private function loadTextDomain()
     {
         $this->i18n->loadPluginTextdomain();
     }
@@ -134,7 +134,7 @@ class PluginKernel
      *
      * @since    1.0.0
      */
-    private function initAPIHandler(): void
+    private function initAPIHandler()
     {
         $this->apiHandler->init();
     }
@@ -145,7 +145,7 @@ class PluginKernel
      *
      * @since    1.0.0
      */
-    private function initTemplateHandler(): void
+    private function initTemplateHandler()
     {
         $this->templateHandler->init();
     }
@@ -155,7 +155,7 @@ class PluginKernel
      *
      * @since    1.0.0
      */
-    private function initLoader(): void
+    private function initLoader()
     {
         $this->loader->run();
     }

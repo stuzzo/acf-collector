@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the ACF Formatter plugin.
+ * This file is part of the ACF Collector plugin.
  *
  * (c) Alfredo Aiello <stuzzo@gmail.com>
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace ACFFormatter\Main;
+namespace ACFCollector\Main;
 
 /**
  * Define the internationalization functionality.
@@ -27,10 +27,10 @@ class PluginI18N
      *
      * @since    1.0.0
      */
-    public function loadPluginTextdomain(): void
+    public function loadPluginTextdomain()
     {
         \load_plugin_textdomain(
-            'acf-formatter',
+            'acf-collector',
             false,
             dirname(__DIR__) . '/languages/'
         );

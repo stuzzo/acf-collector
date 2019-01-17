@@ -12,11 +12,11 @@
 namespace ACFCollector\Formatter;
 
 /**
- * Class that formats image field
+ * Class that formats file field
  *
  * @since      1.0.0
  */
-class ImageFormatter extends BaseFormatter implements FormatterInterface
+class FileFormatter extends BaseFormatter implements FormatterInterface
 {
     protected $returnKeys = array(
         'return_format',

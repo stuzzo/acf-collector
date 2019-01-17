@@ -12,14 +12,15 @@
 namespace ACFCollector\Formatter;
 
 /**
- * Class that formats image field
+ * Class that formats wysiwyg field
  *
  * @since      1.0.0
  */
-class ImageFormatter extends BaseFormatter implements FormatterInterface
+class WysiwygFormatter  extends BaseFormatter implements FormatterInterface
 {
     protected $returnKeys = array(
-        'return_format',
+        'default_value',
+        'placeholder',
     );
 
     private function __construct() {}
@@ -41,7 +42,7 @@ class ImageFormatter extends BaseFormatter implements FormatterInterface
         if (empty($field['value'])) {
             $formattedFields['value'] = '';
         } else {
-            $formattedFields['value'] = $field['value'];
+            $formattedFields['value'] = (string)$field['value'];
         }
 
         return $this->prepareFieldsForOutput($field, $formattedFields);

@@ -43,6 +43,7 @@ final class RestAPIHandler
     {
         $this->initPageResponse();
         $this->initPostResponse();
+        $this->initUserResponse();
     }
 
     private function initPageResponse()
@@ -53,6 +54,11 @@ final class RestAPIHandler
     private function initPostResponse()
     {
         $this->loader->addRestField('post', 'acf_collector_fields', ['get_callback' => [$this, 'getObjectCustomFields']]);
+    }
+
+    private function initUserResponse()
+    {
+        $this->loader->addRestField('user', 'acf_collector_fields', ['get_callback' => [$this, 'getObjectCustomFields']]);
     }
 
     /**

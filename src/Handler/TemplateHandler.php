@@ -21,7 +21,7 @@ use ACFCollector\Main\PluginLoader;
  *
  * @since      1.0.0
  */
-class TemplateHandler
+final class TemplateHandler
 {
 
     /**
@@ -52,11 +52,9 @@ class TemplateHandler
     public function register_template_hook()
     {
         global $post;
-        $fields = get_field_objects($post->ID);
-        $post->fields = $fields;
-        var_dump($fields);
-        die('ciao');
-
+        $fieldsHandler = ACFHandler::getInstance();
+        $fields = $fieldsHandler->getFieldsFormattedFromObjectId($post->ID);
+        $post->acf_collector_fields = $fields;
     }
 
 }

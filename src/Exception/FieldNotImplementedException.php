@@ -11,7 +11,7 @@
 
 namespace ACFCollector\Exception;
 
-class FieldNotImplementedException extends \RuntimeException
+final class FieldNotImplementedException extends \RuntimeException
 {
     public function __construct($fieldType, $code = 0, \Throwable $previous = null)
     {

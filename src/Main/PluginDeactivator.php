@@ -18,7 +18,7 @@ namespace ACFCollector\Main;
  *
  * @since      1.0.0
  */
-class PluginDeactivator
+final class PluginDeactivator
 {
 
     /**

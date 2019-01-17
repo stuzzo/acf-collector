@@ -82,6 +82,7 @@ function initPlugin()
     $restAPIHandler = new RestAPIHandler($pluginLoader);
     $templateHandler = new TemplateHandler($pluginLoader);
     $pluginKernel = new PluginKernel($pluginI18N,  $restAPIHandler, $templateHandler, $pluginLoader);
+    $pluginKernel->init();
 }
 initPlugin();
 //

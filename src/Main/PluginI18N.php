@@ -19,7 +19,7 @@ namespace ACFCollector\Main;
  *
  * @since      1.0.0
  */
-class PluginI18N
+final class PluginI18N
 {
 
     /**

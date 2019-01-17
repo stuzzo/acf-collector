@@ -18,7 +18,7 @@ namespace ACFCollector\Main;
  *
  * @since      1.0.0
  */
-class PluginActivator
+final class PluginActivator
 {
 
     /**

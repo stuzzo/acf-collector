@@ -20,7 +20,7 @@ namespace ACFCollector\Main;
  *
  * @since      1.0.0
  */
-class PluginLoader
+final class PluginLoader
 {
 
     /**

@@ -21,7 +21,7 @@ use ACFCollector\Main\PluginLoader;
  *
  * @since      1.0.0
  */
-class RestAPIHandler
+final class RestAPIHandler
 {
 
     /**
@@ -47,17 +47,22 @@ class RestAPIHandler
 
     private function initPageResponse()
     {
-        $this->loader->addRestField('page', 'acf_formatter_fields', ['get_callback' => [$this, 'get_object_custom_fields']]);
+        $this->loader->addRestField('page', 'acf_collector_fields', ['get_callback' => [$this, 'getObjectCustomFields']]);
     }
 
     private function initPostResponse()
     {
-        $this->loader->addRestField('post', 'acf_formatter_fields', ['get_callback' => [$this, 'get_object_custom_fields']]);
+        $this->loader->addRestField('post', 'acf_collector_fields', ['get_callback' => [$this, 'getObjectCustomFields']]);
     }
 
-    public function get_object_custom_fields($object)
+    /**
+     * @param mixed $object Current object requested (Post, Page, etc.)
+     *
+     * @return array
+     */
+    public function getObjectCustomFields($object)
     {
-        $fieldsHandler = ACF_Formatter_Fields_Handler::getInstance();
+        $fieldsHandler = ACFHandler::getInstance();
         $fields = $fieldsHandler->getFieldsFormattedFromObjectId($object['id']);
 
         return $fields;

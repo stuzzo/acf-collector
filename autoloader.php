@@ -38,5 +38,12 @@ function acfCollectorAutoload($requestClassNamespace)
     $relativePath = str_replace('\\', DIRECTORY_SEPARATOR, substr($requestClassNamespace, $firstBackslashIndex + 1));
     $classFullPath = sprintf('%s%s.php', $startFolder, $relativePath);
 
+    /**
+     * If the class file not exists, we can't require it
+     */
+    if (!file_exists($classFullPath)) {
+        return false;
+    }
+
     require_once $classFullPath;
 }

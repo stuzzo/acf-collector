@@ -21,7 +21,7 @@ use ACFCollector\Handler\TemplateHandler;
  *
  * @since      1.0.0
  */
-class PluginKernel
+final class PluginKernel
 {
 
     /**

@@ -11,12 +11,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "ACFFormatter\\": "src/"
+            "ACFCollector\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ACFFormatter\\Tests\\": "tests/"
+            "ACFCollector\\Tests\\": "tests/"
         }
     },
     "require": {

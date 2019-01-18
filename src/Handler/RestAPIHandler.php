@@ -21,17 +21,23 @@ use ACFCollector\Main\PluginLoader;
  *
  * @since      1.0.0
  */
-final class RestAPIHandler
+class RestAPIHandler
 {
 
     /**
-     * @var PluginLoader
+     * @var \ACFCollector\Main\PluginLoader
      */
     private $loader;
 
-    public function __construct(PluginLoader $loader)
+    /**
+     * @var \ACFCollector\Handler\ACFHandler
+     */
+    private $ACFHandler;
+
+    public function __construct(PluginLoader $loader, ACFHandler $ACFHandler)
     {
         $this->loader = $loader;
+        $this->ACFHandler = $ACFHandler;
     }
 
     /**
@@ -68,8 +74,7 @@ final class RestAPIHandler
      */
     public function getObjectCustomFields($object)
     {
-        $fieldsHandler = ACFHandler::getInstance();
-        $fields = $fieldsHandler->getFieldsFormattedFromObjectId($object['id']);
+        $fields = $this->ACFHandler->getFieldsFormattedFromObjectId($object['id']);
 
         return $fields;
     }

@@ -88,7 +88,6 @@ final class ACFHandler
         return $formattedField;
     }
 
-
     private function formatFieldByType($field)
     {
         /** @var \ACFCollector\Formatter\FormatterInterface $formatter */

@@ -33,6 +33,7 @@
  * Domain Path:       /languages
  */
 
+use ACFCollector\Handler\ACFHandler;
 use ACFCollector\Handler\RestAPIHandler;
 use ACFCollector\Handler\TemplateHandler;
 use ACFCollector\Main\PluginI18N;
@@ -53,8 +54,6 @@ define('ACF_COLLECTOR_VERSION', '1.0.0');
 define('ACF_COLLECTOR_PATH', plugin_dir_path(__FILE__));
 
 require_once 'autoloader.php';
-
-//require plugin_dir_path(__FILE__) . '/vendor/autoload.php';
 
 /**
  * The code that runs during plugin activation.
@@ -79,23 +78,9 @@ function initPlugin()
 {
     $pluginI18N = new PluginI18N();
     $pluginLoader = new PluginLoader();
-    $restAPIHandler = new RestAPIHandler($pluginLoader);
-    $templateHandler = new TemplateHandler($pluginLoader);
+    $restAPIHandler = new RestAPIHandler($pluginLoader, ACFHandler::getInstance());
+    $templateHandler = new TemplateHandler($pluginLoader, ACFHandler::getInstance());
     $pluginKernel = new PluginKernel($pluginI18N,  $restAPIHandler, $templateHandler, $pluginLoader);
     $pluginKernel->init();
 }
 initPlugin();
-//
-//
-// Initialize service container
-//$container = new ContainerBuilder();
-//
-// Load configuration
-//$phpLoader = new PhpFileLoader($container, new FileLocator(__DIR__.'/config'));
-//$phpLoader->load('services.php');
-//
-//$container->compile();
-//
-///** @var PluginKernel $pluginKernel */
-//$pluginKernel = $container->get(PluginKernel::class);
-//$pluginKernel->init();

@@ -2,12 +2,13 @@
 
 namespace ACFFormatter\Tests\Main;
 
-use ACFFormatter\Handler\TemplateHandler;
-use ACFFormatter\Main\PluginLoader;
-use ACFFormatter\Tests\ACFFormatterTestCase;
+use ACFCollector\Handler\ACFHandler;
+use ACFCollector\Handler\TemplateHandler;
+use ACFCollector\Main\PluginLoader;
+use ACFCollector\Tests\ACFCollectorTestCase;
 use function has_filter;
 
-class PluginLoaderTest extends ACFFormatterTestCase
+class PluginLoaderTest extends ACFCollectorTestCase
 {
     private function getPluginLoader(): PluginLoader
     {
@@ -18,7 +19,19 @@ class PluginLoaderTest extends ACFFormatterTestCase
     {
         $pluginLoader = $this->getPluginLoader();
 
-        $templateHandler = new TemplateHandler($pluginLoader);
+        $templateHandler = new TemplateHandler($pluginLoader, ACFHandler::getInstance());
+        $templateHandler->init();
+
+        $pluginLoader->run();
+
+        self::assertTrue(has_filter('template_redirect', [$templateHandler, 'register_template_hook']));
+    }
+
+    public function testAddAction(): void
+    {
+        $pluginLoader = $this->getPluginLoader();
+
+        $templateHandler = new TemplateHandler($pluginLoader, ACFHandler::getInstance());
         $templateHandler->init();
 
         $pluginLoader->run();

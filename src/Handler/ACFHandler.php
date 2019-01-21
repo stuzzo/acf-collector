@@ -24,9 +24,7 @@ final class ACFHandler
     /**
      * @since 1.0.0
      */
-    private function __construct()
-    {
-    }
+    private function __construct() {}
 
     /**
      * @since 1.0.0

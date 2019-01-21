@@ -1,5 +1,16 @@
 <?php
 
+/*
+ * This file is part of the ACF Collector plugin.
+ *
+ * (c) Alfredo Aiello <stuzzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace ACFFormatter\Tests\Handler;
 
 use ACFCollector\Handler\ACFHandler;
@@ -7,13 +18,20 @@ use ACFCollector\Tests\ACFCollectorTestCase;
 
 class ACFHandlerTest extends ACFCollectorTestCase
 {
-    public function testIfLoadDomainIsCalled(): void
+    public function testIfArrayIsReturnedWithARandomID(): void
     {
         $ACFHandler = ACFHandler::getInstance();
-        $returnFields = $ACFHandler->getFieldsFormattedFromObjectId(34234324323432);
+        $returnFields = $ACFHandler->getFieldsFormattedFromObjectId($this->getRandomInt());
 
         $this->assertIsArray($returnFields);
+    }
 
+    public function testIfArrayIsReturnedWithARandomTermIDAndRandomTaxonomy(): void
+    {
+        $ACFHandler = ACFHandler::getInstance();
+        $returnFields = $ACFHandler->getFieldsFormattedFromTerm($this->getRandomInt(), $this->getRandomString());
+
+        $this->assertIsArray($returnFields);
     }
 
 }

@@ -48,7 +48,6 @@ if (!defined('WPINC')) {
 /**
  * Currently plugin version.
  * Start at version 1.0.0 and use SemVer - https://semver.org
- * Rename this for your plugin and update it as you release new versions.
  */
 define('ACF_COLLECTOR_VERSION', '1.0.0');
 define('ACF_COLLECTOR_PATH', plugin_dir_path(__FILE__));
@@ -57,6 +56,8 @@ require_once 'autoloader.php';
 
 /**
  * The code that runs during plugin activation.
+ *
+ * @since 1.0.0
  */
 function activate_acf_formatter()
 {
@@ -66,6 +67,8 @@ register_activation_hook(__FILE__, 'activate_acf_formatter');
 
 /**
  * The code that runs during plugin deactivation.
+ *
+ * @since 1.0.0
  */
 function deactivate_acf_formatter()
 {
@@ -73,7 +76,11 @@ function deactivate_acf_formatter()
 }
 register_deactivation_hook(__FILE__, 'deactivate_acf_formatter');
 
-
+/**
+ * Plugin entry point
+ *
+ * @since 1.0.0
+ */
 function initPlugin()
 {
     $pluginI18N = new PluginI18N();

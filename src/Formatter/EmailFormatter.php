@@ -38,7 +38,8 @@ class EmailFormatter extends BaseFormatter implements FormatterInterface
 
     public function formatReturnValue($field)
     {
-        $formattedFields = $this->filterArrayFieldByReturnKeys($field, $this->returnKeys);
+//        $formattedFields = $this->filterArrayFieldByReturnKeys($field, $this->returnKeys);
+        $formattedFields = $field;
         if (empty($field['value'])) {
             $formattedFields['value'] = '';
         } else {

@@ -14,6 +14,7 @@ namespace ACFCollector\Handler;
 use ACFCollector\Exception\FieldNotImplementedException;
 use ACFCollector\Factory\FormatterFactory;
 use function sprintf;
+use function usort;
 
 /**
  * @since      1.0.0
@@ -40,6 +41,8 @@ final class ACFHandler
     }
 
     /**
+     * Return the list of acf associated with the object requested through his ID
+     *
      * @param int $objectId
      *
      * @return array
@@ -53,10 +56,14 @@ final class ACFHandler
             return $this->getArrayResponseWhenNoFieldsFound();
         }
 
+        usort($fields, array($this, 'orderCustomFields'));
+
         return $this->formatFields($fields);
     }
 
     /**
+     * Return the list of acf associated with the term requested through his ID and his taxonomy
+     *
      * @param int $termID
      * @param string $termTaxonomy
      *
@@ -96,11 +103,13 @@ final class ACFHandler
             return $this->getArrayResponseWhenNoFieldsFound();
         }
 
+        usort($fields, array($this, 'orderCustomFields'));
+
         return $this->formatFields($fields);
     }
 
     /**
-     * @param $fields
+     * @param array $fields
      *
      * @return array
      *
@@ -116,6 +125,13 @@ final class ACFHandler
         return $formattedFields;
     }
 
+    /**
+     * @param array $field
+     *
+     * @return array
+     *
+     * @since 1.0.0
+     */
     private function formatField($field)
     {
         if (empty($field['name'])) {
@@ -145,6 +161,15 @@ final class ACFHandler
         return $formattedField;
     }
 
+    /**
+     * Return the formatted value based on field type
+     *
+     * @param array $field
+     *
+     * @return array
+     *
+     * @since 1.0.0
+     */
     private function formatFieldByType($field)
     {
         /** @var \ACFCollector\Formatter\FormatterInterface $formatter */
@@ -153,8 +178,20 @@ final class ACFHandler
         return $formatter->formatReturnValue($field);
     }
 
+    /**
+     * Return the response when no fields are found on the specified object
+     *
+     * @return array
+     *
+     * @since 1.0.0
+     */
     private function getArrayResponseWhenNoFieldsFound()
     {
         return array('No fields found on the provided object');
+    }
+
+    private function orderCustomFields($firstField, $secondField)
+    {
+        return $firstField['menu_order'] > $secondField['menu_order'];
     }
 }

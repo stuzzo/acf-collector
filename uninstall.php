@@ -21,8 +21,6 @@
  *
  * @link       https://www.google.it
  * @since      1.0.0
- *
- * @package    Acf_Formatter
  */
 
 // If uninstall not called from WordPress, then exit.

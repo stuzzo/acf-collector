@@ -87,7 +87,7 @@ class TemplateHandler
 
         /** @var \WP_Term $currentTerm */
         $currentTerm = get_queried_object();
-        $fields = $this->ACFHandler->getFieldsFormattedFromTerm($currentTerm);
+        $fields = $this->ACFHandler->getFieldsFormattedFromTerm($currentTerm->term_id, $currentTerm->taxonomy);
         $currentTerm->{self::ACF_COLLECTOR_FIELD_NAME} = $fields;
     }
 

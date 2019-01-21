@@ -55,7 +55,7 @@ class RestAPIHandler
      */
     public function init()
     {
-        $this->loader->addAction('wp_loaded', $this, 'setupRestFields');
+        $this->loader->addAction('rest_api_init', $this, 'setupRestFields');
     }
 
 
@@ -64,40 +64,16 @@ class RestAPIHandler
      */
     public function setupRestFields()
     {
-        $this->initPageResponse();
-        $this->initPostResponse();
-        $this->initCustomPostTypes();
+        $this->initCustomPostTypesResponse();
         $this->initTaxonomyResponse();
     }
 
     /**
      * @since      1.0.0
      */
-    private function initPageResponse()
+    private function initCustomPostTypesResponse()
     {
-        $this->addRestField('page', self::ACF_COLLECTOR_FIELD_NAME, array('get_callback' => array($this, 'getObjectCustomFields')));
-    }
-
-    /**
-     * @since      1.0.0
-     */
-    private function initPostResponse()
-    {
-        $this->addRestField('post', self::ACF_COLLECTOR_FIELD_NAME, array('get_callback' => array($this, 'getObjectCustomFields')));
-    }
-
-    /**
-     * @since      1.0.0
-     */
-    private function initCustomPostTypes()
-    {
-        $args = array(
-            'public'   => true,
-            '_builtin' => false,
-        );
-        $output = 'names'; // names or objects, note names is the default
-        $operator = 'and'; // 'and' or 'or'
-        $post_types = get_post_types($args, $output, $operator);
+        $post_types = get_post_types(array('public' => true));
         foreach ($post_types as $postType) {
             $this->addRestField($postType, self::ACF_COLLECTOR_FIELD_NAME, array('get_callback' => array($this, 'getObjectCustomFields')));
         }

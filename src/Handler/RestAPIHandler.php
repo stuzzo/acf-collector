@@ -12,6 +12,9 @@
 namespace ACFCollector\Handler;
 
 use ACFCollector\Main\PluginLoader;
+use function get_taxonomies;
+use function get_term_by;
+use function var_dump;
 
 /**
  * The api-facing functionality of the plugin.
@@ -23,14 +26,19 @@ use ACFCollector\Main\PluginLoader;
  */
 class RestAPIHandler
 {
+    const ACF_COLLECTOR_FIELD_NAME = 'acf_collector_field';
 
     /**
      * @var \ACFCollector\Main\PluginLoader
+     *
+     * @since      1.0.0
      */
     private $loader;
 
     /**
      * @var \ACFCollector\Handler\ACFHandler
+     *
+     * @since      1.0.0
      */
     private $ACFHandler;
 
@@ -47,24 +55,71 @@ class RestAPIHandler
      */
     public function init()
     {
+        $this->loader->addAction('wp_loaded', $this, 'setupRestFields');
+    }
+
+
+    /**
+     * @since      1.0.0
+     */
+    public function setupRestFields()
+    {
         $this->initPageResponse();
         $this->initPostResponse();
-        $this->initUserResponse();
+        $this->initCustomPostTypes();
+        $this->initTaxonomyResponse();
     }
 
+    /**
+     * @since      1.0.0
+     */
     private function initPageResponse()
     {
-        $this->loader->addRestField('page', 'acf_collector_fields', ['get_callback' => [$this, 'getObjectCustomFields']]);
+        $this->addRestField('page', self::ACF_COLLECTOR_FIELD_NAME, array('get_callback' => array($this, 'getObjectCustomFields')));
     }
 
+    /**
+     * @since      1.0.0
+     */
     private function initPostResponse()
     {
-        $this->loader->addRestField('post', 'acf_collector_fields', ['get_callback' => [$this, 'getObjectCustomFields']]);
+        $this->addRestField('post', self::ACF_COLLECTOR_FIELD_NAME, array('get_callback' => array($this, 'getObjectCustomFields')));
     }
 
-    private function initUserResponse()
+    /**
+     * @since      1.0.0
+     */
+    private function initCustomPostTypes()
     {
-        $this->loader->addRestField('user', 'acf_collector_fields', ['get_callback' => [$this, 'getObjectCustomFields']]);
+        $args = array(
+            'public'   => true,
+            '_builtin' => false,
+        );
+        $output = 'names'; // names or objects, note names is the default
+        $operator = 'and'; // 'and' or 'or'
+        $post_types = get_post_types($args, $output, $operator);
+        foreach ($post_types as $postType) {
+            $this->addRestField($postType, self::ACF_COLLECTOR_FIELD_NAME, array('get_callback' => array($this, 'getObjectCustomFields')));
+        }
+    }
+
+    /**
+     * @since      1.0.0
+     */
+    private function initTaxonomyResponse()
+    {
+        $taxonomies = get_taxonomies();
+        foreach ($taxonomies as $taxonomy) {
+            $this->addRestField($taxonomy, self::ACF_COLLECTOR_FIELD_NAME, array('get_callback' => array($this, 'getTermCustomFields')));
+        }
+    }
+
+    /**
+     * @since      1.0.0
+     */
+    private function addRestField($type, $fieldName, $args)
+    {
+        \register_rest_field($type, $fieldName, $args);
     }
 
     /**
@@ -74,9 +129,17 @@ class RestAPIHandler
      */
     public function getObjectCustomFields($object)
     {
-        $fields = $this->ACFHandler->getFieldsFormattedFromObjectId($object['id']);
+        return $this->ACFHandler->getFieldsFormattedFromObjectId($object['id']);
+    }
 
-        return $fields;
+    /**
+     * @param array $currentTerm Current term requested
+     *
+     * @return array
+     */
+    public function getTermCustomFields($currentTerm)
+    {
+        return $this->ACFHandler->getFieldsFormattedFromTerm($currentTerm['id'], $currentTerm['taxonomy']);
     }
 
 }

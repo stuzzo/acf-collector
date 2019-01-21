@@ -12,6 +12,12 @@
 namespace ACFCollector\Handler;
 
 use ACFCollector\Main\PluginLoader;
+use function get_queried_object;
+use function is_category;
+use function is_page;
+use function is_single;
+use function is_tag;
+use function is_tax;
 
 /**
  * The public-facing functionality of the plugin.
@@ -23,6 +29,7 @@ use ACFCollector\Main\PluginLoader;
  */
 class TemplateHandler
 {
+    const ACF_COLLECTOR_FIELD_NAME = 'acf_collector_field';
 
     /**
      * @var \ACFCollector\Main\PluginLoader
@@ -41,25 +48,47 @@ class TemplateHandler
     }
 
     /**
-     * Register the api methods to modify Rest API responses.
+     * Register the filters used to add the fields to the current object
      *
      * @since    1.0.0
      */
     public function init()
     {
-        $this->loader->addFilter('template_redirect', $this, 'register_template_hook');
+        $this->loader->addFilter('template_redirect', $this, 'addFieldsToCurrentPost');
+        $this->loader->addFilter('template_redirect', $this, 'addFieldsToCurrentTaxonomy');
     }
 
     /**
-     * Register the JavaScript for the public-facing side of the site.
+     * Add the fields to the current object (page or post)
      *
      * @since    1.0.0
      */
-    public function register_template_hook()
+    public function addFieldsToCurrentPost()
     {
+        if (is_tax() || is_category() || is_tag()) {
+            return;
+        }
+
         global $post;
         $fields = $this->ACFHandler->getFieldsFormattedFromObjectId($post->ID);
-        $post->acf_collector_fields = $fields;
+        $post->{self::ACF_COLLECTOR_FIELD_NAME} = $fields;
+    }
+
+    /**
+     * Add the fields to the current object (page or post)
+     *
+     * @since    1.0.0
+     */
+    public function addFieldsToCurrentTaxonomy()
+    {
+        if (is_single() || is_page() || is_category() || is_tag()) {
+            return;
+        }
+
+        /** @var \WP_Term $currentTerm */
+        $currentTerm = get_queried_object();
+        $fields = $this->ACFHandler->getFieldsFormattedFromTerm($currentTerm);
+        $currentTerm->{self::ACF_COLLECTOR_FIELD_NAME} = $fields;
     }
 
 }

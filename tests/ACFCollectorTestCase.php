@@ -18,12 +18,14 @@ use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use function Brain\Monkey\Functions\stubs;
 use function Brain\Monkey\setUp;
 use function Brain\Monkey\tearDown;
+use function sprintf;
 
 class ACFCollectorTestCase extends \PHPUnit\Framework\TestCase
 {
     protected const PLUGIN_NAME = 'acf-collector';
     protected const PLUGIN_VERSION = '1.0.0';
     protected const ACF_COLLECTOR_FIELD_NAME = 'acf_collector_field';
+    protected $jsonDir = '';
 
     // Adds Mockery expectations to the PHPUnit assertions count.
     use MockeryPHPUnitIntegration;
@@ -31,6 +33,7 @@ class ACFCollectorTestCase extends \PHPUnit\Framework\TestCase
     public function setUp()
     {
         parent::setUp();
+        $this->jsonDir = sprintf('%s/Formatter/json', __DIR__);
         setUp();
         stubs(['load_plugin_textdomain'], true);
         stubs(['is_tax', 'is_category', 'is_tag', 'is_single', 'is_page', 'is_category'], false);

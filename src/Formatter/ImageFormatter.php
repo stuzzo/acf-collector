@@ -16,14 +16,26 @@ namespace ACFCollector\Formatter;
  *
  * @since      1.0.0
  */
-class ImageFormatter extends BaseFormatter implements FormatterInterface
+class ImageFormatter extends BaseFormatter
 {
+    /**
+     * @var array
+     * @since 1.0.0
+     */
     protected $returnKeys = array(
         'return_format',
     );
 
+    /**
+     * ImageFormatter constructor.
+     */
     private function __construct() {}
 
+    /**
+     * @return \ACFCollector\Formatter\FormatterInterface
+     *
+     * @since 1.0.0
+     */
     public static function getInstance()
     {
         static $inst = null;
@@ -35,16 +47,4 @@ class ImageFormatter extends BaseFormatter implements FormatterInterface
         return $inst;
     }
 
-    public function formatReturnValue($field)
-    {
-//        $formattedFields = $this->filterArrayFieldByReturnKeys($field, $this->returnKeys);
-        $formattedFields = $field;
-        if (empty($field['value'])) {
-            $formattedFields['value'] = '';
-        } else {
-            $formattedFields['value'] = $field['value'];
-        }
-
-        return $this->prepareFieldsForOutput($field, $formattedFields);
-    }
 }

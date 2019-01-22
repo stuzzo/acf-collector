@@ -16,15 +16,29 @@ namespace ACFCollector\Formatter;
  *
  * @since      1.0.0
  */
-class EmailFormatter extends BaseFormatter implements FormatterInterface
+class EmailFormatter extends BaseFormatter
 {
+    /**
+     * @var array
+     * @since 1.0.0
+     */
     protected $returnKeys = array(
         'default_value',
         'placeholder',
     );
 
+    /**
+     * EmailFormatter constructor.
+     *
+     * @since 1.0.0
+     */
     private function __construct() {}
 
+    /**
+     * @return \ACFCollector\Formatter\FormatterInterface
+     *
+     * @since 1.0.0
+     */
     public static function getInstance()
     {
         static $inst = null;
@@ -36,16 +50,4 @@ class EmailFormatter extends BaseFormatter implements FormatterInterface
         return $inst;
     }
 
-    public function formatReturnValue($field)
-    {
-//        $formattedFields = $this->filterArrayFieldByReturnKeys($field, $this->returnKeys);
-        $formattedFields = $field;
-        if (empty($field['value'])) {
-            $formattedFields['value'] = '';
-        } else {
-            $formattedFields['value'] = (string)$field['value'];
-        }
-
-        return $this->prepareFieldsForOutput($field, $formattedFields);
-    }
 }

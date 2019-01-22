@@ -36,7 +36,7 @@ class PasswordFormatter extends BaseFormatter implements FormatterInterface
         return $inst;
     }
 
-    public function formatReturnValue($field)
+    public function format($field)
     {
         $formattedFields = $this->filterArrayFieldByReturnKeys($field, $this->returnKeys);
         if (empty($field['value'])) {

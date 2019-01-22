@@ -9,14 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace ACFCollector\Formatter;
+namespace ACFCollector\Formatter\Output;
 
-interface FormatterInterface
+/**
+ * Interface OutputFormatterInterface
+ * @package ACFCollector\Formatter
+ * @since 1.0.0
+ */
+interface OutputFormatterInterface
 {
     /**
      * @param array $field
      *
      * @return array
      */
-    public function format($field);
+    public function formatReturnValue($field);
 }

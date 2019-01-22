@@ -11,32 +11,32 @@
 
 namespace ACFCollector\Factory;
 
-use ACFCollector\Exception\FieldNotImplementedException;
+use ACFCollector\Exception\OutputFormatterNotImplementedException;
 use function call_user_func;
 
 /**
- * Class FormatterFactory
+ * Class FormatterOutputFactory
  * @package ACFCollector\Factory
  */
-class FormatterFactory
+class FormatterOutputFactory
 {
     /**
      * @since 1.0.0
      */
-    const FORMATTERS_CLASS_PREFIX = 'ACFCollector\Formatter';
+    const FORMATTERS_CLASS_PREFIX = 'ACFCollector\Formatter\Output';
 
     /**
-     * Get the field formatter by type
+     * Get the output field formatter by type
      *
      * @param string $type
      *
-     * @return \ACFCollector\Formatter\FormatterInterface
+     * @return \ACFCollector\Formatter\Output\OutputFormatterInterface
      */
-    public static function getFormatter($type)
+    public static function getFormatterForOutput($type)
     {
         $formatterClass = sprintf('%s\%sFormatter', self::FORMATTERS_CLASS_PREFIX, ucfirst($type));
         if (!class_exists($formatterClass, true)) {
-            throw new FieldNotImplementedException($type);
+            throw new OutputFormatterNotImplementedException($type);
         }
 
         return call_user_func(array($formatterClass, 'getInstance'));

@@ -175,7 +175,7 @@ final class ACFHandler
         /** @var \ACFCollector\Formatter\FormatterInterface $formatter */
         $formatter = FormatterFactory::getFormatter($field['type']);
 
-        return $formatter->formatReturnValue($field);
+        return $formatter->format($field);
     }
 
     /**

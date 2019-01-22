@@ -12,14 +12,14 @@
 namespace ACFCollector\Exception;
 
 /**
- * Class FieldNotImplementedException
+ * Class OutputFormatterNotImplementedException
  * @package ACFCollector\Exception
  * @since 1.0.0
  */
-final class FieldNotImplementedException extends \RuntimeException
+final class OutputFormatterNotImplementedException extends \RuntimeException
 {
     /**
-     * FieldNotImplementedException constructor.
+     * OutputFormatterNotImplementedException constructor.
      *
      * @param string          $fieldType
      * @param int             $code

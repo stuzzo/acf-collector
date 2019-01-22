@@ -12,23 +12,22 @@
 namespace ACFCollector\Exception;
 
 /**
- * Class FieldNotImplementedException
+ * Class WrongFilteredFieldsException
  * @package ACFCollector\Exception
  * @since 1.0.0
  */
-final class FieldNotImplementedException extends \RuntimeException
+final class WrongFilteredFieldsException extends \RuntimeException
 {
     /**
-     * FieldNotImplementedException constructor.
+     * WrongFilteredFieldsException constructor.
      *
-     * @param string          $fieldType
+     * @param string          $message
      * @param int             $code
      * @param \Throwable|null $previous
      * @since 1.0.0
      */
-    public function __construct($fieldType, $code = 0, \Throwable $previous = null)
+    public function __construct($message, $code = 0, \Throwable $previous = null)
     {
-        $fullMessage = sprintf('Formatter for field type %s non implemented', $fieldType);
-        parent::__construct($fullMessage, $code, $previous);
+        parent::__construct($message, $code, $previous);
     }
 }

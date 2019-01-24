@@ -28,8 +28,15 @@ use function sprintf;
  */
 abstract class BaseFormatter implements FormatterInterface
 {
+    const STRING_OUTPUT_FORMATTER_TYPE = 'String';
+    const ARRAY_OUTPUT_FORMATTER_TYPE = 'Array';
+    const INTEGER_OUTPUT_FORMATTER_TYPE = 'Integer';
 
-    protected $outputFormatterType = 'String';
+    /**
+     * @var string
+     * @since 1.0.0
+     */
+    protected $defaultOutputFormatterType;
 
     /**
      * @var array
@@ -79,7 +86,7 @@ abstract class BaseFormatter implements FormatterInterface
 
         $this->verifyOutputFormatter($field);
         try {
-            $outputFormatter = FormatterOutputFactory::getFormatterForOutput($this->outputFormatterType);
+            $outputFormatter = FormatterOutputFactory::getFormatterForOutput($this->defaultOutputFormatterType);
             $formattedFields += $outputFormatter->formatReturnValue($field);
         } catch (OutputFormatterNotImplementedException $exception) {
             $formattedFields['value'] = $exception->getMessage();
@@ -139,10 +146,10 @@ abstract class BaseFormatter implements FormatterInterface
 
         switch ($field['return_format']) {
             case 'array':
-                $this->outputFormatterType = 'Array';
+                $this->defaultOutputFormatterType = 'Array';
                 break;
             case 'id':
-                $this->outputFormatterType = 'Integer';
+                $this->defaultOutputFormatterType = 'Integer';
         }
     }
 }

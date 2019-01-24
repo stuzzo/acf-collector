@@ -1,0 +1,26 @@
+{
+  "ID": 17,
+  "key": "field_5c40b841d73b3",
+  "label": "Url",
+  "name": "url",
+  "prefix": "acf",
+  "type": "url",
+  "value": "https:\/\/www.google.it",
+  "menu_order": 10,
+  "instructions": "",
+  "required": 0,
+  "id": "",
+  "class": "",
+  "conditional_logic": 0,
+  "parent": 5,
+  "wrapper": {
+    "width": "",
+    "class": "",
+    "id": ""
+  },
+  "_name": "url",
+  "_prepare": 0,
+  "_valid": 1,
+  "default_value": "a",
+  "placeholder": "a"
+}

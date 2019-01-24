@@ -16,15 +16,27 @@ namespace ACFCollector\Formatter;
  *
  * @since      1.0.0
  */
-class TextareaFormatter  extends BaseFormatter implements FormatterInterface
+class TextareaFormatter  extends BaseFormatter
 {
-    protected $returnKeys = array(
-        'default_value',
-        'placeholder',
-    );
+    /**
+     * TextareaFormatter constructor.
+     *
+     * @since 1.0.0
+     */
+    private function __construct()
+    {
+        $this->defaultOutputFormatterType = self::STRING_OUTPUT_FORMATTER_TYPE;
+        $this->returnKeys = array(
+            'default_value',
+            'placeholder',
+        );
+    }
 
-    private function __construct() {}
-
+    /**
+     * @return \ACFCollector\Formatter\FormatterInterface
+     *
+     * @since 1.0.0
+     */
     public static function getInstance()
     {
         static $inst = null;
@@ -36,15 +48,4 @@ class TextareaFormatter  extends BaseFormatter implements FormatterInterface
         return $inst;
     }
 
-    public function format($field)
-    {
-        $formattedFields = $this->filterArrayFieldByReturnKeys($field, $this->returnKeys);
-        if (empty($field['value'])) {
-            $formattedFields['value'] = '';
-        } else {
-            $formattedFields['value'] = (string)$field['value'];
-        }
-
-        return $this->prepareFieldsForOutput($field, $formattedFields);
-    }
 }

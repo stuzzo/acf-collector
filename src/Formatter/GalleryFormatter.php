@@ -18,23 +18,14 @@ namespace ACFCollector\Formatter;
  */
 class GalleryFormatter extends BaseFormatter
 {
-
-    /**
-     * @var string
-     * @since 1.0.0
-     */
-    protected $outputFormatterType = 'Array';
-
-    /**
-     * @var array
-     * @since 1.0.0
-     */
-    protected $returnKeys = array();
-
     /**
      * GalleryFormatter constructor.
      */
-    private function __construct() {}
+    private function __construct()
+    {
+        $this->defaultOutputFormatterType = self::ARRAY_OUTPUT_FORMATTER_TYPE;
+        $this->returnKeys = array();
+    }
 
     /**
      * @return \ACFCollector\Formatter\FormatterInterface

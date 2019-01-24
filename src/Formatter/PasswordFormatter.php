@@ -16,14 +16,18 @@ namespace ACFCollector\Formatter;
  *
  * @since      1.0.0
  */
-class PasswordFormatter extends BaseFormatter implements FormatterInterface
+class PasswordFormatter extends BaseFormatter
 {
-    protected $returnKeys = array(
-        'default_value',
-        'placeholder',
-    );
-
-    private function __construct() {}
+    /**
+     * OembedFormatter constructor.
+     *
+     * @since 1.0.0
+     */
+    private function __construct()
+    {
+        $this->defaultOutputFormatterType = self::STRING_OUTPUT_FORMATTER_TYPE;
+        $this->returnKeys = array();
+    }
 
     public static function getInstance()
     {
@@ -34,17 +38,5 @@ class PasswordFormatter extends BaseFormatter implements FormatterInterface
         }
 
         return $inst;
-    }
-
-    public function format($field)
-    {
-        $formattedFields = $this->filterArrayFieldByReturnKeys($field, $this->returnKeys);
-        if (empty($field['value'])) {
-            $formattedFields['value'] = '';
-        } else {
-            $formattedFields['value'] = (string)$field['value'];
-        }
-
-        return $this->prepareFieldsForOutput($field, $formattedFields);
     }
 }

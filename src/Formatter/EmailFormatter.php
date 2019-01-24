@@ -19,20 +19,18 @@ namespace ACFCollector\Formatter;
 class EmailFormatter extends BaseFormatter
 {
     /**
-     * @var array
-     * @since 1.0.0
-     */
-    protected $returnKeys = array(
-        'default_value',
-        'placeholder',
-    );
-
-    /**
      * EmailFormatter constructor.
      *
      * @since 1.0.0
      */
-    private function __construct() {}
+    private function __construct()
+    {
+        $this->defaultOutputFormatterType = self::STRING_OUTPUT_FORMATTER_TYPE;
+        $this->returnKeys = array(
+            'default_value',
+            'placeholder',
+        );
+    }
 
     /**
      * @return \ACFCollector\Formatter\FormatterInterface

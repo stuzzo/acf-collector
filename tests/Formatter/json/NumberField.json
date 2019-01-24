@@ -1,0 +1,31 @@
+{
+  "ID": 11,
+  "key": "field_5c40b310f5b56",
+  "label": "Number",
+  "name": "number",
+  "prefix": "acf",
+  "type": "number",
+  "value": "1",
+  "menu_order": 4,
+  "instructions": "",
+  "required": 0,
+  "id": "",
+  "class": "",
+  "conditional_logic": 0,
+  "parent": 5,
+  "wrapper": {
+    "width": "",
+    "class": "",
+    "id": ""
+  },
+  "_name": "number",
+  "_prepare": 0,
+  "_valid": 1,
+  "default_value": 1,
+  "placeholder": 1,
+  "prepend": "",
+  "append": "",
+  "min": 1,
+  "max": 1,
+  "step": ""
+}

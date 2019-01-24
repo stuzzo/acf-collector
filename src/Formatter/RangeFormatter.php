@@ -18,15 +18,24 @@ namespace ACFCollector\Formatter;
  */
 class RangeFormatter extends BaseFormatter
 {
-    protected $returnKeys = array(
-        'default_value',
-        'min',
-        'max',
-        'placeholder',
-    );
+    /**
+     * RangeFormatter constructor.
+     */
+    private function __construct()
+    {
+        $this->defaultOutputFormatterType = self::INTEGER_OUTPUT_FORMATTER_TYPE;
+        $this->returnKeys = array(
+            'default_value',
+            'min',
+            'max',
+        );
+    }
 
-    private function __construct() {}
-
+    /**
+     * @return \ACFCollector\Formatter\FormatterInterface
+     *
+     * @since 1.0.0
+     */
     public static function getInstance()
     {
         static $inst = null;
@@ -36,17 +45,5 @@ class RangeFormatter extends BaseFormatter
         }
 
         return $inst;
-    }
-
-    public function format($field)
-    {
-        $formattedFields = $this->filterArrayFieldByReturnKeys($field, $this->returnKeys);
-        if (empty($field['value'])) {
-            $formattedFields['value'] = 0;
-        } else {
-            $formattedFields['value'] = (int)$field['value'];
-        }
-
-        return $this->prepareFieldsForOutput($field, $formattedFields);
     }
 }

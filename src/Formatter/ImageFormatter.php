@@ -19,17 +19,15 @@ namespace ACFCollector\Formatter;
 class ImageFormatter extends BaseFormatter
 {
     /**
-     * @var array
-     * @since 1.0.0
-     */
-    protected $returnKeys = array(
-        'return_format',
-    );
-
-    /**
      * ImageFormatter constructor.
      */
-    private function __construct() {}
+    private function __construct()
+    {
+        $this->defaultOutputFormatterType = self::ARRAY_OUTPUT_FORMATTER_TYPE;
+        $this->returnKeys = array(
+            'return_format',
+        );
+    }
 
     /**
      * @return \ACFCollector\Formatter\FormatterInterface

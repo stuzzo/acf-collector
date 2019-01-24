@@ -16,12 +16,24 @@ namespace ACFCollector\Formatter;
  *
  * @since      1.0.0
  */
-class OembedFormatter extends BaseFormatter implements FormatterInterface
+class OembedFormatter extends BaseFormatter
 {
-    protected $returnKeys = array();
+    /**
+     * OembedFormatter constructor.
+     *
+     * @since 1.0.0
+     */
+    private function __construct()
+    {
+        $this->defaultOutputFormatterType = self::STRING_OUTPUT_FORMATTER_TYPE;
+        $this->returnKeys = array();
+    }
 
-    private function __construct() {}
-
+    /**
+     * @return \ACFCollector\Formatter\FormatterInterface
+     *
+     * @since 1.0.0
+     */
     public static function getInstance()
     {
         static $inst = null;
@@ -33,15 +45,4 @@ class OembedFormatter extends BaseFormatter implements FormatterInterface
         return $inst;
     }
 
-    public function format($field)
-    {
-        $formattedFields = $this->filterArrayFieldByReturnKeys($field, $this->returnKeys);
-        if (empty($field['value'])) {
-            $formattedFields['value'] = '';
-        } else {
-            $formattedFields['value'] = (string) $field['value'];
-        }
-
-        return $this->prepareFieldsForOutput($field, $formattedFields);
-    }
 }

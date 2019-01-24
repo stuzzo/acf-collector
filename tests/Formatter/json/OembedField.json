@@ -1,0 +1,26 @@
+{
+  "ID": 26,
+  "key": "field_5c40c7867969e",
+  "label": "embed",
+  "name": "embed",
+  "prefix": "acf",
+  "type": "oembed",
+  "value": "<a href=\"https:\/\/www.google.it\">https:\/\/www.google.it<\/a>",
+  "menu_order": 5,
+  "instructions": "",
+  "required": 0,
+  "id": "",
+  "class": "",
+  "conditional_logic": 0,
+  "parent": 5,
+  "wrapper": {
+    "width": "",
+    "class": "",
+    "id": ""
+  },
+  "_name": "embed",
+  "_prepare": 0,
+  "_valid": 1,
+  "width": "",
+  "height": ""
+}

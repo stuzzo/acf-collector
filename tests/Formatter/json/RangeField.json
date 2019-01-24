@@ -1,0 +1,30 @@
+{
+  "ID": 13,
+  "key": "field_5c40b41d57592",
+  "label": "intervallo",
+  "name": "interval",
+  "prefix": "acf",
+  "type": "range",
+  "value": "65",
+  "menu_order": 7,
+  "instructions": "",
+  "required": 0,
+  "id": "",
+  "class": "",
+  "conditional_logic": 0,
+  "parent": 5,
+  "wrapper": {
+    "width": "",
+    "class": "",
+    "id": ""
+  },
+  "_name": "interval",
+  "_prepare": 0,
+  "_valid": 1,
+  "default_value": 40,
+  "min": "",
+  "max": "",
+  "step": "",
+  "prepend": "",
+  "append": ""
+}

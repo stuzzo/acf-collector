@@ -16,17 +16,27 @@ namespace ACFCollector\Formatter;
  *
  * @since      1.0.0
  */
-class NumberFormatter extends BaseFormatter implements FormatterInterface
+class NumberFormatter extends BaseFormatter
 {
-    protected $returnKeys = array(
-        'default_value',
-        'min',
-        'max',
-        'placeholder',
-    );
+    /**
+     * NumberFormatter constructor.
+     */
+    private function __construct()
+    {
+        $this->defaultOutputFormatterType = self::INTEGER_OUTPUT_FORMATTER_TYPE;
+        $this->returnKeys = array(
+            'default_value',
+            'min',
+            'max',
+            'placeholder',
+        );
+    }
 
-    private function __construct() {}
-
+    /**
+     * @return \ACFCollector\Formatter\FormatterInterface
+     *
+     * @since 1.0.0
+     */
     public static function getInstance()
     {
         static $inst = null;
@@ -38,15 +48,4 @@ class NumberFormatter extends BaseFormatter implements FormatterInterface
         return $inst;
     }
 
-    public function format($field)
-    {
-        $formattedFields = $this->filterArrayFieldByReturnKeys($field, $this->returnKeys);
-        if (empty($field['value'])) {
-            $formattedFields['value'] = 0;
-        } else {
-            $formattedFields['value'] = (int)$field['value'];
-        }
-
-        return $this->prepareFieldsForOutput($field, $formattedFields);
-    }
 }

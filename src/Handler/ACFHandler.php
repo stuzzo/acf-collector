@@ -13,6 +13,8 @@ namespace ACFCollector\Handler;
 
 use ACFCollector\Exception\FieldNotImplementedException;
 use ACFCollector\Factory\FormatterFactory;
+use function get_comment_meta;
+use function get_term_meta;
 use function sprintf;
 use function usort;
 
@@ -43,22 +45,17 @@ final class ACFHandler
     /**
      * Return the list of acf associated with the object requested through his ID
      *
-     * @param int $objectId
+     * @param int $objectID
      *
      * @return array
      *
      * @since 1.0.0
      */
-    public function getFieldsFormattedFromObjectId($objectId)
+    public function getFieldsFormattedFromObjectID($objectID)
     {
-        $fields = get_field_objects($objectId);
-        if (empty($fields)) {
-            return $this->getArrayResponseWhenNoFieldsFound();
-        }
+        $fields = get_field_objects($objectID);
 
-        usort($fields, array($this, 'orderCustomFields'));
-
-        return $this->formatFields($fields);
+        return $this->checkFieldsBeforeFormat($fields);
     }
 
     /**
@@ -75,7 +72,40 @@ final class ACFHandler
         if (empty($meta)) {
             return $this->getArrayResponseWhenNoFieldsFound();
         }
+        $fields = $this->getFieldsFromMetaObject($meta, sprintf('%s_%s', $termTaxonomy, $termID));
 
+        return $this->checkFieldsBeforeFormat($fields);
+    }
+
+    /**
+     * Return the list of acf associated with the comment requested through his ID
+     *
+     * @param int $commentID
+     *
+     * @return array
+     */
+    public function getFieldsFormattedFromCommentID($commentID)
+    {
+        $meta = get_comment_meta($commentID);
+        if (empty($meta)) {
+            return $this->getArrayResponseWhenNoFieldsFound();
+        }
+        $fields = $this->getFieldsFromMetaObject($meta, sprintf('comment_%s', $commentID));
+
+        return $this->checkFieldsBeforeFormat($fields);
+    }
+
+    /**
+     * Get custom fields from object meta
+     *
+     * @param $meta
+     * @param $object
+     *
+     * @return array
+     */
+    private function getFieldsFromMetaObject($meta, $object)
+    {
+        $fields = [];
         // populate vars
         foreach ($meta as $key => $value) {
             // does a field key exist for this value?
@@ -93,16 +123,27 @@ final class ACFHandler
                 continue;
             }
 
-            $field['value'] = get_field($field['name'], sprintf('%s_%s', $termTaxonomy, $termID));
+            $field['value'] = get_field($field['name'], $object);
 
             // append to $value
             $fields[$field['name']] = $field;
         }
 
+        return $fields;
+    }
+
+    /**
+     * Verify if fields aren't empty and order them
+     *
+     * @param $fields
+     *
+     * @return array
+     */
+    private function checkFieldsBeforeFormat($fields)
+    {
         if (empty($fields)) {
             return $this->getArrayResponseWhenNoFieldsFound();
         }
-
         usort($fields, array($this, 'orderCustomFields'));
 
         return $this->formatFields($fields);
@@ -190,8 +231,18 @@ final class ACFHandler
         return array('No fields found on the provided object');
     }
 
+    /**
+     * Order object elements by field menu_order
+     * @param $firstField
+     * @param $secondField
+     *
+     * @return bool
+     */
     private function orderCustomFields($firstField, $secondField)
     {
+        if (!isset($firstField['menu_order'], $secondField['menu_order'])) {
+            return false;
+        }
         return $firstField['menu_order'] > $secondField['menu_order'];
     }
 }

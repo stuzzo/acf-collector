@@ -19,6 +19,7 @@ use ACFCollector\Tests\ACFCollectorTestCase;
 use function Brain\Monkey\Functions\stubs;
 use function has_filter;
 use stdClass;
+use WP_Term;
 
 class TemplateHandlerTest extends ACFCollectorTestCase
 {
@@ -31,6 +32,7 @@ class TemplateHandlerTest extends ACFCollectorTestCase
 
         self::assertTrue(has_filter('template_redirect', [$templateHandler, 'addFieldsToCurrentPost']));
         self::assertTrue(has_filter('template_redirect', [$templateHandler, 'addFieldsToCurrentTaxonomy']));
+        self::assertTrue(has_filter('get_comment', [$templateHandler, 'addFieldsToCurrentComment']));
     }
 
     public function testAddFieldsToCurrentPost(): void
@@ -50,7 +52,8 @@ class TemplateHandlerTest extends ACFCollectorTestCase
         $templateHandler = new TemplateHandler($pluginLoader, ACFHandler::getInstance());
         global $wp_query;
         $wp_query = new stdClass();
-        $wp_query->queried_object = new stdClass();
+        $mock = \Mockery::mock(WP_Term::class);
+        $wp_query->queried_object = $mock;
         stubs(['get_queried_object'], $wp_query->queried_object);
         $templateHandler->addFieldsToCurrentTaxonomy();
 

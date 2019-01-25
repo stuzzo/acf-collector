@@ -12,8 +12,10 @@
 namespace ACFCollector\Handler;
 
 use ACFCollector\Main\PluginLoader;
+use function get_tags;
 use function get_taxonomies;
 use function get_term_by;
+use function get_the_tags;
 use function var_dump;
 
 /**
@@ -66,6 +68,8 @@ class RestAPIHandler
     {
         $this->initCustomPostTypesResponse();
         $this->initTaxonomyResponse();
+        $this->initTagResponse();
+        $this->initCommentResponse();
     }
 
     /**
@@ -93,6 +97,22 @@ class RestAPIHandler
     /**
      * @since      1.0.0
      */
+    private function initTagResponse()
+    {
+        $this->addRestField('tag', self::ACF_COLLECTOR_FIELD_NAME, array('get_callback' => array($this, 'getTermCustomFields')));
+    }
+
+    /**
+     * @since      1.0.0
+     */
+    private function initCommentResponse()
+    {
+        $this->addRestField('comment', self::ACF_COLLECTOR_FIELD_NAME, array('get_callback' => array($this, 'getCommentCustomFields')));
+    }
+
+    /**
+     * @since      1.0.0
+     */
     private function addRestField($type, $fieldName, $args)
     {
         \register_rest_field($type, $fieldName, $args);
@@ -105,7 +125,7 @@ class RestAPIHandler
      */
     public function getObjectCustomFields($object)
     {
-        return $this->ACFHandler->getFieldsFormattedFromObjectId($object['id']);
+        return $this->ACFHandler->getFieldsFormattedFromObjectID($object['id']);
     }
 
     /**
@@ -116,6 +136,16 @@ class RestAPIHandler
     public function getTermCustomFields($currentTerm)
     {
         return $this->ACFHandler->getFieldsFormattedFromTerm($currentTerm['id'], $currentTerm['taxonomy']);
+    }
+
+    /**
+     * @param array $currentComment Current term requested
+     *
+     * @return array
+     */
+    public function getCommentCustomFields($currentComment)
+    {
+        return $this->ACFHandler->getFieldsFormattedFromCommentID($currentComment['id']);
     }
 
 }

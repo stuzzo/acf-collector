@@ -14,8 +14,6 @@ namespace ACFCollector\Handler;
 use ACFCollector\Main\PluginLoader;
 use function get_queried_object;
 use function is_category;
-use function is_page;
-use function is_single;
 use function is_tag;
 use function is_tax;
 
@@ -56,6 +54,7 @@ class TemplateHandler
     {
         $this->loader->addFilter('template_redirect', $this, 'addFieldsToCurrentPost');
         $this->loader->addFilter('template_redirect', $this, 'addFieldsToCurrentTaxonomy');
+        $this->loader->addFilter('get_comment', $this, 'addFieldsToCurrentComment');
     }
 
     /**
@@ -70,8 +69,27 @@ class TemplateHandler
         }
 
         global $post;
-        $fields = $this->ACFHandler->getFieldsFormattedFromObjectId($post->ID);
+        if (empty($post)) {
+            return;
+        }
+        $fields = $this->ACFHandler->getFieldsFormattedFromObjectID($post->ID);
         $post->{self::ACF_COLLECTOR_FIELD_NAME} = $fields;
+    }
+
+    /**
+     * Add the fields to the current comment
+     *
+     * @var \WP_Comment $comment
+     * @since    1.0.0
+     *
+     * @return \WP_Comment
+     */
+    public function addFieldsToCurrentComment($comment)
+    {
+        $fields = $this->ACFHandler->getFieldsFormattedFromCommentID($comment->comment_ID);
+        $comment->{self::ACF_COLLECTOR_FIELD_NAME} = $fields;
+
+        return $comment;
     }
 
     /**
@@ -81,12 +99,11 @@ class TemplateHandler
      */
     public function addFieldsToCurrentTaxonomy()
     {
-        if (is_single() || is_page() || is_category() || is_tag()) {
-            return;
-        }
-
         /** @var \WP_Term $currentTerm */
         $currentTerm = get_queried_object();
+        if (null === $currentTerm || !($currentTerm instanceof \WP_Term)) {
+            return;
+        }
         $fields = $this->ACFHandler->getFieldsFormattedFromTerm($currentTerm->term_id, $currentTerm->taxonomy);
         $currentTerm->{self::ACF_COLLECTOR_FIELD_NAME} = $fields;
     }

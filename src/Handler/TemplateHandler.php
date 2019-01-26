@@ -55,6 +55,8 @@ class TemplateHandler
         $this->loader->addFilter('template_redirect', $this, 'addFieldsToCurrentPost');
         $this->loader->addFilter('template_redirect', $this, 'addFieldsToCurrentTaxonomy');
         $this->loader->addFilter('get_comment', $this, 'addFieldsToCurrentComment');
+        $this->loader->addFilter('get_user_custom_fields', $this, 'addFieldsToCurrentUser');
+//        $this->loader->addFilter('wp_nav_menu_items', $this, 'addFieldsToCurrentMenu', 10, 2);
     }
 
     /**
@@ -69,9 +71,10 @@ class TemplateHandler
         }
 
         global $post;
-        if (empty($post)) {
+        if (empty($post) || property_exists($post, self::ACF_COLLECTOR_FIELD_NAME)) {
             return;
         }
+
         $fields = $this->ACFHandler->getFieldsFormattedFromObjectID($post->ID);
         $post->{self::ACF_COLLECTOR_FIELD_NAME} = $fields;
     }
@@ -86,6 +89,9 @@ class TemplateHandler
      */
     public function addFieldsToCurrentComment($comment)
     {
+        if (property_exists($comment, self::ACF_COLLECTOR_FIELD_NAME)) {
+            return $comment;
+        }
         $fields = $this->ACFHandler->getFieldsFormattedFromCommentID($comment->comment_ID);
         $comment->{self::ACF_COLLECTOR_FIELD_NAME} = $fields;
 
@@ -101,11 +107,49 @@ class TemplateHandler
     {
         /** @var \WP_Term $currentTerm */
         $currentTerm = get_queried_object();
-        if (null === $currentTerm || !($currentTerm instanceof \WP_Term)) {
+        if (null === $currentTerm || !($currentTerm instanceof \WP_Term) || property_exists($currentTerm, self::ACF_COLLECTOR_FIELD_NAME)) {
             return;
         }
         $fields = $this->ACFHandler->getFieldsFormattedFromTerm($currentTerm->term_id, $currentTerm->taxonomy);
         $currentTerm->{self::ACF_COLLECTOR_FIELD_NAME} = $fields;
+    }
+
+    /**
+     * Add the fields to the current user
+     *
+     * @param \WP_User $user
+     * @since    1.0.0
+     *
+     * @return \WP_User
+     */
+    public function addFieldsToCurrentUser($user)
+    {
+        if (null === $user || !($user instanceof \WP_User) || property_exists($user, self::ACF_COLLECTOR_FIELD_NAME)) {
+            return;
+        }
+        $fields = $this->ACFHandler->getFieldsFormattedFromUserID($user->ID);
+        $user->{self::ACF_COLLECTOR_FIELD_NAME} = $fields;
+
+        return $user;
+    }
+
+    /**
+     * Add the fields to the current user
+     *
+     * @param \WP_User $user
+     * @since    1.0.0
+     *
+     * @return \WP_User
+     */
+    public function addFieldsToCurrentMenu($user, $users)
+    {
+//        if (null === $user || !($user instanceof \WP_User) || property_exists($user, self::ACF_COLLECTOR_FIELD_NAME)) {
+//            return;
+//        }
+//        $fields = $this->ACFHandler->getFieldsFormattedFromUserID($user->ID);
+//        $user->{self::ACF_COLLECTOR_FIELD_NAME} = $fields;
+//
+//        return $user;
     }
 
 }

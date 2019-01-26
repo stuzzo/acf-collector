@@ -51,4 +51,24 @@ class RestAPIHandlerTest extends ACFCollectorTestCase
         $this->assertIsArray($fields);
     }
 
+    public function testGetCommentCustomFields(): void
+    {
+        $pluginLoader = $this->getPluginLoader();
+        $restAPIHandler = new RestAPIHandler($pluginLoader, ACFHandler::getInstance());
+        $object['id'] = $this->getRandomInt();
+        $fields = $restAPIHandler->getCommentCustomFields($object);
+
+        $this->assertIsArray($fields);
+    }
+
+    public function testGetUserCustomFields(): void
+    {
+        $pluginLoader = $this->getPluginLoader();
+        $restAPIHandler = new RestAPIHandler($pluginLoader, ACFHandler::getInstance());
+        $object['id'] = $this->getRandomInt();
+        $fields = $restAPIHandler->getUserCustomFields($object);
+
+        $this->assertIsArray($fields);
+    }
+
 }

@@ -33,6 +33,7 @@ class TemplateHandlerTest extends ACFCollectorTestCase
         self::assertTrue(has_filter('template_redirect', [$templateHandler, 'addFieldsToCurrentPost']));
         self::assertTrue(has_filter('template_redirect', [$templateHandler, 'addFieldsToCurrentTaxonomy']));
         self::assertTrue(has_filter('get_comment', [$templateHandler, 'addFieldsToCurrentComment']));
+        self::assertTrue(has_filter('get_user_custom_fields', [$templateHandler, 'addFieldsToCurrentUser']));
     }
 
     public function testAddFieldsToCurrentPost(): void

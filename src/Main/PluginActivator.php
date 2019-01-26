@@ -24,6 +24,10 @@ final class PluginActivator
     /**
      * @since    1.0.0
      */
-    public static function activate(){}
+    public static function activate(){
+        /**
+         * @TODO check if ACF is installed and it's at least version 5
+         */
+    }
 
 }

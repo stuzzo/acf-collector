@@ -37,7 +37,7 @@ class ACFCollectorTestCase extends \PHPUnit\Framework\TestCase
         setUp();
         stubs(['load_plugin_textdomain'], true);
         stubs(['is_tax', 'is_category', 'is_tag', 'is_single', 'is_page', 'is_category'], false);
-        stubs(['get_field_objects', 'get_term_meta', 'get_comment_meta'], []);
+        stubs(['get_field_objects', 'get_term_meta', 'get_comment_meta', 'get_user_meta'], []);
     }
 
     public function tearDown()

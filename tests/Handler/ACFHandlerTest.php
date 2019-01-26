@@ -42,4 +42,12 @@ class ACFHandlerTest extends ACFCollectorTestCase
         $this->assertIsArray($returnFields);
     }
 
+    public function testIfArrayIsReturnedWithARandomUserID(): void
+    {
+        $ACFHandler = ACFHandler::getInstance();
+        $returnFields = $ACFHandler->getFieldsFormattedFromUserID($this->getRandomInt());
+
+        $this->assertIsArray($returnFields);
+    }
+
 }

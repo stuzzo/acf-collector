@@ -70,6 +70,7 @@ class RestAPIHandler
         $this->initTaxonomyResponse();
         $this->initTagResponse();
         $this->initCommentResponse();
+        $this->initUserResponse();
     }
 
     /**
@@ -113,6 +114,14 @@ class RestAPIHandler
     /**
      * @since      1.0.0
      */
+    private function initUserResponse()
+    {
+        $this->addRestField('user', self::ACF_COLLECTOR_FIELD_NAME, array('get_callback' => array($this, 'getUserCustomFields')));
+    }
+
+    /**
+     * @since      1.0.0
+     */
     private function addRestField($type, $fieldName, $args)
     {
         \register_rest_field($type, $fieldName, $args);
@@ -122,6 +131,7 @@ class RestAPIHandler
      * @param mixed $object Current object requested (Post, Page, etc.)
      *
      * @return array
+     * @since      1.0.0
      */
     public function getObjectCustomFields($object)
     {
@@ -132,6 +142,7 @@ class RestAPIHandler
      * @param array $currentTerm Current term requested
      *
      * @return array
+     * @since      1.0.0
      */
     public function getTermCustomFields($currentTerm)
     {
@@ -139,13 +150,25 @@ class RestAPIHandler
     }
 
     /**
-     * @param array $currentComment Current term requested
+     * @param array $currentComment Current comment requested
      *
      * @return array
+     * @since      1.0.0
      */
     public function getCommentCustomFields($currentComment)
     {
         return $this->ACFHandler->getFieldsFormattedFromCommentID($currentComment['id']);
+    }
+
+    /**
+     * @param array $currentUser Current user requested
+     *
+     * @return array
+     * @since      1.0.0
+     */
+    public function getUserCustomFields($currentUser)
+    {
+        return $this->ACFHandler->getFieldsFormattedFromUserID($currentUser['id']);
     }
 
 }

@@ -15,6 +15,7 @@ use ACFCollector\Exception\FieldNotImplementedException;
 use ACFCollector\Factory\FormatterFactory;
 use function get_comment_meta;
 use function get_term_meta;
+use function get_user_meta;
 use function sprintf;
 use function usort;
 
@@ -91,6 +92,24 @@ final class ACFHandler
             return $this->getArrayResponseWhenNoFieldsFound();
         }
         $fields = $this->getFieldsFromMetaObject($meta, sprintf('comment_%s', $commentID));
+
+        return $this->checkFieldsBeforeFormat($fields);
+    }
+
+    /**
+     * Return the list of acf associated with the comment requested through his ID
+     *
+     * @param int $userID
+     *
+     * @return array
+     */
+    public function getFieldsFormattedFromUserID($userID)
+    {
+        $meta = get_user_meta($userID);
+        if (empty($meta)) {
+            return $this->getArrayResponseWhenNoFieldsFound();
+        }
+        $fields = $this->getFieldsFromMetaObject($meta, sprintf('user_%s', $userID));
 
         return $this->checkFieldsBeforeFormat($fields);
     }

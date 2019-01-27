@@ -56,7 +56,8 @@ class TemplateHandler
         $this->loader->addFilter('template_redirect', $this, 'addFieldsToCurrentTaxonomy');
         $this->loader->addFilter('get_comment', $this, 'addFieldsToCurrentComment');
         $this->loader->addFilter('get_user_custom_fields', $this, 'addFieldsToCurrentUser');
-//        $this->loader->addFilter('wp_nav_menu_items', $this, 'addFieldsToCurrentMenu', 10, 2);
+        $this->loader->addFilter('wp_get_nav_menu_object', $this, 'addFieldsToCurrentMenu');
+        $this->loader->addFilter('wp_get_nav_menus', $this, 'addFieldsToCurrentMenus', 10, 2);
     }
 
     /**
@@ -136,20 +137,39 @@ class TemplateHandler
     /**
      * Add the fields to the current user
      *
-     * @param \WP_User $user
+     * @param \WP_Term $menu
      * @since    1.0.0
      *
-     * @return \WP_User
+     * @return \WP_Term
      */
-    public function addFieldsToCurrentMenu($user, $users)
+    public function addFieldsToCurrentMenu($menu)
     {
-//        if (null === $user || !($user instanceof \WP_User) || property_exists($user, self::ACF_COLLECTOR_FIELD_NAME)) {
-//            return;
-//        }
-//        $fields = $this->ACFHandler->getFieldsFormattedFromUserID($user->ID);
-//        $user->{self::ACF_COLLECTOR_FIELD_NAME} = $fields;
-//
-//        return $user;
+        if (null === $menu || !($menu instanceof \WP_Term) || property_exists($menu, self::ACF_COLLECTOR_FIELD_NAME)) {
+            return;
+        }
+
+        $fields = $this->ACFHandler->getFieldsFormattedFromTerm($menu->term_id, $menu->taxonomy);
+        $menu->{self::ACF_COLLECTOR_FIELD_NAME} = $fields;
+
+        return $menu;
+    }
+
+    /**
+     * Add the fields to the current menus
+     *
+     * @param \array $menus
+     *
+     * @since    1.0.0
+     *
+     * @return \array
+     */
+    public function addFieldsToCurrentMenus($menus, $args)
+    {
+        foreach ($menus as &$currentMenu) {
+            $currentMenu = $this->addFieldsToCurrentMenu($currentMenu);
+        }
+
+        return $menus;
     }
 
 }

@@ -21,7 +21,7 @@
  * @since             1.0.0
  *
  * @wordpress-plugin
- * Plugin Name:       ACF: API and template fields collector
+ * Plugin Name:       Advanced Custom Fields: API and template fields collector
  * Plugin URI:        https://www.google.it
  * Description:       It appends automatically to the current request all the custom fields used in the current content (e.g. Pages, Posts, etc.)
  * Version:           1.0.0
@@ -30,7 +30,7 @@
  * License:           GPLv2 or later
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       acf-collector
- * Domain Path:       /languages
+ * Domain Path:       /Resources/languages
  */
 
 use ACFCollector\Handler\ACFHandler;

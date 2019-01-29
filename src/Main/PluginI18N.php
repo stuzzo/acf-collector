@@ -32,7 +32,7 @@ class PluginI18N
         \load_plugin_textdomain(
             'acf-collector',
             false,
-            dirname(__DIR__) . '/languages/'
+            dirname(__DIR__) . '/Resources/languages/'
         );
     }
 

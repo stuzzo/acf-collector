@@ -64,13 +64,19 @@ class PluginKernel
      */
     private $loader;
 
-    public function __construct(PluginI18N $i18n, RestAPIHandler $apiHandler, TemplateHandler $templateHandler, PluginLoader $loader)
+    /**
+     * @var \ACFCollector\Main\PluginOptions
+     */
+    private $options;
+
+    public function __construct(PluginI18N $i18n, RestAPIHandler $apiHandler, TemplateHandler $templateHandler, PluginLoader $loader, PluginOptions $options)
     {
         add_action('plugins_loaded', [$this, 'init']);
         $this->i18n = $i18n;
         $this->apiHandler = $apiHandler;
         $this->templateHandler = $templateHandler;
         $this->loader = $loader;
+        $this->options = $options;
     }
 
     /**
@@ -94,6 +100,7 @@ class PluginKernel
         $this->initAPIHandler();
         $this->initTemplateHandler();
         $this->initLoader();
+        $this->initOptionPage();
     }
 
     /**
@@ -158,5 +165,15 @@ class PluginKernel
     private function initLoader()
     {
         $this->loader->run();
+    }
+
+    /**
+     * Run the loader to execute all of the hooks with WordPress.
+     *
+     * @since    1.0.0
+     */
+    private function initOptionPage()
+    {
+        $this->options->init();
     }
 }

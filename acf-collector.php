@@ -39,6 +39,7 @@ use ACFCollector\Handler\TemplateHandler;
 use ACFCollector\Main\PluginI18N;
 use ACFCollector\Main\PluginKernel;
 use ACFCollector\Main\PluginLoader;
+use ACFCollector\Main\PluginOptions;
 
 // If this file is called directly, abort.
 if (!defined('WPINC')) {
@@ -87,7 +88,7 @@ function initPlugin()
     $pluginLoader = new PluginLoader();
     $restAPIHandler = new RestAPIHandler($pluginLoader, ACFHandler::getInstance());
     $templateHandler = new TemplateHandler($pluginLoader, ACFHandler::getInstance());
-    $pluginKernel = new PluginKernel($pluginI18N,  $restAPIHandler, $templateHandler, $pluginLoader);
-    $pluginKernel->init();
+    $pluginOptions = new PluginOptions();
+    new PluginKernel($pluginI18N,  $restAPIHandler, $templateHandler, $pluginLoader, $pluginOptions);
 }
 initPlugin();

@@ -23,32 +23,38 @@ use function is_tax;
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the public-facing stylesheet and JavaScript.
  *
- * @since      1.0.0
+ * @since  1.0.0
  */
 class TemplateHandler
 {
-    const ACF_COLLECTOR_FIELD_NAME = 'acf_collector_field';
-
     /**
      * @var \ACFCollector\Main\PluginLoader
+     * @since  1.0.0
      */
     private $loader;
 
     /**
      * @var \ACFCollector\Handler\ACFHandler
+     * @since  1.0.0
      */
     private $ACFHandler;
 
-    public function __construct(PluginLoader $loader, ACFHandler $ACFHandler)
+    /**
+     * @var string
+     * @since  1.0.0
+     */
+    private $ACFCollectorFieldName;
+
+    public function __construct(PluginLoader $loader, ACFHandler $ACFHandler, $ACFCollectorFieldName)
     {
         $this->loader = $loader;
         $this->ACFHandler = $ACFHandler;
+        $this->ACFCollectorFieldName = $ACFCollectorFieldName;
     }
 
     /**
      * Register the filters used to add the fields to the current object
-     *
-     * @since    1.0.0
+     * @since  1.0.0
      */
     public function init()
     {
@@ -63,7 +69,7 @@ class TemplateHandler
     /**
      * Add the fields to the current object (page or post)
      *
-     * @since    1.0.0
+     * @since  1.0.0
      */
     public function addFieldsToCurrentPost()
     {
@@ -72,29 +78,28 @@ class TemplateHandler
         }
 
         global $post;
-        if (empty($post) || property_exists($post, self::ACF_COLLECTOR_FIELD_NAME)) {
+        if (empty($post) || property_exists($post, $this->ACFCollectorFieldName)) {
             return;
         }
 
         $fields = $this->ACFHandler->getFieldsFormattedFromObjectID($post->ID);
-        $post->{self::ACF_COLLECTOR_FIELD_NAME} = $fields;
+        $post->{$this->ACFCollectorFieldName} = $fields;
     }
 
     /**
      * Add the fields to the current comment
      *
      * @var \WP_Comment $comment
-     * @since    1.0.0
-     *
      * @return \WP_Comment
+     * @since  1.0.0
      */
     public function addFieldsToCurrentComment($comment)
     {
-        if (property_exists($comment, self::ACF_COLLECTOR_FIELD_NAME)) {
+        if (property_exists($comment, $this->ACFCollectorFieldName)) {
             return $comment;
         }
         $fields = $this->ACFHandler->getFieldsFormattedFromCommentID($comment->comment_ID);
-        $comment->{self::ACF_COLLECTOR_FIELD_NAME} = $fields;
+        $comment->{$this->ACFCollectorFieldName} = $fields;
 
         return $comment;
     }
@@ -102,34 +107,33 @@ class TemplateHandler
     /**
      * Add the fields to the current object (page or post)
      *
-     * @since    1.0.0
+     * @since  1.0.0
      */
     public function addFieldsToCurrentTaxonomy()
     {
         /** @var \WP_Term $currentTerm */
         $currentTerm = get_queried_object();
-        if (null === $currentTerm || !($currentTerm instanceof \WP_Term) || property_exists($currentTerm, self::ACF_COLLECTOR_FIELD_NAME)) {
+        if (null === $currentTerm || !($currentTerm instanceof \WP_Term) || property_exists($currentTerm, $this->ACFCollectorFieldName)) {
             return;
         }
         $fields = $this->ACFHandler->getFieldsFormattedFromTerm($currentTerm->term_id, $currentTerm->taxonomy);
-        $currentTerm->{self::ACF_COLLECTOR_FIELD_NAME} = $fields;
+        $currentTerm->{$this->ACFCollectorFieldName} = $fields;
     }
 
     /**
      * Add the fields to the current user
      *
      * @param \WP_User $user
-     * @since    1.0.0
-     *
      * @return \WP_User
+     * @since  1.0.0
      */
-    public function addFieldsToCurrentUser($user)
+    public function addFieldsToCurrentUser(&$user)
     {
-        if (null === $user || !($user instanceof \WP_User) || property_exists($user, self::ACF_COLLECTOR_FIELD_NAME)) {
+        if (null === $user || !($user instanceof \WP_User) || property_exists($user, $this->ACFCollectorFieldName)) {
             return;
         }
         $fields = $this->ACFHandler->getFieldsFormattedFromUserID($user->ID);
-        $user->{self::ACF_COLLECTOR_FIELD_NAME} = $fields;
+        $user->{$this->ACFCollectorFieldName} = $fields;
 
         return $user;
     }
@@ -138,18 +142,17 @@ class TemplateHandler
      * Add the fields to the current user
      *
      * @param \WP_Term $menu
-     * @since    1.0.0
-     *
      * @return \WP_Term
+     * @since  1.0.0
      */
     public function addFieldsToCurrentMenu($menu)
     {
-        if (null === $menu || !($menu instanceof \WP_Term) || property_exists($menu, self::ACF_COLLECTOR_FIELD_NAME)) {
+        if (null === $menu || !($menu instanceof \WP_Term) || property_exists($menu, $this->ACFCollectorFieldName)) {
             return;
         }
 
         $fields = $this->ACFHandler->getFieldsFormattedFromTerm($menu->term_id, $menu->taxonomy);
-        $menu->{self::ACF_COLLECTOR_FIELD_NAME} = $fields;
+        $menu->{$this->ACFCollectorFieldName} = $fields;
 
         return $menu;
     }
@@ -158,10 +161,8 @@ class TemplateHandler
      * Add the fields to the current menus
      *
      * @param \array $menus
-     *
-     * @since    1.0.0
-     *
      * @return \array
+     * @since  1.0.0
      */
     public function addFieldsToCurrentMenus($menus, $args)
     {

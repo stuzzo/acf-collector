@@ -23,7 +23,7 @@ class RestAPIHandlerTest extends ACFCollectorTestCase
     public function testAddAction(): void
     {
         $pluginLoader = $this->getPluginLoader();
-        $restAPIHandler = new RestAPIHandler($pluginLoader, ACFHandler::getInstance());
+        $restAPIHandler = new RestAPIHandler($pluginLoader, ACFHandler::getInstance(), $this->getACFCollectorFieldName());
         $restAPIHandler->init();
         $pluginLoader->run();
 
@@ -33,7 +33,7 @@ class RestAPIHandlerTest extends ACFCollectorTestCase
     public function testGetObjectCustomFields(): void
     {
         $pluginLoader = $this->getPluginLoader();
-        $restAPIHandler = new RestAPIHandler($pluginLoader, ACFHandler::getInstance());
+        $restAPIHandler = new RestAPIHandler($pluginLoader, ACFHandler::getInstance(), $this->getACFCollectorFieldName());
         $object['id'] = $this->getRandomInt();
         $fields = $restAPIHandler->getObjectCustomFields($object);
 
@@ -43,7 +43,7 @@ class RestAPIHandlerTest extends ACFCollectorTestCase
     public function testGetTermCustomFields(): void
     {
         $pluginLoader = $this->getPluginLoader();
-        $restAPIHandler = new RestAPIHandler($pluginLoader, ACFHandler::getInstance());
+        $restAPIHandler = new RestAPIHandler($pluginLoader, ACFHandler::getInstance(), $this->getACFCollectorFieldName());
         $object['id'] = $this->getRandomInt();
         $object['taxonomy'] = $this->getRandomString();
         $fields = $restAPIHandler->getTermCustomFields($object);
@@ -54,7 +54,7 @@ class RestAPIHandlerTest extends ACFCollectorTestCase
     public function testGetCommentCustomFields(): void
     {
         $pluginLoader = $this->getPluginLoader();
-        $restAPIHandler = new RestAPIHandler($pluginLoader, ACFHandler::getInstance());
+        $restAPIHandler = new RestAPIHandler($pluginLoader, ACFHandler::getInstance(), $this->getACFCollectorFieldName());
         $object['id'] = $this->getRandomInt();
         $fields = $restAPIHandler->getCommentCustomFields($object);
 
@@ -64,7 +64,7 @@ class RestAPIHandlerTest extends ACFCollectorTestCase
     public function testGetUserCustomFields(): void
     {
         $pluginLoader = $this->getPluginLoader();
-        $restAPIHandler = new RestAPIHandler($pluginLoader, ACFHandler::getInstance());
+        $restAPIHandler = new RestAPIHandler($pluginLoader, ACFHandler::getInstance(), $this->getACFCollectorFieldName());
         $object['id'] = $this->getRandomInt();
         $fields = $restAPIHandler->getUserCustomFields($object);
 

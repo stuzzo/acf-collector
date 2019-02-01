@@ -47,9 +47,7 @@ final class ACFHandler
      * Return the list of acf associated with the object requested through his ID
      *
      * @param int $objectID
-     *
      * @return array
-     *
      * @since 1.0.0
      */
     public function getFieldsFormattedFromObjectID($objectID)
@@ -64,8 +62,8 @@ final class ACFHandler
      *
      * @param int $termID
      * @param string $termTaxonomy
-     *
      * @return array
+     * @since 1.0.0
      */
     public function getFieldsFormattedFromTerm($termID, $termTaxonomy)
     {
@@ -82,8 +80,8 @@ final class ACFHandler
      * Return the list of acf associated with the comment requested through his ID
      *
      * @param int $commentID
-     *
      * @return array
+     * @since 1.0.0
      */
     public function getFieldsFormattedFromCommentID($commentID)
     {
@@ -100,8 +98,8 @@ final class ACFHandler
      * Return the list of acf associated with the comment requested through his ID
      *
      * @param int $userID
-     *
      * @return array
+     * @since 1.0.0
      */
     public function getFieldsFormattedFromUserID($userID)
     {
@@ -119,8 +117,8 @@ final class ACFHandler
      *
      * @param $meta
      * @param $object
-     *
      * @return array
+     * @since 1.0.0
      */
     private function getFieldsFromMetaObject($meta, $object)
     {
@@ -155,8 +153,8 @@ final class ACFHandler
      * Verify if fields aren't empty and order them
      *
      * @param $fields
-     *
      * @return array
+     * @since 1.0.0
      */
     private function checkFieldsBeforeFormat($fields)
     {
@@ -170,9 +168,7 @@ final class ACFHandler
 
     /**
      * @param array $fields
-     *
      * @return array
-     *
      * @since 1.0.0
      */
     private function formatFields($fields)
@@ -187,9 +183,7 @@ final class ACFHandler
 
     /**
      * @param array $field
-     *
      * @return array
-     *
      * @since 1.0.0
      */
     private function formatField($field)
@@ -225,9 +219,7 @@ final class ACFHandler
      * Return the formatted value based on field type
      *
      * @param array $field
-     *
      * @return array
-     *
      * @since 1.0.0
      */
     private function formatFieldByType($field)
@@ -242,7 +234,6 @@ final class ACFHandler
      * Return the response when no fields are found on the specified object
      *
      * @return array
-     *
      * @since 1.0.0
      */
     private function getArrayResponseWhenNoFieldsFound()
@@ -252,10 +243,11 @@ final class ACFHandler
 
     /**
      * Order object elements by field menu_order
+     *
      * @param $firstField
      * @param $secondField
-     *
      * @return bool
+     * @since 1.0.0
      */
     private function orderCustomFields($firstField, $secondField)
     {

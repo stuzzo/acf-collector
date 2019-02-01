@@ -19,6 +19,7 @@ use ACFCollector\Handler\TemplateHandler;
 use ACFCollector\Main\PluginI18N;
 use ACFCollector\Main\PluginKernel;
 use ACFCollector\Main\PluginLoader;
+use ACFCollector\Main\PluginOptions;
 use ACFCollector\Tests\ACFCollectorTestCase;
 
 class PluginKernelTest extends ACFCollectorTestCase
@@ -28,9 +29,10 @@ class PluginKernelTest extends ACFCollectorTestCase
         $pluginI18n = $this->getMockBuilder(PluginI18N::class)->getMock();
         $pluginLoader = $this->getMockBuilder(PluginLoader::class)->getMock();
         $acfHandler = ACFHandler::getInstance();
-        $restAPIHandler = $this->getMockBuilder(RestAPIHandler::class)->setConstructorArgs([$pluginLoader, $acfHandler])->getMock();
-        $templateHandler = $this->getMockBuilder(TemplateHandler::class)->setConstructorArgs([$pluginLoader, $acfHandler])->getMock();
-        return new PluginKernel($pluginI18n, $restAPIHandler, $templateHandler, $pluginLoader);
+        $restAPIHandler = $this->getMockBuilder(RestAPIHandler::class)->setConstructorArgs([$pluginLoader, $acfHandler, $this->getACFCollectorFieldName()])->getMock();
+        $templateHandler = $this->getMockBuilder(TemplateHandler::class)->setConstructorArgs([$pluginLoader, $acfHandler, $this->getACFCollectorFieldName()])->getMock();
+        $pluginOptions = $this->getMockBuilder(PluginOptions::class)->getMock();
+        return new PluginKernel($pluginI18n, $restAPIHandler, $templateHandler, $pluginLoader, $pluginOptions);
     }
 
     public function testPluginVersion(): void

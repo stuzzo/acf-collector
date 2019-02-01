@@ -57,7 +57,6 @@ require_once 'autoloader.php';
 
 /**
  * The code that runs during plugin activation.
- *
  * @since 1.0.0
  */
 function activate_acf_formatter()
@@ -68,7 +67,6 @@ register_activation_hook(__FILE__, 'activate_acf_formatter');
 
 /**
  * The code that runs during plugin deactivation.
- *
  * @since 1.0.0
  */
 function deactivate_acf_formatter()
@@ -79,15 +77,16 @@ register_deactivation_hook(__FILE__, 'deactivate_acf_formatter');
 
 /**
  * Plugin entry point
- *
  * @since 1.0.0
  */
 function initPlugin()
 {
+    $acfCollectorFieldName = get_option('acf_collector_field_name', 0);
+    $isOutputFiltered = get_option('acf_collector_is_output_filtered', 0);
     $pluginI18N = new PluginI18N();
     $pluginLoader = new PluginLoader();
-    $restAPIHandler = new RestAPIHandler($pluginLoader, ACFHandler::getInstance());
-    $templateHandler = new TemplateHandler($pluginLoader, ACFHandler::getInstance());
+    $restAPIHandler = new RestAPIHandler($pluginLoader, ACFHandler::getInstance(), $acfCollectorFieldName);
+    $templateHandler = new TemplateHandler($pluginLoader, ACFHandler::getInstance(), $acfCollectorFieldName);
     $pluginOptions = new PluginOptions();
     new PluginKernel($pluginI18N,  $restAPIHandler, $templateHandler, $pluginLoader, $pluginOptions);
 }

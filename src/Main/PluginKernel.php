@@ -26,46 +26,46 @@ class PluginKernel
 
     /**
      * The unique identifier of this plugin.
-     *
-     * @since    1.0.0
      * @var      string $pluginName The string used to uniquely identify this plugin.
+     * @since    1.0.0
      */
     private $pluginName;
 
     /**
      * The current version of the plugin.
-     *
-     * @since    1.0.0
      * @var      string $version The current version of the plugin.
+     * @since    1.0.0
      */
     private $version;
 
     /**
-     * @since    1.0.0
+     * The class that contains I18N logic
      * @var \ACFCollector\Main\PluginI18N
+     * @since    1.0.0
      */
     private $i18n;
 
     /**
-     * @since    1.0.0
      * @var \ACFCollector\Handler\RestAPIHandler
+     * @since    1.0.0
      */
     private $apiHandler;
 
     /**
-     * @since    1.0.0
      * @var \ACFCollector\Handler\TemplateHandler
+     * @since    1.0.0
      */
     private $templateHandler;
 
     /**
-     * @since    1.0.0
      * @var \ACFCollector\Main\PluginLoader
+     * @since    1.0.0
      */
     private $loader;
 
     /**
      * @var \ACFCollector\Main\PluginOptions
+     * @since    1.0.0
      */
     private $options;
 
@@ -106,9 +106,8 @@ class PluginKernel
     /**
      * The name of the plugin used to uniquely identify it within the context of
      * WordPress and to define internationalization functionality.
-     *
-     * @since     1.0.0
      * @return    string    The name of the plugin.
+     * @since     1.0.0
      */
     public function getPluginName()
     {
@@ -117,9 +116,8 @@ class PluginKernel
 
     /**
      * Retrieve the version number of the plugin.
-     *
-     * @since     1.0.0
      * @return    string    The version number of the plugin.
+     * @since     1.0.0
      */
     public function getVersion()
     {
@@ -128,7 +126,6 @@ class PluginKernel
 
     /**
      * Initialize i18n text domain.
-     *
      * @since    1.0.0
      */
     private function loadTextDomain()
@@ -138,7 +135,6 @@ class PluginKernel
 
     /**
      * Initialize rest api handler
-     *
      * @since    1.0.0
      */
     private function initAPIHandler()
@@ -149,7 +145,6 @@ class PluginKernel
     /**
      * Register all of the hooks related to the public-facing functionality
      * of the plugin.
-     *
      * @since    1.0.0
      */
     private function initTemplateHandler()
@@ -159,7 +154,6 @@ class PluginKernel
 
     /**
      * Run the loader to execute all of the hooks with WordPress.
-     *
      * @since    1.0.0
      */
     private function initLoader()
@@ -169,7 +163,6 @@ class PluginKernel
 
     /**
      * Run the loader to execute all of the hooks with WordPress.
-     *
      * @since    1.0.0
      */
     private function initOptionPage()

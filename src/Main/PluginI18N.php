@@ -24,7 +24,6 @@ class PluginI18N
 
     /**
      * Load the plugin text domain for translation.
-     *
      * @since    1.0.0
      */
     public function loadPluginTextdomain()

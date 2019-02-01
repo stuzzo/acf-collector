@@ -24,7 +24,7 @@ class PluginLoaderTest extends ACFCollectorTestCase
     public function testAddFilter(): void
     {
         $pluginLoader = $this->getPluginLoader();
-        $templateHandler = new TemplateHandler($pluginLoader, ACFHandler::getInstance());
+        $templateHandler = new TemplateHandler($pluginLoader, ACFHandler::getInstance(), $this->getACFCollectorFieldName());
         $templateHandler->init();
         $pluginLoader->run();
 

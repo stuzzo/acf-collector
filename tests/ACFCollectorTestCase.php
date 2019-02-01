@@ -46,12 +46,12 @@ class ACFCollectorTestCase extends \PHPUnit\Framework\TestCase
         parent::tearDown();
     }
 
-    protected function getRandomInt()
+    protected function getRandomInt(): int
     {
         return \random_int(1, 100000000);
     }
 
-    protected function getRandomString($length = 10)
+    protected function getRandomString($length = 10): string
     {
         return substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', \random_int(1, 10))), 1, $length);
     }
@@ -59,5 +59,10 @@ class ACFCollectorTestCase extends \PHPUnit\Framework\TestCase
     protected function getPluginLoader(): PluginLoader
     {
         return new PluginLoader();
+    }
+
+    protected function getACFCollectorFieldName(): string
+    {
+        return 'acf_collector_field';
     }
 }

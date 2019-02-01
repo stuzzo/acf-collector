@@ -18,10 +18,8 @@ define('ACF_COLLECTOR_SOURCE', 'src' . DIRECTORY_SEPARATOR);
 
 /**
  * Automatically loads the specified file.
- *
  * Examines the fully qualified class name, separates it into components, then creates
  * a string that represents where the file is loaded on disk.
- *
  * @since 1.0.0
  */
 spl_autoload_register('acfCollectorAutoload');

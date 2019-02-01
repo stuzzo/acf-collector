@@ -28,7 +28,7 @@ class TemplateHandlerTest extends ACFCollectorTestCase
     public function testAddAction(): void
     {
         $pluginLoader = $this->getPluginLoader();
-        $templateHandler = new TemplateHandler($pluginLoader, ACFHandler::getInstance());
+        $templateHandler = new TemplateHandler($pluginLoader, ACFHandler::getInstance(), $this->getACFCollectorFieldName());
         $templateHandler->init();
         $pluginLoader->run();
 
@@ -43,7 +43,7 @@ class TemplateHandlerTest extends ACFCollectorTestCase
     public function testAddFieldsToCurrentPost(): void
     {
         $pluginLoader = $this->getPluginLoader();
-        $templateHandler = new TemplateHandler($pluginLoader, ACFHandler::getInstance());
+        $templateHandler = new TemplateHandler($pluginLoader, ACFHandler::getInstance(), $this->getACFCollectorFieldName());
         global $post;
         $post = new stdClass();
         $templateHandler->addFieldsToCurrentPost();
@@ -54,7 +54,7 @@ class TemplateHandlerTest extends ACFCollectorTestCase
     public function testAddFieldsToCurrentTaxonomy(): void
     {
         $pluginLoader = $this->getPluginLoader();
-        $templateHandler = new TemplateHandler($pluginLoader, ACFHandler::getInstance());
+        $templateHandler = new TemplateHandler($pluginLoader, ACFHandler::getInstance(), $this->getACFCollectorFieldName());
         global $wp_query;
         $wp_query = new stdClass();
         $mock = \Mockery::mock(WP_Term::class);
@@ -68,7 +68,7 @@ class TemplateHandlerTest extends ACFCollectorTestCase
     public function testAddFieldsToCurrentComment(): void
     {
         $pluginLoader = $this->getPluginLoader();
-        $templateHandler = new TemplateHandler($pluginLoader, ACFHandler::getInstance());
+        $templateHandler = new TemplateHandler($pluginLoader, ACFHandler::getInstance(), $this->getACFCollectorFieldName());
         $mock = \Mockery::mock(WP_Comment::class);
         $templateHandler->addFieldsToCurrentComment($mock);
 
@@ -78,7 +78,7 @@ class TemplateHandlerTest extends ACFCollectorTestCase
     public function testAddFieldsToCurrentMenu(): void
     {
         $pluginLoader = $this->getPluginLoader();
-        $templateHandler = new TemplateHandler($pluginLoader, ACFHandler::getInstance());
+        $templateHandler = new TemplateHandler($pluginLoader, ACFHandler::getInstance(), $this->getACFCollectorFieldName());
         $mock = \Mockery::mock(WP_Term::class);
         $mock->taxonomy = 'nav_menu';
         $templateHandler->addFieldsToCurrentMenu($mock);
@@ -89,7 +89,7 @@ class TemplateHandlerTest extends ACFCollectorTestCase
     public function testAddFieldsToCurrentMenus(): void
     {
         $pluginLoader = $this->getPluginLoader();
-        $templateHandler = new TemplateHandler($pluginLoader, ACFHandler::getInstance());
+        $templateHandler = new TemplateHandler($pluginLoader, ACFHandler::getInstance(), $this->getACFCollectorFieldName());
         $mock = \Mockery::mock(WP_Term::class);
         $mock->taxonomy = 'nav_menu';
         $menus = [$mock];

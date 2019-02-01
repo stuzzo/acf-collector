@@ -117,6 +117,7 @@ abstract class BaseFormatter implements FormatterInterface
             $diffMessage = sprintf('The following %s different: %s', count($diff) > 1 ? 'elements are' : 'element is', implode(',', $diff));
             throw new WrongFilteredFieldsException(sprintf('The field %s expects %d to return, %d received. %s', $field['name'], count($returnKeys), count($formattedFields), $diffMessage));
         }
+
         return $formattedFields;
     }
 

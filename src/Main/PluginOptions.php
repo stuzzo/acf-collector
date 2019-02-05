@@ -18,6 +18,11 @@ class PluginOptions
     /**
      * @since    1.0.0
      */
+    const PREFIX_OPTION_NAME = 'acf_collector';
+
+    /**
+     * @since    1.0.0
+     */
     public function init()
     {
         add_action('admin_menu', [$this, 'setupOptions']);

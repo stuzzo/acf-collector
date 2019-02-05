@@ -54,6 +54,7 @@ class TemplateHandler
 
     /**
      * Register the filters used to add the fields to the current object
+     *
      * @since  1.0.0
      */
     public function init()

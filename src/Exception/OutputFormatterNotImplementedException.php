@@ -11,6 +11,8 @@
 
 namespace ACFCollector\Exception;
 
+use ACFCollector\Main\PluginI18N;
+
 /**
  * Class OutputFormatterNotImplementedException
  * @package ACFCollector\Exception
@@ -28,7 +30,7 @@ final class OutputFormatterNotImplementedException extends \RuntimeException
      */
     public function __construct($fieldType, $code = 0, \Throwable $previous = null)
     {
-        $fullMessage = sprintf('Formatter for field type %s non implemented', $fieldType);
+        $fullMessage = __(sprintf('Formatter for field type %s non implemented', $fieldType), PluginI18N::PLUGIN_TEXT_DOMAIN);
         parent::__construct($fullMessage, $code, $previous);
     }
 }

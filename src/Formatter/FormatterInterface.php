@@ -15,8 +15,9 @@ interface FormatterInterface
 {
     /**
      * @param array $field
+     * @param bool $isOutputFiltered
      *
      * @return array
      */
-    public function format($field);
+    public function format($field, $isOutputFiltered);
 }

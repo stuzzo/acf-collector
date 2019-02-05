@@ -52,11 +52,11 @@ abstract class BaseFormatter implements FormatterInterface
      */
     protected function getBaseReturnFields()
     {
-        return array(
+        return [
             'label',
             'name',
             'type',
-        );
+        ];
     }
 
     /**
@@ -71,17 +71,24 @@ abstract class BaseFormatter implements FormatterInterface
 
     /**
      * @param array $field
+     * @param bool  $isOutputFiltered
      *
      * @return array
      * @since 1.0.0
      */
-    public function format($field)
+    public function format($field, $isOutputFiltered)
     {
-        try {
-            $formattedFields = $this->filterArrayFieldByReturnKeys($field, $this->returnKeys);
-        } catch (WrongFilteredFieldsException $exception) {
-            $formattedFields['value'] = $exception->getMessage();
-            return $this->prepareFieldsForOutput($field, $formattedFields);
+
+        if ($isOutputFiltered) {
+            try {
+                $formattedFields = $this->filterArrayFieldByReturnKeys($field, $this->returnKeys);
+            } catch (WrongFilteredFieldsException $exception) {
+                $formattedFields['value'] = $exception->getMessage();
+
+                return $this->prepareFieldsForOutput($field, $formattedFields);
+            }
+        } else {
+            $formattedFields = $this->formatArrayKeysByKeys($field);
         }
 
         $this->verifyOutputFormatter($field);
@@ -105,7 +112,7 @@ abstract class BaseFormatter implements FormatterInterface
      */
     protected function filterArrayFieldByReturnKeys($field, $returnKeys)
     {
-        $formattedFields = array();
+        $formattedFields = [];
         foreach ($field as $key => $value) {
             if (in_array($key, $returnKeys, true)) {
                 $formattedFields[$key] = $value;
@@ -122,6 +129,23 @@ abstract class BaseFormatter implements FormatterInterface
     }
 
     /**
+     * Filter the result array by keys specified on init method
+     *
+     * @param $field
+     *
+     * @return array
+     */
+    protected function formatArrayKeysByKeys($field)
+    {
+        $formattedFields = [];
+        foreach ($field as $key => $value) {
+            $formattedFields[$key] = $value;
+        }
+
+        return $formattedFields;
+    }
+
+    /**
      * Return an array fieldName => fieldValue
      *
      * @param $field
@@ -131,7 +155,7 @@ abstract class BaseFormatter implements FormatterInterface
      */
     protected function prepareFieldsForOutput($field, $formattedFields)
     {
-        return array($field['name'] => $formattedFields);
+        return [$field['name'] => $formattedFields];
     }
 
     /**

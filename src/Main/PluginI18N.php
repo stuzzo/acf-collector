@@ -21,6 +21,24 @@ namespace ACFCollector\Main;
  */
 class PluginI18N
 {
+    /**
+     * @since 1.0.0
+     */
+    const PLUGIN_TEXT_DOMAIN = 'acf-collector';
+
+    /**
+     * Return the plugin text domain
+     * @return string
+     * @since 1.0.0
+     */
+    public static function getPluginTextDomain()
+    {
+        static $inst = null;
+        if ($inst === null) {
+            $inst = new self();
+        }
+        return self::PLUGIN_TEXT_DOMAIN;
+    }
 
     /**
      * Load the plugin text domain for translation.
@@ -29,7 +47,7 @@ class PluginI18N
     public function loadPluginTextdomain()
     {
         \load_plugin_textdomain(
-            'acf-collector',
+            self::PLUGIN_TEXT_DOMAIN,
             false,
             dirname(__DIR__) . '/Resources/languages/'
         );

@@ -36,6 +36,7 @@
 use ACFCollector\Handler\ACFHandler;
 use ACFCollector\Handler\RestAPIHandler;
 use ACFCollector\Handler\TemplateHandler;
+use ACFCollector\Main\PluginActivator;
 use ACFCollector\Main\PluginI18N;
 use ACFCollector\Main\PluginKernel;
 use ACFCollector\Main\PluginLoader;
@@ -61,8 +62,9 @@ require_once 'autoloader.php';
  */
 function activate_acf_formatter()
 {
-//    PluginActivator::activate();
+    PluginActivator::activate();
 }
+
 register_activation_hook(__FILE__, 'activate_acf_formatter');
 
 /**
@@ -71,9 +73,36 @@ register_activation_hook(__FILE__, 'activate_acf_formatter');
  */
 function deactivate_acf_formatter()
 {
-//    PluginDeactivator::deactivate();
+    //    PluginDeactivator::deactivate();
 }
+
 register_deactivation_hook(__FILE__, 'deactivate_acf_formatter');
+
+/**
+ * Add action links on plugin page in to Plugin Name block
+ *
+ * @param $links array() action links
+ * @param $file  string  relative path to plugin "acf-collector.php"
+ *
+ * @return $links array() action links
+ */
+if (!function_exists('acf_collector_plugin_action_links')) {
+    function acf_collector_plugin_action_links($links, $file)
+    {
+        static $this_plugin;
+        if (!$this_plugin) {
+            $this_plugin = plugin_basename(__FILE__);
+        }
+        if ($file === $this_plugin) {
+            $settings_link = '<a href="options-general.php?page=acf_collector">' . __('Settings', PluginI18N::PLUGIN_TEXT_DOMAIN) . '</a>';
+            array_unshift($links, $settings_link);
+        }
+
+        return $links;
+    }
+
+}
+add_filter('plugin_action_links', 'acf_collector_plugin_action_links', 10, 2);
 
 /**
  * Plugin entry point
@@ -82,12 +111,12 @@ register_deactivation_hook(__FILE__, 'deactivate_acf_formatter');
 function initPlugin()
 {
     $acfCollectorFieldName = get_option('acf_collector_field_name', 0);
-    $isOutputFiltered = get_option('acf_collector_is_output_filtered', 0);
     $pluginI18N = new PluginI18N();
     $pluginLoader = new PluginLoader();
     $restAPIHandler = new RestAPIHandler($pluginLoader, ACFHandler::getInstance(), $acfCollectorFieldName);
     $templateHandler = new TemplateHandler($pluginLoader, ACFHandler::getInstance(), $acfCollectorFieldName);
     $pluginOptions = new PluginOptions();
-    new PluginKernel($pluginI18N,  $restAPIHandler, $templateHandler, $pluginLoader, $pluginOptions);
+    new PluginKernel($pluginI18N, $restAPIHandler, $templateHandler, $pluginLoader, $pluginOptions);
 }
+
 initPlugin();

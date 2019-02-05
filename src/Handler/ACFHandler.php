@@ -14,6 +14,7 @@ namespace ACFCollector\Handler;
 use ACFCollector\Exception\FieldNotImplementedException;
 use ACFCollector\Factory\FormatterFactory;
 use function get_comment_meta;
+use function get_option;
 use function get_term_meta;
 use function get_user_meta;
 use function sprintf;
@@ -24,11 +25,18 @@ use function usort;
  */
 final class ACFHandler
 {
+    /**
+     * @var bool
+     * @since 1.0.0
+     */
+    private $isOutputFiltered;
 
     /**
      * @since 1.0.0
      */
-    private function __construct() {}
+    private function __construct() {
+        $this->isOutputFiltered = get_option('acf_collector_is_output_filtered', false);
+    }
 
     /**
      * @since 1.0.0
@@ -227,7 +235,7 @@ final class ACFHandler
         /** @var \ACFCollector\Formatter\FormatterInterface $formatter */
         $formatter = FormatterFactory::getFormatter($field['type']);
 
-        return $formatter->format($field);
+        return $formatter->format($field, $this->isOutputFiltered);
     }
 
     /**

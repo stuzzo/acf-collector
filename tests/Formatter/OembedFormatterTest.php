@@ -33,7 +33,7 @@ class OembedFormatterTest extends ACFCollectorTestCase
     {
         $formatter = OembedFormatter::getInstance();
         $field = $this->getField();
-        $fieldsFormatted = $formatter->format($field);
+        $fieldsFormatted = $formatter->format($field, false);
 
         $this->assertIsArray($fieldsFormatted);
         $this->assertArrayHasKey('label', $fieldsFormatted[$field['name']]);

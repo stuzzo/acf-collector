@@ -57,7 +57,7 @@ define('ACF_COLLECTOR_PATH', plugin_dir_path(__FILE__));
 require_once 'autoloader.php';
 
 /**
- * The code that runs during plugin activation.
+ * The code that runs during plugin activation and admin init.
  * @since 1.0.0
  */
 function activate_acf_formatter()
@@ -66,6 +66,7 @@ function activate_acf_formatter()
 }
 
 register_activation_hook(__FILE__, 'activate_acf_formatter');
+add_action('admin_init', 'activate_acf_formatter');
 
 /**
  * The code that runs during plugin deactivation.
@@ -110,7 +111,7 @@ add_filter('plugin_action_links', 'acf_collector_plugin_action_links', 10, 2);
  */
 function initPlugin()
 {
-    $acfCollectorFieldName = get_option('acf_collector_field_name', 0);
+    $acfCollectorFieldName = get_option('acf_collector_field_name', 'acf_collector_field');
     $pluginI18N = new PluginI18N();
     $pluginLoader = new PluginLoader();
     $restAPIHandler = new RestAPIHandler($pluginLoader, ACFHandler::getInstance(), $acfCollectorFieldName);

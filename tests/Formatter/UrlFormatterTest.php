@@ -15,6 +15,7 @@ namespace ACFFormatter\Tests\Formatter;
 
 use ACFCollector\Formatter\UrlFormatter;
 use ACFCollector\Tests\ACFCollectorTestCase;
+use function fann_set_learning_momentum;
 use function file_get_contents;
 use function json_decode;
 use function sprintf;
@@ -33,7 +34,7 @@ class UrlFormatterTest extends ACFCollectorTestCase
     {
         $formatter = UrlFormatter::getInstance();
         $field = $this->getField();
-        $fieldsFormatted = $formatter->format($field);
+        $fieldsFormatted = $formatter->format($field, false);
 
         $this->assertIsArray($fieldsFormatted);
         $this->assertArrayHasKey('label', $fieldsFormatted[$field['name']]);

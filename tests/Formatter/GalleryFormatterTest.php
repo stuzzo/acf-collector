@@ -34,7 +34,7 @@ class GalleryFormatterTest extends ACFCollectorTestCase
     {
         $formatter = GalleryFormatter::getInstance();
         $field = $this->getField();
-        $fieldsFormatted = $formatter->format($field);
+        $fieldsFormatted = $formatter->format($field, false);
 
         $this->assertIsArray($fieldsFormatted);
         $this->assertArrayHasKey('label', $fieldsFormatted[$field['name']]);

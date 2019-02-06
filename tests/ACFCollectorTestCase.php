@@ -14,10 +14,14 @@ declare(strict_types=1);
 namespace ACFCollector\Tests;
 
 use ACFCollector\Main\PluginLoader;
+use function get_option;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use function Brain\Monkey\Functions\stubs;
 use function Brain\Monkey\setUp;
 use function Brain\Monkey\tearDown;
+use function ob_end_clean;
+use function ob_get_flush;
+use function ob_start;
 use function sprintf;
 
 class ACFCollectorTestCase extends \PHPUnit\Framework\TestCase
@@ -36,7 +40,7 @@ class ACFCollectorTestCase extends \PHPUnit\Framework\TestCase
         $this->jsonDir = sprintf('%s/Formatter/json', __DIR__);
         setUp();
         stubs(['load_plugin_textdomain'], true);
-        stubs(['is_tax', 'is_category', 'is_tag', 'is_single', 'is_page', 'is_category'], false);
+        stubs(['is_tax', 'is_category', 'is_tag', 'is_single', 'is_page', 'is_category', 'get_option'], false);
         stubs(['get_field_objects', 'get_term_meta', 'get_comment_meta', 'get_user_meta'], []);
     }
 

@@ -11,9 +11,6 @@
 
 namespace ACFCollector\Main;
 
-use function defined;
-use function var_dump;
-
 /**
  * Fired during plugin activation.
  * This class defines all code necessary to run during the plugin's activation.

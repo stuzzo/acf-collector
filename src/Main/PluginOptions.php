@@ -86,7 +86,7 @@ class PluginOptions
         $radio = '';
         $currentValue = (int) esc_attr(get_option($args['name'], 0));
         foreach ($args['options'] as $key => $value) {
-            $radio .= sprintf('<input class="acf-collector-container_body--input-radio" type="radio" name="%s" value="%s" %s>%s', $key, $value['value'], $currentValue === $value['value'] ? 'checked' : '', $value['label']);
+            $radio .= sprintf('<input class="acf-collector-container_body--input-radio" type="radio" name="%s" value="%s" %s>%s', $args['name'], $value['value'], $currentValue === $value['value'] ? 'checked' : '', $value['label']);
         }
         $span = sprintf('<br><span class="acf-collector-container_body--span">%s</span>', $args['description']);
 

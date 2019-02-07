@@ -79,15 +79,15 @@ function deactivate_acf_formatter()
 
 register_deactivation_hook(__FILE__, 'deactivate_acf_formatter');
 
-/**
- * Add action links on plugin page in to Plugin Name block
- *
- * @param $links array() action links
- * @param $file  string  relative path to plugin "acf-collector.php"
- *
- * @return $links array() action links
- */
 if (!function_exists('acf_collector_plugin_action_links')) {
+    /**
+     * Add action links on plugin page in to Plugin Name block
+     *
+     * @param $links array() action links
+     * @param $file  string  relative path to plugin "acf-collector.php"
+     *
+     * @return $links array() action links
+     */
     function acf_collector_plugin_action_links($links, $file)
     {
         static $this_plugin;

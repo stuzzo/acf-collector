@@ -8,9 +8,12 @@ declare(strict_types=1);
 
 namespace ACFCollector\Main;
 
+use function __;
 use function add_action;
 use function dirname;
+use function preg_match;
 use function sprintf;
+use function var_dump;
 
 class PluginOptions
 {
@@ -55,7 +58,7 @@ class PluginOptions
             $optionsSection,// section id for parent section.
             ['name' => 'acf_collector_field_name', 'description' => 'This will be the key where you will find the custom fields']
         );
-        \register_setting($optionsGroup, 'acf_collector_field_name');
+        \register_setting($optionsGroup, 'acf_collector_field_name', [$this, 'validateCollectorFieldName']);
 
         \add_settings_field(
             'acf_collector_is_output_filtered',//ID for the settings field to add
@@ -91,6 +94,23 @@ class PluginOptions
         $span = sprintf('<br><span class="acf-collector-container_body--span">%s</span>', $args['description']);
 
         echo $radio . $span;
+    }
+
+    public function validateCollectorFieldName($option) {
+        //sanitize
+        $option = sanitize_text_field($option);
+
+        if (!preg_match('/^[A-Za-z][A-Za-z0-9]*(?:_[A-Za-z0-9]+)*$/', $option)) {
+            \add_settings_error(
+                'acf_collector_field_name',
+                'fieldNameNotValid',
+                __('The field can have only alphanumerical values and _', PluginI18N::getPluginTextDomain()),
+                'error'
+            );
+            return 'acf_collector_field';
+        }
+
+        return $option;
     }
 
     private function initOptionPage()

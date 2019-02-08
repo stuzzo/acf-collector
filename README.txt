@@ -1,4 +1,4 @@
-=== Plugin Name ===
+=== ACF-Collector PRO ===
 Contributors: stuzzo
 Donate link: https://www.paypal.me/stuzzo
 Tags: acf, advanced, custom, field, fields, rest, api

@@ -33,11 +33,13 @@ class PluginI18N
      */
     public static function getPluginTextDomain()
     {
-        static $inst = null;
-        if ($inst === null) {
-            $inst = new self();
-        }
-        return self::PLUGIN_TEXT_DOMAIN;
+//        static $inst = null;
+//        if ($inst === null) {
+//            $inst = new self();
+//        }
+//        return self::PLUGIN_TEXT_DOMAIN;
+
+        return 'acf-collector';
     }
 
     /**
@@ -47,7 +49,7 @@ class PluginI18N
     public function loadPluginTextdomain()
     {
         \load_plugin_textdomain(
-            self::PLUGIN_TEXT_DOMAIN,
+            self::getPluginTextDomain(),
             false,
             dirname(__DIR__) . '/Resources/languages/'
         );

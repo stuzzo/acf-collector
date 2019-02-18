@@ -19,14 +19,13 @@ namespace ACFCollector\Formatter;
 class PasswordFormatter extends BaseFormatter
 {
     /**
-     * OembedFormatter constructor.
+     * PasswordFormatter constructor.
      *
      * @since 1.0.0
      */
     private function __construct()
     {
         $this->defaultOutputFormatterType = self::STRING_OUTPUT_FORMATTER_TYPE;
-        $this->returnKeys = array();
     }
 
     public static function getInstance()
@@ -34,7 +33,6 @@ class PasswordFormatter extends BaseFormatter
         static $inst = null;
         if ($inst === null) {
             $inst = new self();
-            $inst->init();
         }
 
         return $inst;

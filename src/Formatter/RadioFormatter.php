@@ -12,21 +12,20 @@
 namespace ACFCollector\Formatter;
 
 /**
- * Class that formats email field
+ * Class that formats radio field
  *
  * @since      1.0.0
  */
 class RadioFormatter extends BaseFormatter
 {
     /**
-     * EmailFormatter constructor.
+     * RadioFormatter constructor.
      *
      * @since 1.0.0
      */
     private function __construct()
     {
         $this->defaultOutputFormatterType = self::STRING_OUTPUT_FORMATTER_TYPE;
-        $this->returnKeys = array();
     }
 
     /**
@@ -39,7 +38,6 @@ class RadioFormatter extends BaseFormatter
         static $inst = null;
         if ($inst === null) {
             $inst = new self();
-            $inst->init();
         }
 
         return $inst;

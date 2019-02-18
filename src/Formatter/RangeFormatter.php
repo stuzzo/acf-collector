@@ -24,7 +24,6 @@ class RangeFormatter extends BaseFormatter
     private function __construct()
     {
         $this->defaultOutputFormatterType = self::INTEGER_OUTPUT_FORMATTER_TYPE;
-        $this->returnKeys = array();
     }
 
     /**
@@ -37,7 +36,6 @@ class RangeFormatter extends BaseFormatter
         static $inst = null;
         if ($inst === null) {
             $inst = new self();
-            $inst->init();
         }
 
         return $inst;

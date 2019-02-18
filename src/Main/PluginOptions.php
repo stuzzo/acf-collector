@@ -68,7 +68,7 @@ class PluginOptions
             $optionsSection,// section id for parent section.
             [
                 'name' => 'acf_collector_is_output_filtered',
-                'description' => 'Choose if you want to receive all the fields properties or just value, label and name',
+                'description' => 'Choose if you want to receive all the fields properties or just the value',
                 'options' => [['label' => 'Yes', 'value' => 1], ['label' => 'No', 'value' => 0]]
             ]
         );

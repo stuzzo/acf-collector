@@ -12,14 +12,14 @@
 namespace ACFCollector\Formatter;
 
 /**
- * Class that formats checkbox field
+ * Class that formats true/false field
  *
  * @since      1.0.0
  */
-class CheckboxFormatter extends BaseFormatter
+class TrueFalseFormatter extends BaseFormatter
 {
     /**
-     * CheckboxFormatter constructor.
+     * TrueFalseFormatter constructor.
      *
      * @since 1.0.0
      */

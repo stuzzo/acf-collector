@@ -12,7 +12,7 @@
 namespace ACFCollector\Formatter;
 
 /**
- * Class that formats file field
+ * Class that formats oembed field
  *
  * @since      1.0.0
  */
@@ -26,7 +26,6 @@ class OembedFormatter extends BaseFormatter
     private function __construct()
     {
         $this->defaultOutputFormatterType = self::STRING_OUTPUT_FORMATTER_TYPE;
-        $this->returnKeys = array();
     }
 
     /**
@@ -39,7 +38,6 @@ class OembedFormatter extends BaseFormatter
         static $inst = null;
         if ($inst === null) {
             $inst = new self();
-            $inst->init();
         }
 
         return $inst;

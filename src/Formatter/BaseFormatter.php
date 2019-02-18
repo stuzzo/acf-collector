@@ -12,14 +12,7 @@
 namespace ACFCollector\Formatter;
 
 use ACFCollector\Exception\OutputFormatterNotImplementedException;
-use ACFCollector\Exception\WrongFilteredFieldsException;
 use ACFCollector\Factory\FormatterOutputFactory;
-use function array_diff;
-use function array_values;
-use function count;
-use function implode;
-use function in_array;
-use function sprintf;
 
 /**
  * Base class that contains only helper methods for formatters
@@ -39,33 +32,6 @@ abstract class BaseFormatter implements FormatterInterface
     protected $defaultOutputFormatterType;
 
     /**
-     * @var array
-     * @since 1.0.0
-     */
-    protected $returnKeys;
-
-    /**
-     * Keys that are returned for each field type
-     *
-     * @return array
-     * @since 1.0.0
-     */
-    protected function getBaseReturnFields()
-    {
-        return [];
-    }
-
-    /**
-     * Set the keys to return
-     *
-     * @since 1.0.0
-     */
-    protected function init()
-    {
-        $this->returnKeys = array_merge($this->returnKeys, $this->getBaseReturnFields());
-    }
-
-    /**
      * @param array $field
      * @param bool  $isOutputFiltered
      *
@@ -75,18 +41,7 @@ abstract class BaseFormatter implements FormatterInterface
     public function format($field, $isOutputFiltered)
     {
 
-        if ($isOutputFiltered) {
-            try {
-                $formattedFields = $this->filterArrayFieldByReturnKeys($field, $this->returnKeys);
-            } catch (WrongFilteredFieldsException $exception) {
-                $formattedFields['value'] = $exception->getMessage();
-
-                return $this->prepareFieldsForOutput($field, $formattedFields);
-            }
-        } else {
-            $formattedFields = $this->formatArrayKeysByKeys($field);
-        }
-
+        $formattedFields = [];
         $this->setOutputFormatterByField($field);
         try {
             $outputFormatter = FormatterOutputFactory::getFormatterForOutput($this->defaultOutputFormatterType);
@@ -95,50 +50,7 @@ abstract class BaseFormatter implements FormatterInterface
             $formattedFields['value'] = $exception->getMessage();
         }
 
-        return $this->prepareFieldsForOutput($field, $formattedFields);
-    }
-
-    /**
-     * Filter the result array by keys specified on init method
-     *
-     * @param $field
-     * @param $returnKeys
-     *
-     * @return array
-     */
-    protected function filterArrayFieldByReturnKeys($field, $returnKeys)
-    {
-        $formattedFields = [];
-        foreach ($field as $key => $value) {
-            if (in_array($key, $returnKeys, true)) {
-                $formattedFields[$key] = $value;
-            }
-        }
-
-        if (count($formattedFields) !== count($returnKeys)) {
-            $diff = array_diff(array_values($returnKeys), array_keys($formattedFields));
-            $diffMessage = sprintf('The following %s different: %s', count($diff) > 1 ? 'elements are' : 'element is', implode(',', $diff));
-            throw new WrongFilteredFieldsException(sprintf('The field %s expects %d to return, %d received. %s', $field['name'], count($returnKeys), count($formattedFields), $diffMessage));
-        }
-
-        return $formattedFields;
-    }
-
-    /**
-     * Filter the result array by keys specified on init method
-     *
-     * @param $field
-     *
-     * @return array
-     */
-    protected function formatArrayKeysByKeys($field)
-    {
-        $formattedFields = [];
-        foreach ($field as $key => $value) {
-            $formattedFields[$key] = $value;
-        }
-
-        return $formattedFields;
+        return $this->prepareFieldsForOutput($field, $formattedFields, $isOutputFiltered);
     }
 
     /**
@@ -146,16 +58,22 @@ abstract class BaseFormatter implements FormatterInterface
      *
      * @param array $field
      * @param array $formattedFields
+     * @param bool $isOutputFiltered
      *
      * @return array
      */
-    protected function prepareFieldsForOutput($field, $formattedFields)
+    protected function prepareFieldsForOutput($field, $formattedFields, $isOutputFiltered)
     {
-        /*
-         * In this way I know that every field type set a value,
-         * so in next time, I can cast the formatted fields parameter to array
-         */
-        $returnValue = $formattedFields['value'];
+        if ($isOutputFiltered) {
+            /*
+             * In this way I know that every field type set a value,
+             * so in next time, I can cast the formatted fields parameter to array
+             */
+            $returnValue = $formattedFields['value'];
+        } else {
+            $returnValue = $formattedFields;
+        }
+
 
         return [$field['name'] => $returnValue];
     }

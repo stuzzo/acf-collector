@@ -84,11 +84,6 @@ abstract class BaseFormatter implements FormatterInterface
      */
     protected function setOutputFormatterByField($field)
     {
-        if ('checkbox' === $field['type']) {
-            $this->defaultOutputFormatterType = 'Array';
-            return;
-        }
-
         if (!isset($field['return_format'])) {
             return;
         }

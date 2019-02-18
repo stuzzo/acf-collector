@@ -1,0 +1,29 @@
+{
+  "ID": 78,
+  "key": "field_5c6b3ff678303",
+  "label": "link page",
+  "name": "link_page",
+  "prefix": "acf",
+  "type": "page_link",
+  "value": "https://wordpress.vm/?page_id=3",
+  "menu_order": 19,
+  "instructions": "",
+  "required": 0,
+  "id": "",
+  "class": "",
+  "conditional_logic": 0,
+  "parent": 5,
+  "wrapper": {
+    "width": "",
+    "class": "",
+    "id": ""
+  },
+  "_name": "link_page",
+  "_prepare": 0,
+  "_valid": 1,
+  "post_type": "",
+  "taxonomy": "",
+  "allow_null": 0,
+  "allow_archives": 1,
+  "multiple": 0
+}

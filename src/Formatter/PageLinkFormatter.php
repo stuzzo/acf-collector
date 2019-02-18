@@ -12,20 +12,20 @@
 namespace ACFCollector\Formatter;
 
 /**
- * Class that formats checkbox field
+ * Class that formats page link field
  *
  * @since      1.0.0
  */
-class CheckboxFormatter extends BaseFormatter
+class PageLinkFormatter extends BaseFormatter
 {
     /**
-     * CheckboxFormatter constructor.
+     * PageLinkFormatter constructor.
      *
      * @since 1.0.0
      */
     private function __construct()
     {
-        $this->defaultOutputFormatterType = self::ARRAY_OUTPUT_FORMATTER_TYPE;
+        $this->defaultOutputFormatterType = self::STRING_OUTPUT_FORMATTER_TYPE;
     }
 
     /**
@@ -43,4 +43,15 @@ class CheckboxFormatter extends BaseFormatter
         return $inst;
     }
 
+    /**
+     * Verify if the current field has the return format key and modify the output formatter
+     *
+     * @param $field
+     */
+    protected function setOutputFormatterByField($field)
+    {
+        if (1 === $field['multiple']) {
+            $this->defaultOutputFormatterType = 'Array';
+        }
+    }
 }

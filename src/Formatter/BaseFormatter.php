@@ -23,6 +23,7 @@ abstract class BaseFormatter implements FormatterInterface
 {
     const STRING_OUTPUT_FORMATTER_TYPE = 'String';
     const ARRAY_OUTPUT_FORMATTER_TYPE = 'Array';
+    const OBJECT_OUTPUT_FORMATTER_TYPE = 'Object';
     const INTEGER_OUTPUT_FORMATTER_TYPE = 'Integer';
 
     /**
@@ -98,6 +99,9 @@ abstract class BaseFormatter implements FormatterInterface
                 break;
             case 'id':
                 $this->defaultOutputFormatterType = 'Integer';
+                break;
+            case 'object':
+                $this->defaultOutputFormatterType = 'Object';
         }
     }
 }

@@ -11,11 +11,23 @@
 
 namespace ACFCollector\Formatter\Output;
 
+/**
+ * Class ArrayFormatter
+ * @package ACFCollector\Formatter\Output
+ * @since 1.0.0
+ */
 class ArrayFormatter implements OutputFormatterInterface
 {
-
+    /**
+     * ArrayFormatter constructor
+     * @since 1.0.0
+     */
     private function __construct() {}
 
+    /**
+     * @return \ACFCollector\Formatter\Output\OutputFormatterInterface
+     * @since 1.0.0
+     */
     public static function getInstance()
     {
         static $inst = null;

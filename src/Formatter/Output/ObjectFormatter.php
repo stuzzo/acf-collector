@@ -11,16 +11,17 @@
 
 namespace ACFCollector\Formatter\Output;
 
+use function json_encode;
+
 /**
- * Class IntegerFormatter
+ * Class ObjectFormatter
  * @package ACFCollector\Formatter\Output
  * @since 1.0.0
  */
-class IntegerFormatter implements OutputFormatterInterface
+class ObjectFormatter implements OutputFormatterInterface
 {
-
     /**
-     * IntegerFormatter constructor
+     * ObjectFormatter constructor
      * @since 1.0.0
      */
     private function __construct() {}
@@ -47,9 +48,9 @@ class IntegerFormatter implements OutputFormatterInterface
     public function formatReturnValue($field)
     {
         if (empty($field['value'])) {
-            return array('value' => 0);
+            return array('value' => []);
         }
 
-        return array('value' => (int)$field['value']);
+        return array('value' => json_encode($field['value']));
     }
 }

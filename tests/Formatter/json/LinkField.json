@@ -1,0 +1,29 @@
+{
+  "ID": 74,
+  "key": "field_5c6b34018ec79",
+  "label": "link",
+  "name": "link",
+  "prefix": "acf",
+  "type": "link",
+  "value": {
+    "title": "ciao",
+    "url": "https://wordpress.vm/ciao-mondo/",
+    "target": "_blank"
+  },
+  "menu_order": 17,
+  "instructions": "",
+  "required": 0,
+  "id": "",
+  "class": "",
+  "conditional_logic": 0,
+  "parent": 5,
+  "wrapper": {
+    "width": "",
+    "class": "",
+    "id": ""
+  },
+  "_name": "link",
+  "_prepare": 0,
+  "_valid": 1,
+  "return_format": "array"
+}

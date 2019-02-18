@@ -91,7 +91,7 @@ abstract class BaseFormatter implements FormatterInterface
             $formattedFields = $this->formatArrayKeysByKeys($field);
         }
 
-        $this->verifyOutputFormatter($field);
+        $this->setOutputFormatterByField($field);
         try {
             $outputFormatter = FormatterOutputFactory::getFormatterForOutput($this->defaultOutputFormatterType);
             $formattedFields += $outputFormatter->formatReturnValue($field);
@@ -163,8 +163,13 @@ abstract class BaseFormatter implements FormatterInterface
      *
      * @param $field
      */
-    protected function verifyOutputFormatter($field)
+    protected function setOutputFormatterByField($field)
     {
+        if ('checkbox' === $field['type']) {
+            $this->defaultOutputFormatterType = 'Array';
+            return;
+        }
+
         if (!isset($field['return_format'])) {
             return;
         }

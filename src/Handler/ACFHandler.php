@@ -35,7 +35,7 @@ final class ACFHandler
      * @since 1.0.0
      */
     private function __construct() {
-        $this->isOutputFiltered = get_option('acf_collector_is_output_filtered', false);
+        $this->isOutputFiltered = get_option('acf_collector_is_output_filtered', true);
     }
 
     /**

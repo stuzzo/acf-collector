@@ -1,0 +1,34 @@
+{
+  "ID": 64,
+  "key": "field_5c5d5b549acb4",
+  "label": "Radio",
+  "name": "radio",
+  "prefix": "acf",
+  "type": "radio",
+  "value": "rosso",
+  "menu_order": 14,
+  "instructions": "",
+  "required": 0,
+  "id": "",
+  "class": "",
+  "conditional_logic": 0,
+  "parent": 5,
+  "wrapper": {
+    "width": "",
+    "class": "",
+    "id": ""
+  },
+  "_name": "radio",
+  "_prepare": 0,
+  "_valid": 1,
+  "choices": {
+    "rosso": "Rosso",
+    "giallo": "Giallo"
+  },
+  "allow_null": 0,
+  "other_choice": 0,
+  "default_value": "",
+  "layout": "vertical",
+  "return_format": "value",
+  "save_other_choice": 0
+}

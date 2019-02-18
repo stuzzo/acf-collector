@@ -1,0 +1,29 @@
+{
+  "ID": 71,
+  "key": "field_5c6b30fb1fd46",
+  "label": "boolean",
+  "name": "boolean",
+  "prefix": "acf",
+  "type": "true_false",
+  "value": true,
+  "menu_order": 16,
+  "instructions": "",
+  "required": 0,
+  "id": "",
+  "class": "",
+  "conditional_logic": 0,
+  "parent": 5,
+  "wrapper": {
+    "width": "",
+    "class": "",
+    "id": ""
+  },
+  "_name": "boolean",
+  "_prepare": 0,
+  "_valid": 1,
+  "message": "",
+  "default_value": 0,
+  "ui": 0,
+  "ui_on_text": "",
+  "ui_off_text": ""
+}

@@ -52,11 +52,7 @@ abstract class BaseFormatter implements FormatterInterface
      */
     protected function getBaseReturnFields()
     {
-        return [
-            'label',
-            'name',
-            'type',
-        ];
+        return [];
     }
 
     /**
@@ -148,14 +144,20 @@ abstract class BaseFormatter implements FormatterInterface
     /**
      * Return an array fieldName => fieldValue
      *
-     * @param $field
-     * @param $formattedFields
+     * @param array $field
+     * @param array $formattedFields
      *
      * @return array
      */
     protected function prepareFieldsForOutput($field, $formattedFields)
     {
-        return [$field['name'] => $formattedFields];
+        /*
+         * In this way I know that every field type set a value,
+         * so in next time, I can cast the formatted fields parameter to array
+         */
+        $returnValue = $formattedFields['value'];
+
+        return [$field['name'] => $returnValue];
     }
 
     /**

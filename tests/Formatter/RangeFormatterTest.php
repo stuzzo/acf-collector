@@ -37,8 +37,5 @@ class RangeFormatterTest extends ACFCollectorTestCase
         $fieldsFormatted = $formatter->format($field, false);
 
         $this->assertIsArray($fieldsFormatted);
-        $this->assertArrayHasKey('label', $fieldsFormatted[$field['name']]);
-        $this->assertArrayHasKey('value', $fieldsFormatted[$field['name']]);
-        $this->assertArrayHasKey('type', $fieldsFormatted[$field['name']]);
     }
 }

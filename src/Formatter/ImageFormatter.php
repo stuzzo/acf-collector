@@ -24,9 +24,7 @@ class ImageFormatter extends BaseFormatter
     private function __construct()
     {
         $this->defaultOutputFormatterType = self::ARRAY_OUTPUT_FORMATTER_TYPE;
-        $this->returnKeys = array(
-            'return_format',
-        );
+        $this->returnKeys = array();
     }
 
     /**

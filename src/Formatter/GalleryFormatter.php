@@ -43,4 +43,25 @@ class GalleryFormatter extends BaseFormatter
         return $inst;
     }
 
+    /**
+     * @param array $field
+     * @param bool  $isOutputFiltered
+     *
+     * @return array
+     * @since 1.0.0
+     */
+    public function format($field, $isOutputFiltered)
+    {
+        if (empty($field['value'])) {
+            return [];
+        }
+
+        $images = [];
+        foreach ($field['value'] as $image) {
+            $images[] = $image['url'];
+        }
+
+        return [$field['name'] => $images];
+    }
+
 }

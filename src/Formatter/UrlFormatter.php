@@ -26,10 +26,7 @@ class UrlFormatter extends BaseFormatter
     private function __construct()
     {
         $this->defaultOutputFormatterType = self::STRING_OUTPUT_FORMATTER_TYPE;
-        $this->returnKeys = array(
-            'default_value',
-            'placeholder',
-        );
+        $this->returnKeys = array();
     }
 
     /**

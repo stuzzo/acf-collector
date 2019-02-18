@@ -24,12 +24,7 @@ class NumberFormatter extends BaseFormatter
     private function __construct()
     {
         $this->defaultOutputFormatterType = self::INTEGER_OUTPUT_FORMATTER_TYPE;
-        $this->returnKeys = array(
-            'default_value',
-            'min',
-            'max',
-            'placeholder',
-        );
+        $this->returnKeys = array();
     }
 
     /**

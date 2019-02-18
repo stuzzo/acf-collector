@@ -41,37 +41,35 @@ abstract class BaseFormatter implements FormatterInterface
     public function format($field, $isOutputFiltered)
     {
 
-        $formattedFields = [];
         $this->setOutputFormatterByField($field);
         try {
             $outputFormatter = FormatterOutputFactory::getFormatterForOutput($this->defaultOutputFormatterType);
-            $formattedFields += $outputFormatter->formatReturnValue($field);
+            $field += $outputFormatter->formatReturnValue($field);
         } catch (OutputFormatterNotImplementedException $exception) {
-            $formattedFields['value'] = $exception->getMessage();
+            $field['value'] = $exception->getMessage();
         }
 
-        return $this->prepareFieldsForOutput($field, $formattedFields, $isOutputFiltered);
+        return $this->prepareFieldsForOutput($field, $isOutputFiltered);
     }
 
     /**
      * Return an array fieldName => fieldValue
      *
      * @param array $field
-     * @param array $formattedFields
      * @param bool $isOutputFiltered
      *
      * @return array
      */
-    protected function prepareFieldsForOutput($field, $formattedFields, $isOutputFiltered)
+    protected function prepareFieldsForOutput($field, $isOutputFiltered)
     {
         if ($isOutputFiltered) {
             /*
              * In this way I know that every field type set a value,
              * so in next time, I can cast the formatted fields parameter to array
              */
-            $returnValue = $formattedFields['value'];
+            $returnValue = $field['value'];
         } else {
-            $returnValue = $formattedFields;
+            $returnValue = $field;
         }
 
 

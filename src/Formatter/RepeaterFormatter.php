@@ -55,9 +55,9 @@ class RepeaterFormatter extends BaseFormatter
     {
         $this->setOutputFormatterByField($field);
 
-        $subFieldsDefinitions = isset($field['sub_fields']) ? $field['sub_fields'] : [];
-        $subFieldsBlocks = ($field['value'] && $field['value'] !== false) ? $field['value'] : [];
-        $formattedData = [];
+        $subFieldsDefinitions = isset($field['sub_fields']) ? $field['sub_fields'] : array();
+        $subFieldsBlocks = ($field['value'] && $field['value'] !== false) ? $field['value'] : array();
+        $formattedData = array();
 
         foreach ($subFieldsBlocks as $subFieldsBlock) {
             $index = 0;

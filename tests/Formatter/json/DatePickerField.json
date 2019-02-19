@@ -1,0 +1,27 @@
+{
+  "ID": 89,
+  "key": "field_5c6c081a4cfa3",
+  "label": "data",
+  "name": "data",
+  "prefix": "acf",
+  "type": "date_picker",
+  "value": "21/02/2019",
+  "menu_order": 24,
+  "instructions": "",
+  "required": 0,
+  "id": "",
+  "class": "",
+  "conditional_logic": 0,
+  "parent": 5,
+  "wrapper": {
+    "width": "",
+    "class": "",
+    "id": ""
+  },
+  "_name": "data",
+  "_prepare": 0,
+  "_valid": 1,
+  "display_format": "d/m/Y",
+  "return_format": "d/m/Y",
+  "first_day": 1
+}

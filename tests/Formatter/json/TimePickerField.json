@@ -1,0 +1,26 @@
+{
+  "ID": 92,
+  "key": "field_5c6c735460e9b",
+  "label": "tempo",
+  "name": "tempo",
+  "prefix": "acf",
+  "type": "time_picker",
+  "value": "16:17:00",
+  "menu_order": 26,
+  "instructions": "",
+  "required": 0,
+  "id": "",
+  "class": "",
+  "conditional_logic": 0,
+  "parent": 5,
+  "wrapper": {
+    "width": "",
+    "class": "",
+    "id": ""
+  },
+  "_name": "tempo",
+  "_prepare": 0,
+  "_valid": 1,
+  "display_format": "H:i:s",
+  "return_format": "H:i:s"
+}

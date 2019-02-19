@@ -1,0 +1,27 @@
+{
+  "ID": 91,
+  "key": "field_5c6c733e60e9a",
+  "label": "data ora",
+  "name": "data_ora",
+  "prefix": "acf",
+  "type": "date_time_picker",
+  "value": "28/02/2019 4:18 pm",
+  "menu_order": 25,
+  "instructions": "",
+  "required": 0,
+  "id": "",
+  "class": "",
+  "conditional_logic": 0,
+  "parent": 5,
+  "wrapper": {
+    "width": "",
+    "class": "",
+    "id": ""
+  },
+  "_name": "data_ora",
+  "_prepare": 0,
+  "_valid": 1,
+  "display_format": "d/m/Y g:i a",
+  "return_format": "d/m/Y g:i a",
+  "first_day": 1
+}

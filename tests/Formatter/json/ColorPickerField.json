@@ -1,0 +1,25 @@
+{
+  "ID": 93,
+  "key": "field_5c6c736660e9c",
+  "label": "colore",
+  "name": "colore",
+  "prefix": "acf",
+  "type": "color_picker",
+  "value": "#0b1963",
+  "menu_order": 27,
+  "instructions": "",
+  "required": 0,
+  "id": "",
+  "class": "",
+  "conditional_logic": 0,
+  "parent": 5,
+  "wrapper": {
+    "width": "",
+    "class": "",
+    "id": ""
+  },
+  "_name": "colore",
+  "_prepare": 0,
+  "_valid": 1,
+  "default_value": ""
+}

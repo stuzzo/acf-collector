@@ -12,14 +12,14 @@
 namespace ACFCollector\Formatter;
 
 /**
- * Class that formats post object field
+ * Class that formats relationship field
  *
  * @since      1.0.0
  */
-class PostObjectFormatter extends BaseFormatter
+class RelationshipFormatter extends BaseFormatter
 {
     /**
-     * PostObjectFormatter constructor.
+     * RelationshipFormatter constructor.
      *
      * @since 1.0.0
      */

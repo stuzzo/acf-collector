@@ -11,9 +11,6 @@
 
 namespace ACFCollector\Formatter;
 
-use function array_merge;
-use phpDocumentor\Reflection\Types\Parent_;
-
 /**
  * Class that formats text field
  *

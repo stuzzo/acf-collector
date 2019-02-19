@@ -13,17 +13,17 @@ declare(strict_types=1);
 
 namespace ACFFormatter\Tests\Formatter;
 
-use ACFCollector\Formatter\RelationshipFormatter;
+use ACFCollector\Formatter\TaxonomyFormatter;
 use ACFCollector\Tests\ACFCollectorTestCase;
 use function file_get_contents;
 use function json_decode;
 use function sprintf;
 
-class RelationshipFormatterTest extends ACFCollectorTestCase
+class TaxonomyFormatterTest extends ACFCollectorTestCase
 {
     private function getField(): array
     {
-        $jsonFile = sprintf('%s/RelationshipField.json', $this->jsonDir);
+        $jsonFile = sprintf('%s/TaxonomyField.json', $this->jsonDir);
         $jsonContent = file_get_contents($jsonFile);
 
         return json_decode($jsonContent, true);
@@ -31,7 +31,7 @@ class RelationshipFormatterTest extends ACFCollectorTestCase
 
     public function testReturnValue(): void
     {
-        $formatter = RelationshipFormatter::getInstance();
+        $formatter = TaxonomyFormatter::getInstance();
         $field = $this->getField();
         $fieldsFormatted = $formatter->format($field, false);
 

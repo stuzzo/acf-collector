@@ -1,0 +1,43 @@
+{
+  "ID": 83,
+  "key": "field_5c6c04aab0618",
+  "label": "tassonomie",
+  "name": "tassonomie",
+  "prefix": "acf",
+  "type": "taxonomy",
+  "value": {
+    "term_id": 4,
+    "name": "test",
+    "slug": "test",
+    "term_group": 0,
+    "term_taxonomy_id": 4,
+    "taxonomy": "category",
+    "description": "",
+    "parent": 0,
+    "count": 0,
+    "filter": "raw"
+  },
+  "menu_order": 21,
+  "instructions": "",
+  "required": 0,
+  "id": "",
+  "class": "",
+  "conditional_logic": 0,
+  "parent": 5,
+  "wrapper": {
+    "width": "",
+    "class": "",
+    "id": ""
+  },
+  "_name": "tassonomie",
+  "_prepare": 0,
+  "_valid": 1,
+  "taxonomy": "category",
+  "field_type": "radio",
+  "allow_null": 0,
+  "add_term": 1,
+  "save_terms": 0,
+  "load_terms": 0,
+  "return_format": "object",
+  "multiple": 0
+}

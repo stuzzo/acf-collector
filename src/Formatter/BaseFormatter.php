@@ -41,7 +41,6 @@ abstract class BaseFormatter implements FormatterInterface
      */
     public function format($field, $isOutputFiltered)
     {
-
         $this->setOutputFormatterByField($field);
         try {
             $outputFormatter = FormatterOutputFactory::getFormatterForOutput($this->defaultOutputFormatterType);

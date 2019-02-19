@@ -1,0 +1,66 @@
+{
+  "ID": 99,
+  "key": "field_5c6c8372070ce",
+  "label": "reeeeeee",
+  "name": "reeeeeee",
+  "prefix": "acf",
+  "type": "repeater",
+  "value": [
+    {
+      "aaaaaaaaaaaaaaaaaaa": "aaaaaaaaaa@gmail.com"
+    },
+    {
+      "aaaaaaaaaaaaaaaaaaa": "pippo@pluto.com"
+    }
+  ],
+  "menu_order": 1,
+  "instructions": "",
+  "required": 0,
+  "id": "",
+  "class": "",
+  "conditional_logic": 0,
+  "parent": 97,
+  "wrapper": {
+    "width": "",
+    "class": "",
+    "id": ""
+  },
+  "_name": "reeeeeee",
+  "_prepare": 0,
+  "_valid": 1,
+  "collapsed": "",
+  "min": 0,
+  "max": 0,
+  "layout": "table",
+  "button_label": "",
+  "sub_fields": [
+    {
+      "ID": 100,
+      "key": "field_5c6c837d070cf",
+      "label": "aaaaaaaaa",
+      "name": "aaaaaaaaaaaaaaaaaaa",
+      "prefix": "acf",
+      "type": "email",
+      "value": null,
+      "menu_order": 0,
+      "instructions": "",
+      "required": 0,
+      "id": "",
+      "class": "",
+      "conditional_logic": 0,
+      "parent": 99,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "_name": "aaaaaaaaaaaaaaaaaaa",
+      "_prepare": 0,
+      "_valid": 1,
+      "default_value": "",
+      "placeholder": "",
+      "prepend": "",
+      "append": ""
+    }
+  ]
+}

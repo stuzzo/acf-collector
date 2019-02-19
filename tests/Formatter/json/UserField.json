@@ -1,0 +1,36 @@
+{
+  "ID": 85,
+  "key": "field_5c6c05f8bf7a8",
+  "label": "user",
+  "name": "user",
+  "prefix": "acf",
+  "type": "user",
+  "value": {
+    "data": {},
+    "ID": 3,
+    "caps": {},
+    "cap_key": "wp_capabilities",
+    "roles": [],
+    "allcaps": {},
+    "filter": null
+  },
+  "menu_order": 22,
+  "instructions": "",
+  "required": 0,
+  "id": "",
+  "class": "",
+  "conditional_logic": 0,
+  "parent": 5,
+  "wrapper": {
+    "width": "",
+    "class": "",
+    "id": ""
+  },
+  "_name": "user",
+  "_prepare": 0,
+  "_valid": 1,
+  "role": "",
+  "allow_null": 0,
+  "multiple": 0,
+  "return_format": "object"
+}

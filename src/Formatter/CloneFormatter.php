@@ -12,17 +12,16 @@
 namespace ACFCollector\Formatter;
 
 use ACFCollector\Handler\ACFHandler;
-use function var_dump;
 
 /**
- * Class that formats Google map field
+ * Class that formats clone field
  *
  * @since      1.0.0
  */
-class RepeaterFormatter extends BaseFormatter
+class CloneFormatter extends BaseFormatter
 {
     /**
-     * GoogleMapFormatter constructor.
+     * CloneFormatter constructor.
      *
      * @since 1.0.0
      */
@@ -59,23 +58,11 @@ class RepeaterFormatter extends BaseFormatter
         $this->setOutputFormatterByField($field);
 
         $subFieldsDefinitions = isset($field['sub_fields']) ? $field['sub_fields'] : array();
-        $subFieldsBlocks = ($field['value'] && $field['value'] !== false) ? $field['value'] : array();
-
         $formattedData = array();
-
-        foreach ($subFieldsBlocks as $subFieldsBlock) {
-            $index = 0;
-            $currentFormattedField = array();
-//            var_dump($field);
-//            die();
-            foreach ($subFieldsBlock as $fieldKey => $fieldValue) {
-//                var_dump($subFieldsBlock);
-//                die();
-                $currentSubField = $subFieldsDefinitions[$index++];
-                $currentSubField['value'] = $fieldValue;
-                $subFieldsBlocks += ACFHandler::getInstance()->formatField($currentSubField);
-            }
-            $formattedData[] = $currentFormattedField;
+        foreach ($subFieldsDefinitions as $subField) {
+            $currentSubFieldName = $subField['name'];
+            $subField['value'] = !empty($field['value'][$currentSubFieldName]) ? $field['value'][$currentSubFieldName] : array();
+            $formattedData += ACFHandler::getInstance()->formatField($subField);
         }
         $field['value'] = $formattedData;
 

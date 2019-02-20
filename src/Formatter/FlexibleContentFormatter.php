@@ -11,6 +11,9 @@
 
 namespace ACFCollector\Formatter;
 
+use ACFCollector\Handler\ACFHandler;
+use function var_dump;
+
 /**
  * Class that formats flexible content field
  *
@@ -73,7 +76,13 @@ class FlexibleContentFormatter extends BaseFormatter
                         //Associo alla definizione, il suo valore
                         $subFieldDefinition['value'] = $currentSubFieldValue;
                         //Restituisco il campo formattato
-                        $formattedData[$subFieldsDefinition['name']] += parent::format($subFieldDefinition, $isOutputFiltered);
+                        if ('repeater' === $subFieldDefinition['type']) {
+//                            var_dump($subFieldDefinition);
+//                            die();
+                        }
+//                        var_dump($subFieldDefinition['type']);
+//                        die();
+                        $formattedData[$subFieldsDefinition['name']] += ACFHandler::getInstance()->formatField($subFieldDefinition);
                         break;
                     }
                 }

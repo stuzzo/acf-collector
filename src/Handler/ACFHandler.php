@@ -194,7 +194,7 @@ final class ACFHandler
      * @return array
      * @since 1.0.0
      */
-    private function formatField($field)
+    public function formatField($field)
     {
         if (empty($field['name'])) {
             $formattedField[$field['error']] = 'Found one or more fields without name';

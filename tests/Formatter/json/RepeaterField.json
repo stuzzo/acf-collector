@@ -1,31 +1,31 @@
 {
-  "ID": 99,
-  "key": "field_5c6c8372070ce",
-  "label": "reeeeeee",
-  "name": "reeeeeee",
+  "ID": 97,
+  "key": "field_5c6c8349070cc",
+  "label": "repeater",
+  "name": "repeater",
   "prefix": "acf",
   "type": "repeater",
-  "value": [
-    {
+  "value": [{
+    "test": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "reeeeeee": [{
       "aaaaaaaaaaaaaaaaaaa": "aaaaaaaaaa@gmail.com"
-    },
-    {
+    }, {
       "aaaaaaaaaaaaaaaaaaa": "pippo@pluto.com"
-    }
-  ],
-  "menu_order": 1,
+    }]
+  }],
+  "menu_order": 0,
   "instructions": "",
   "required": 0,
   "id": "",
   "class": "",
   "conditional_logic": 0,
-  "parent": 97,
+  "parent": 5,
   "wrapper": {
     "width": "",
     "class": "",
     "id": ""
   },
-  "_name": "reeeeeee",
+  "_name": "repeater",
   "_prepare": 0,
   "_valid": 1,
   "collapsed": "",
@@ -33,8 +33,63 @@
   "max": 0,
   "layout": "table",
   "button_label": "",
-  "sub_fields": [
-    {
+  "sub_fields": [{
+    "ID": 98,
+    "key": "field_5c6c8365070cd",
+    "label": "test",
+    "name": "test",
+    "prefix": "acf",
+    "type": "text",
+    "value": null,
+    "menu_order": 0,
+    "instructions": "",
+    "required": 0,
+    "id": "",
+    "class": "",
+    "conditional_logic": 0,
+    "parent": 97,
+    "wrapper": {
+      "width": "",
+      "class": "",
+      "id": ""
+    },
+    "_name": "test",
+    "_prepare": 0,
+    "_valid": 1,
+    "default_value": "",
+    "placeholder": "",
+    "prepend": "",
+    "append": "",
+    "maxlength": ""
+  }, {
+    "ID": 99,
+    "key": "field_5c6c8372070ce",
+    "label": "reeeeeee",
+    "name": "reeeeeee",
+    "prefix": "acf",
+    "type": "repeater",
+    "value": null,
+    "menu_order": 1,
+    "instructions": "",
+    "required": 0,
+    "id": "",
+    "class": "",
+    "conditional_logic": 0,
+    "parent": 97,
+    "wrapper": {
+      "width": "",
+      "class": "",
+      "id": ""
+    },
+    "_name": "reeeeeee",
+    "_prepare": 0,
+    "_valid": 1,
+    "collapsed": "",
+    "min": 0,
+    "max": 0,
+    "layout": "table",
+    "button_label": "",
+    "sub_fields": [{
       "ID": 100,
       "key": "field_5c6c837d070cf",
       "label": "aaaaaaaaa",
@@ -61,6 +116,6 @@
       "placeholder": "",
       "prepend": "",
       "append": ""
-    }
-  ]
+    }]
+  }]
 }

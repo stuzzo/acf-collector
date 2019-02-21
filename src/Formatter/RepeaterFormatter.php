@@ -46,39 +46,4 @@ class RepeaterFormatter extends BaseFormatter
         return $inst;
     }
 
-
-    /**
-     * @param array $field
-     * @param bool  $isOutputFiltered
-     *
-     * @return array
-     * @since 1.0.0
-     */
-    public function format($field, $isOutputFiltered)
-    {
-        $this->setOutputFormatterByField($field);
-
-        $subFieldsDefinitions = isset($field['sub_fields']) ? $field['sub_fields'] : array();
-        $subFieldsBlocks = ($field['value'] && $field['value'] !== false) ? $field['value'] : array();
-
-        $formattedData = array();
-
-        foreach ($subFieldsBlocks as $subFieldsBlock) {
-            $index = 0;
-            $currentFormattedField = array();
-//            var_dump($field);
-//            die();
-            foreach ($subFieldsBlock as $fieldKey => $fieldValue) {
-//                var_dump($subFieldsBlock);
-//                die();
-                $currentSubField = $subFieldsDefinitions[$index++];
-                $currentSubField['value'] = $fieldValue;
-                $subFieldsBlocks += ACFHandler::getInstance()->formatField($currentSubField);
-            }
-            $formattedData[] = $currentFormattedField;
-        }
-        $field['value'] = $formattedData;
-
-        return $this->prepareFieldsForOutput($field, $isOutputFiltered);
-    }
 }

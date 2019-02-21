@@ -45,27 +45,4 @@ class CloneFormatter extends BaseFormatter
         return $inst;
     }
 
-
-    /**
-     * @param array $field
-     * @param bool  $isOutputFiltered
-     *
-     * @return array
-     * @since 1.0.0
-     */
-    public function format($field, $isOutputFiltered)
-    {
-        $this->setOutputFormatterByField($field);
-
-        $subFieldsDefinitions = isset($field['sub_fields']) ? $field['sub_fields'] : array();
-        $formattedData = array();
-        foreach ($subFieldsDefinitions as $subField) {
-            $currentSubFieldName = $subField['name'];
-            $subField['value'] = !empty($field['value'][$currentSubFieldName]) ? $field['value'][$currentSubFieldName] : array();
-            $formattedData += ACFHandler::getInstance()->formatField($subField);
-        }
-        $field['value'] = $formattedData;
-
-        return $this->prepareFieldsForOutput($field, $isOutputFiltered);
-    }
 }

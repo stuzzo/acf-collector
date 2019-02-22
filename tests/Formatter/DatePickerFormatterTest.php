@@ -33,8 +33,11 @@ class DatePickerFormatterTest extends ACFCollectorTestCase
     {
         $formatter = DatePickerFormatter::getInstance();
         $field = $this->getField();
-        $fieldsFormatted = $formatter->format($field, false);
+        $fieldFormatted = $formatter->format($field, true);
 
-        $this->assertIsArray($fieldsFormatted);
+        $this->assertIsArray($fieldFormatted);
+        $this->assertNotEmpty($fieldFormatted);
+        $date = array_values($fieldFormatted);
+        $this->assertIsString(reset($date));
     }
 }

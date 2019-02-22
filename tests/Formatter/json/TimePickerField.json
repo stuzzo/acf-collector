@@ -1,26 +1,26 @@
 {
-  "ID": 92,
-  "key": "field_5c6c735460e9b",
-  "label": "tempo",
-  "name": "tempo",
+  "ID": 171,
+  "key": "field_5c701d879c26b",
+  "label": "time",
+  "name": "time",
   "prefix": "acf",
   "type": "time_picker",
-  "value": "16:17:00",
+  "value": "12:00 am",
   "menu_order": 26,
   "instructions": "",
   "required": 0,
   "id": "",
   "class": "",
   "conditional_logic": 0,
-  "parent": 5,
+  "parent": 114,
   "wrapper": {
     "width": "",
     "class": "",
     "id": ""
   },
-  "_name": "tempo",
+  "_name": "time",
   "_prepare": 0,
   "_valid": 1,
-  "display_format": "H:i:s",
-  "return_format": "H:i:s"
+  "display_format": "g:i a",
+  "return_format": "g:i a"
 }

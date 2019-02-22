@@ -25,7 +25,7 @@ class TaxonomyFormatter extends BaseFormatter
      */
     private function __construct()
     {
-        $this->defaultOutputFormatterType = self::OBJECT_OUTPUT_FORMATTER_TYPE;
+        $this->defaultOutputFormatterType = self::ARRAY_OUTPUT_FORMATTER_TYPE;
     }
 
     /**
@@ -41,5 +41,20 @@ class TaxonomyFormatter extends BaseFormatter
         }
 
         return $inst;
+    }
+
+    /**
+     * Verify if the current field has the return format key and modify the output formatter
+     *
+     * @param $field
+     *
+     * @since 1.0.0
+     */
+    protected function setOutputFormatterByField($field)
+    {
+        $value = $field['value'];
+        if (is_int($value)) {
+            $this->defaultOutputFormatterType = self::INTEGER_OUTPUT_FORMATTER_TYPE;
+        }
     }
 }

@@ -33,11 +33,11 @@ class RadioFormatterTest extends ACFCollectorTestCase
     {
         $formatter = RadioFormatter::getInstance();
         $field = $this->getField();
-        $fieldFormatted = $formatter->format($field, false);
+        $fieldFormatted = $formatter->format($field, true);
 
         $this->assertIsArray($fieldFormatted);
         $this->assertNotEmpty($fieldFormatted);
         $radio = array_values($fieldFormatted);
-        $this->assertIsString($radio);
+        $this->assertIsString(reset($radio));
     }
 }

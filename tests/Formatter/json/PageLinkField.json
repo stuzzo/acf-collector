@@ -1,29 +1,29 @@
 {
-  "ID": 78,
-  "key": "field_5c6b3ff678303",
-  "label": "link page",
-  "name": "link_page",
+  "ID": 158,
+  "key": "field_5c6fd438e6189",
+  "label": "Link pagina",
+  "name": "link_pagina",
   "prefix": "acf",
   "type": "page_link",
-  "value": "https://wordpress.vm/?page_id=3",
+  "value": ["https:\/\/wordpress.vm\/ciao-mondo\/", "https:\/\/wordpress.vm"],
   "menu_order": 19,
   "instructions": "",
   "required": 0,
   "id": "",
   "class": "",
   "conditional_logic": 0,
-  "parent": 5,
+  "parent": 114,
   "wrapper": {
     "width": "",
     "class": "",
     "id": ""
   },
-  "_name": "link_page",
+  "_name": "link_pagina",
   "_prepare": 0,
   "_valid": 1,
   "post_type": "",
   "taxonomy": "",
   "allow_null": 0,
   "allow_archives": 1,
-  "multiple": 0
+  "multiple": 1
 }

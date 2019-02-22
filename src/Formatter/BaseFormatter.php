@@ -13,6 +13,8 @@ namespace ACFCollector\Formatter;
 
 use ACFCollector\Exception\OutputFormatterNotImplementedException;
 use ACFCollector\Factory\FormatterOutputFactory;
+use function strtolower;
+use function trim;
 
 /**
  * Base class that contains only helper methods for formatters
@@ -21,10 +23,10 @@ use ACFCollector\Factory\FormatterOutputFactory;
  */
 abstract class BaseFormatter implements FormatterInterface
 {
-    const STRING_OUTPUT_FORMATTER_TYPE = 'String';
-    const ARRAY_OUTPUT_FORMATTER_TYPE = 'Array';
-    const OBJECT_OUTPUT_FORMATTER_TYPE = 'Object';
-    const INTEGER_OUTPUT_FORMATTER_TYPE = 'Integer';
+    const STRING_OUTPUT_FORMATTER_TYPE = 'string';
+    const ARRAY_OUTPUT_FORMATTER_TYPE = 'array';
+    const OBJECT_OUTPUT_FORMATTER_TYPE = 'object';
+    const INTEGER_OUTPUT_FORMATTER_TYPE = 'integer';
 
     /**
      * @var string
@@ -89,7 +91,8 @@ abstract class BaseFormatter implements FormatterInterface
             return;
         }
 
-        switch ($field['return_format']) {
+        $returnFormat = strtolower(trim($field['return_format']));
+        switch ($returnFormat) {
             case 'array':
                 $this->defaultOutputFormatterType = self::ARRAY_OUTPUT_FORMATTER_TYPE;
                 break;

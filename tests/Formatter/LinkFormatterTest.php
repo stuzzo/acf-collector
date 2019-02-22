@@ -33,8 +33,16 @@ class LinkFormatterTest extends ACFCollectorTestCase
     {
         $formatter = LinkFormatter::getInstance();
         $field = $this->getField();
-        $fieldsFormatted = $formatter->format($field, false);
+        $fieldFormatted = $formatter->format($field, true);
 
-        $this->assertIsArray($fieldsFormatted);
+        $this->assertIsArray($fieldFormatted);
+        $this->assertNotEmpty($fieldFormatted);
+        $text = array_values($fieldFormatted);
+        if ('array' === $field['return_format']) {
+            $this->assertIsArray(reset($text));
+        } else {
+            $this->assertIsString(reset($text));
+        }
+
     }
 }

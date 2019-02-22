@@ -1,18 +1,22 @@
 {
-  "ID": 85,
-  "key": "field_5c6c05f8bf7a8",
-  "label": "user",
-  "name": "user",
+  "ID": 161,
+  "key": "field_5c6fd47de618c",
+  "label": "Utente",
+  "name": "utente",
   "prefix": "acf",
   "type": "user",
   "value": {
-    "data": {},
-    "ID": 3,
-    "caps": {},
-    "cap_key": "wp_capabilities",
-    "roles": [],
-    "allcaps": {},
-    "filter": null
+    "ID": 2,
+    "user_firstname": "a",
+    "user_lastname": "b",
+    "nickname": "user",
+    "user_nicename": "user",
+    "display_name": "a b",
+    "user_email": "ciao@ciao2.it",
+    "user_url": "",
+    "user_registered": "2019-01-26 10:43:01",
+    "user_description": "",
+    "user_avatar": "<img alt='' src='https:\/\/secure.gravatar.com\/avatar\/fc985ee980c25ae2e5056f18275ed550?s=96&#038;d=mm&#038;r=g' srcset='https:\/\/secure.gravatar.com\/avatar\/fc985ee980c25ae2e5056f18275ed550?s=192&#038;d=mm&#038;r=g 2x' class='avatar avatar-96 photo' height='96' width='96' \/>"
   },
   "menu_order": 22,
   "instructions": "",
@@ -20,17 +24,17 @@
   "id": "",
   "class": "",
   "conditional_logic": 0,
-  "parent": 5,
+  "parent": 114,
   "wrapper": {
     "width": "",
     "class": "",
     "id": ""
   },
-  "_name": "user",
+  "_name": "utente",
   "_prepare": 0,
   "_valid": 1,
   "role": "",
   "allow_null": 0,
   "multiple": 0,
-  "return_format": "object"
+  "return_format": "array"
 }

@@ -5,7 +5,7 @@
   "name": "radio",
   "prefix": "acf",
   "type": "radio",
-  "value": "yes",
+  "value": "no",
   "menu_order": 14,
   "instructions": "",
   "required": 0,

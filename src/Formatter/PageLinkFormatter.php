@@ -25,7 +25,7 @@ class PageLinkFormatter extends BaseFormatter
      */
     private function __construct()
     {
-        $this->defaultOutputFormatterType = self::STRING_OUTPUT_FORMATTER_TYPE;
+        $this->defaultOutputFormatterType = self::ARRAY_OUTPUT_FORMATTER_TYPE;
     }
 
     /**

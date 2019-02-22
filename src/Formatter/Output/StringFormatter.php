@@ -42,14 +42,14 @@ class StringFormatter implements OutputFormatterInterface
     /**
      * @param array $field
      *
-     * @return array
+     * @return string
      */
     public function formatReturnValue($field)
     {
         if (empty($field['value'])) {
-            return array('value' => '');
+            return '';
         }
 
-        return array('value' => (string)$field['value']);
+        return (string) $field['value'];
     }
 }

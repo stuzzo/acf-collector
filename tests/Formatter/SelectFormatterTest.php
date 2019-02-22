@@ -34,8 +34,16 @@ class SelectFormatterTest extends ACFCollectorTestCase
     {
         $formatter = SelectFormatter::getInstance();
         $field = $this->getField();
-        $fieldsFormatted = $formatter->format($field, false);
+        $fieldFormatted = $formatter->format($field, true);
 
-        $this->assertIsArray($fieldsFormatted);
+        $this->assertIsArray($fieldFormatted);
+        $this->assertNotEmpty($fieldFormatted);
+        $select = array_values($fieldFormatted);
+        if (1 === $field['multiple']) {
+            $this->assertIsArray(reset($select));
+        } else {
+            $this->assertIsString(reset($select));
+        }
+
     }
 }

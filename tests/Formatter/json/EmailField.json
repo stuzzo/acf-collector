@@ -1,18 +1,18 @@
 {
-  "ID": 15,
-  "key": "field_5c40b52c62849",
+  "ID": 129,
+  "key": "field_5c6ee4bc0ed9c",
   "label": "Email",
   "name": "email",
   "prefix": "acf",
   "type": "email",
-  "value": "ciao ciao",
-  "menu_order": 5,
+  "value": "stuzzo@gmail.com",
+  "menu_order": 4,
   "instructions": "",
   "required": 0,
   "id": "",
   "class": "",
   "conditional_logic": 0,
-  "parent": 5,
+  "parent": 114,
   "wrapper": {
     "width": "",
     "class": "",
@@ -21,8 +21,8 @@
   "_name": "email",
   "_prepare": 0,
   "_valid": 1,
-  "default_value": "aaaaa",
-  "placeholder": "a",
-  "prepend": "a",
-  "append": "a"
+  "default_value": "",
+  "placeholder": "",
+  "prepend": "",
+  "append": ""
 }

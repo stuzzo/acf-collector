@@ -35,6 +35,6 @@ class PostObjectFormatterTest extends ACFCollectorTestCase
         $field = $this->getField();
         $fieldsFormatted = $formatter->format($field, false);
 
-        $this->assertIsArray($fieldsFormatted);
+        $this->assertIsObject($fieldsFormatted);
     }
 }

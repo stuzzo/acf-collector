@@ -1,32 +1,29 @@
 {
-  "ID": 63,
-  "key": "field_5c5d5b2d5663a",
-  "label": "Checkbox",
-  "name": "checkbox",
+  "ID": 148,
+  "key": "field_5c6f2dc44392f",
+  "label": "checkbox",
+  "name": "checkox",
   "prefix": "acf",
   "type": "checkbox",
-  "value": [
-    "rosso",
-    "giallo"
-  ],
+  "value": ["blue"],
   "menu_order": 13,
   "instructions": "",
   "required": 0,
   "id": "",
   "class": "",
   "conditional_logic": 0,
-  "parent": 5,
+  "parent": 114,
   "wrapper": {
     "width": "",
     "class": "",
     "id": ""
   },
-  "_name": "checkbox",
+  "_name": "checkox",
   "_prepare": 0,
   "_valid": 1,
   "choices": {
-    "rosso": "Rosso",
-    "giallo": "Giallo"
+    "blue": "Blue",
+    "green": "Green"
   },
   "allow_custom": 0,
   "default_value": [],

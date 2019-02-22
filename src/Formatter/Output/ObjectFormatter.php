@@ -12,6 +12,7 @@
 namespace ACFCollector\Formatter\Output;
 
 use function json_encode;
+use stdClass;
 
 /**
  * Class ObjectFormatter
@@ -43,14 +44,14 @@ class ObjectFormatter implements OutputFormatterInterface
     /**
      * @param array $field
      *
-     * @return array
+     * @return \stdClass()
      */
     public function formatReturnValue($field)
     {
         if (empty($field['value'])) {
-            return array('value' => []);
+            return new \stdClass();
         }
 
-        return array('value' => json_encode($field['value']));
+        return $field['value'];
     }
 }

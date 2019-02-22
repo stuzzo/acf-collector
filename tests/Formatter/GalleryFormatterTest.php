@@ -34,8 +34,11 @@ class GalleryFormatterTest extends ACFCollectorTestCase
     {
         $formatter = GalleryFormatter::getInstance();
         $field = $this->getField();
-        $fieldsFormatted = $formatter->format($field, false);
+        $fieldFormatted = $formatter->format($field, false);
 
-        $this->assertIsArray($fieldsFormatted);
+        $this->assertIsArray($fieldFormatted);
+        $this->assertNotEmpty($fieldFormatted);
+        $images = array_values($fieldFormatted);
+        $this->assertIsArray(reset($images));
     }
 }

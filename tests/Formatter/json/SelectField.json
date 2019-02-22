@@ -1,35 +1,45 @@
 {
-  "ID": 61,
-  "key": "field_5c5d592f95dfd",
-  "label": "Seleziona",
-  "name": "seleziona",
+  "ID": 147,
+  "key": "field_5c6f2db44392e",
+  "label": "select",
+  "name": "select",
   "prefix": "acf",
   "type": "select",
-  "value": "giallo",
+  "value": [
+    {
+      "value": "black",
+      "label": "Black"
+    },
+    {
+      "value": "none",
+      "label": "None"
+    }
+  ],
   "menu_order": 12,
   "instructions": "",
   "required": 0,
   "id": "",
   "class": "",
   "conditional_logic": 0,
-  "parent": 5,
+  "parent": 114,
   "wrapper": {
     "width": "",
     "class": "",
     "id": ""
   },
-  "_name": "seleziona",
+  "_name": "select",
   "_prepare": 0,
   "_valid": 1,
   "choices": {
-    "rosso": "Rosso",
-    "giallo": "Giallo"
+    "gray": "Gray",
+    "black": "Black",
+    "none": "None"
   },
   "default_value": [],
   "allow_null": 0,
-  "multiple": 0,
+  "multiple": 1,
   "ui": 0,
-  "return_format": "value",
+  "return_format": "array",
   "ajax": 0,
   "placeholder": ""
 }

@@ -41,4 +41,27 @@ class ImageFormatter extends BaseFormatter
         return $inst;
     }
 
+    /**
+     * Return an array fieldName => fieldValue
+     *
+     * @param array $field
+     * @param bool $isOutputFiltered
+     *
+     * @return array
+     */
+    protected function prepareFieldsForOutput($field, $isOutputFiltered)
+    {
+        if ($isOutputFiltered) {
+            if ('array' === $field['return_format']) {
+                $returnValue = $field['value']['url'];
+            } else {
+                $returnValue = $field['value'];
+            }
+        } else {
+            $returnValue = $field;
+        }
+
+        return [$field['name'] => $returnValue];
+    }
+
 }

@@ -43,4 +43,23 @@ class SelectFormatter extends BaseFormatter
         return $inst;
     }
 
+    /**
+     * Verify if the current field has the return format key and modify the output formatter
+     *
+     * @param $field
+     *
+     * @since 1.0.0
+     */
+    protected function setOutputFormatterByField($field)
+    {
+        if (1 === $field['multiple']) {
+            $this->defaultOutputFormatterType = self::ARRAY_OUTPUT_FORMATTER_TYPE;
+            return;
+        }
+
+        if ('array' === $field['return_format']) {
+            $this->defaultOutputFormatterType = self::ARRAY_OUTPUT_FORMATTER_TYPE;
+        }
+    }
+
 }

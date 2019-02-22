@@ -21,10 +21,8 @@ class StringFormatterTest extends ACFCollectorTestCase
     public function testReturnValue(): void
     {
         $formatter = StringFormatter::getInstance();
-        $fieldsFormatted = $formatter->formatReturnValue([]);
+        $fieldFormattedValue = $formatter->formatReturnValue([]);
 
-        $this->assertIsArray($fieldsFormatted);
-        $this->assertArrayHasKey('value', $fieldsFormatted);
-        $this->assertIsString($fieldsFormatted['value']);
+        $this->assertIsString($fieldFormattedValue);
     }
 }

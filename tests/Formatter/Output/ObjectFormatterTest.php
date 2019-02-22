@@ -21,10 +21,8 @@ class ObjectFormatterTest extends ACFCollectorTestCase
     public function testReturnValue(): void
     {
         $formatter = ObjectFormatter::getInstance();
-        $fieldsFormatted = $formatter->formatReturnValue([]);
+        $fieldFormattedValue = $formatter->formatReturnValue([]);
 
-        $this->assertIsArray($fieldsFormatted);
-        $this->assertArrayHasKey('value', $fieldsFormatted);
-        $this->assertIsArray($fieldsFormatted['value']);
+        $this->assertIsObject($fieldFormattedValue);
     }
 }

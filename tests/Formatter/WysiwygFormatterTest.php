@@ -33,8 +33,11 @@ class WysiwygFormatterTest extends ACFCollectorTestCase
     {
         $formatter = WysiwygFormatter::getInstance();
         $field = $this->getField();
-        $fieldsFormatted = $formatter->format($field, false);
+        $fieldFormatted = $formatter->format($field, true);
 
-        $this->assertIsArray($fieldsFormatted);
+        $this->assertIsArray($fieldFormatted);
+        $this->assertNotEmpty($fieldFormatted);
+        $wysiwyg = array_values($fieldFormatted);
+        $this->assertIsString(reset($wysiwyg));
     }
 }

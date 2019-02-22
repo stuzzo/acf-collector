@@ -33,8 +33,11 @@ class CheckboxFormatterTest extends ACFCollectorTestCase
     {
         $formatter = CheckboxFormatter::getInstance();
         $field = $this->getField();
-        $fieldsFormatted = $formatter->format($field, false);
+        $fieldFormatted = $formatter->format($field, true);
 
-        $this->assertIsArray($fieldsFormatted);
+        $this->assertIsArray($fieldFormatted);
+        $this->assertNotEmpty($fieldFormatted);
+        $checkbox = array_values($fieldFormatted);
+        $this->assertIsArray($checkbox);
     }
 }

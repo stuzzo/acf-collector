@@ -15,8 +15,10 @@ namespace ACFFormatter\Tests\Formatter;
 
 use ACFCollector\Formatter\NumberFormatter;
 use ACFCollector\Tests\ACFCollectorTestCase;
+use function array_values;
 use function file_get_contents;
 use function json_decode;
+use function reset;
 use function sprintf;
 
 class NumberFormatterTest extends ACFCollectorTestCase
@@ -33,8 +35,11 @@ class NumberFormatterTest extends ACFCollectorTestCase
     {
         $formatter = NumberFormatter::getInstance();
         $field = $this->getField();
-        $fieldsFormatted = $formatter->format($field, false);
+        $fieldFormatted = $formatter->format($field, true);
 
-        $this->assertIsArray($fieldsFormatted);
+        $this->assertIsArray($fieldFormatted);
+        $this->assertNotEmpty($fieldFormatted);
+        $number = array_values($fieldFormatted);
+        $this->assertIsInt(reset($number));
     }
 }

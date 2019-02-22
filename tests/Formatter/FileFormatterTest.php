@@ -33,8 +33,23 @@ class FileFormatterTest extends ACFCollectorTestCase
     {
         $formatter = FileFormatter::getInstance();
         $field = $this->getField();
-        $fieldsFormatted = $formatter->format($field, false);
+        $fieldFormatted = $formatter->format($field, true);
 
-        $this->assertIsArray($fieldsFormatted);
+        $this->assertIsArray($fieldFormatted);
+        $this->assertNotEmpty($fieldFormatted);
+        $file = array_values($fieldFormatted);
+        $this->assertIsString(reset($file));
+    }
+
+    public function testReturnValueArray(): void
+    {
+        $formatter = FileFormatter::getInstance();
+        $field = $this->getField();
+        $fieldFormatted = $formatter->format($field, false);
+
+        $this->assertIsArray($fieldFormatted);
+        $this->assertNotEmpty($fieldFormatted);
+        $file = array_values($fieldFormatted);
+        $this->assertIsArray(reset($file));
     }
 }

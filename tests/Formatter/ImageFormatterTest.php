@@ -33,8 +33,23 @@ class ImageFormatterTest extends ACFCollectorTestCase
     {
         $formatter = ImageFormatter::getInstance();
         $field = $this->getField();
-        $fieldsFormatted = $formatter->format($field, false);
+        $fieldFormatted = $formatter->format($field, true);
 
-        $this->assertIsArray($fieldsFormatted);
+        $this->assertIsArray($fieldFormatted);
+        $this->assertNotEmpty($fieldFormatted);
+        $image = array_values($fieldFormatted);
+        $this->assertIsString(reset($image));
+    }
+
+    public function testReturnValueArray(): void
+    {
+        $formatter = ImageFormatter::getInstance();
+        $field = $this->getField();
+        $fieldFormatted = $formatter->format($field, false);
+
+        $this->assertIsArray($fieldFormatted);
+        $this->assertNotEmpty($fieldFormatted);
+        $image = array_values($fieldFormatted);
+        $this->assertIsArray(reset($image));
     }
 }

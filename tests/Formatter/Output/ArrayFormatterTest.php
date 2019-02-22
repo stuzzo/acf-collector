@@ -21,10 +21,8 @@ class ArrayFormatterTest extends ACFCollectorTestCase
     public function testReturnValue(): void
     {
         $formatter = ArrayFormatter::getInstance();
-        $fieldsFormatted = $formatter->formatReturnValue([]);
+        $fieldFormattedValue = $formatter->formatReturnValue([]);
 
-        $this->assertIsArray($fieldsFormatted);
-        $this->assertArrayHasKey('value', $fieldsFormatted);
-        $this->assertIsArray($fieldsFormatted['value']);
+        $this->assertIsArray($fieldFormattedValue);
     }
 }

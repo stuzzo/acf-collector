@@ -1,32 +1,32 @@
 {
-  "ID": 69,
-  "key": "field_5c6af05c2abcf",
-  "label": "Bottoni",
-  "name": "bottoni",
+  "ID": 150,
+  "key": "field_5c6f2e3c43931",
+  "label": "Buttons",
+  "name": "buttons",
   "prefix": "acf",
   "type": "button_group",
-  "value": "ciao",
+  "value": "brown",
   "menu_order": 15,
   "instructions": "",
   "required": 0,
   "id": "",
   "class": "",
   "conditional_logic": 0,
-  "parent": 5,
+  "parent": 114,
   "wrapper": {
     "width": "",
     "class": "",
     "id": ""
   },
-  "_name": "bottoni",
+  "_name": "buttons",
   "_prepare": 0,
   "_valid": 1,
   "choices": {
-    "ciao": "ciao",
-    "bau": "bau"
+    "purple": "Purple",
+    "brown": "Brown"
   },
   "allow_null": 0,
   "default_value": "",
-  "layout": "vertical",
+  "layout": "horizontal",
   "return_format": "value"
 }

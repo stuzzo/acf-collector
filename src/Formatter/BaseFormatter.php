@@ -44,7 +44,7 @@ abstract class BaseFormatter implements FormatterInterface
         $this->setOutputFormatterByField($field);
         try {
             $outputFormatter = FormatterOutputFactory::getFormatterForOutput($this->defaultOutputFormatterType);
-            $field += $outputFormatter->formatReturnValue($field);
+            $field['value'] = $outputFormatter->formatReturnValue($field);
         } catch (OutputFormatterNotImplementedException $exception) {
             $field['value'] = $exception->getMessage();
         }
@@ -80,6 +80,8 @@ abstract class BaseFormatter implements FormatterInterface
      * Verify if the current field has the return format key and modify the output formatter
      *
      * @param $field
+     *
+     * @since 1.0.0
      */
     protected function setOutputFormatterByField($field)
     {
@@ -89,13 +91,13 @@ abstract class BaseFormatter implements FormatterInterface
 
         switch ($field['return_format']) {
             case 'array':
-                $this->defaultOutputFormatterType = 'Array';
+                $this->defaultOutputFormatterType = self::ARRAY_OUTPUT_FORMATTER_TYPE;
                 break;
             case 'id':
-                $this->defaultOutputFormatterType = 'Integer';
+                $this->defaultOutputFormatterType = self::INTEGER_OUTPUT_FORMATTER_TYPE;
                 break;
             case 'object':
-                $this->defaultOutputFormatterType = 'Object';
+                $this->defaultOutputFormatterType = self::OBJECT_OUTPUT_FORMATTER_TYPE;
         }
     }
 }

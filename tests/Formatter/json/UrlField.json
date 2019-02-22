@@ -1,18 +1,18 @@
 {
-  "ID": 17,
-  "key": "field_5c40b841d73b3",
+  "ID": 130,
+  "key": "field_5c6ee4cd0ed9d",
   "label": "Url",
   "name": "url",
   "prefix": "acf",
   "type": "url",
   "value": "https:\/\/www.google.it",
-  "menu_order": 10,
+  "menu_order": 5,
   "instructions": "",
   "required": 0,
   "id": "",
   "class": "",
   "conditional_logic": 0,
-  "parent": 5,
+  "parent": 114,
   "wrapper": {
     "width": "",
     "class": "",
@@ -21,6 +21,6 @@
   "_name": "url",
   "_prepare": 0,
   "_valid": 1,
-  "default_value": "a",
-  "placeholder": "a"
+  "default_value": "",
+  "placeholder": ""
 }

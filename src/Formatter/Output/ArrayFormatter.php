@@ -46,9 +46,9 @@ class ArrayFormatter implements OutputFormatterInterface
     public function formatReturnValue($field)
     {
         if (empty($field['value'])) {
-            return array('value' => []);
+            return array();
         }
 
-        return array('value' => $field['value']);
+        return $field['value'];
     }
 }

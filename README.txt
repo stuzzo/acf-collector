@@ -1,4 +1,4 @@
-=== ACF-Collector PRO ===
+=== ACF-Collector ===
 Contributors: stuzzo
 Donate link: https://www.paypal.me/stuzzo
 Tags: acf, advanced, custom, field, fields, rest, api
@@ -54,7 +54,6 @@ Yes, but in the free version you don't find support for:
 - Gallery field
 - Flexible content field
 - Clone field
-- Options pages
 
 = How can I notify an issue or ask for support? =
 

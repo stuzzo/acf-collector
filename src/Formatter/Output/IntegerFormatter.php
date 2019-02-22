@@ -42,14 +42,14 @@ class IntegerFormatter implements OutputFormatterInterface
     /**
      * @param array $field
      *
-     * @return array
+     * @return int
      */
     public function formatReturnValue($field)
     {
         if (empty($field['value'])) {
-            return array('value' => 0);
+            return 0;
         }
 
-        return array('value' => (int)$field['value']);
+        return (int) $field['value'];
     }
 }

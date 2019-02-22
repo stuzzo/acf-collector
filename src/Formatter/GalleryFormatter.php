@@ -51,12 +51,17 @@ class GalleryFormatter extends BaseFormatter
     public function format($field, $isOutputFiltered)
     {
         if (empty($field['value'])) {
-            return [];
+            return array();
         }
 
         $images = [];
         foreach ($field['value'] as $image) {
-            $images[] = $image['url'];
+            if ($isOutputFiltered) {
+                $images[] = $image['url'];
+            } else {
+                $images[] = $image;
+            }
+
         }
 
         return [$field['name'] => $images];

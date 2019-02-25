@@ -33,8 +33,11 @@ class CloneFormatterTest extends ACFCollectorTestCase
     {
         $formatter = CloneFormatter::getInstance();
         $field = $this->getField();
-        $fieldsFormatted = $formatter->format($field, false);
+        $fieldFormatted = $formatter->format($field, true);
 
-        $this->assertIsArray($fieldsFormatted);
+        $this->assertIsArray($fieldFormatted);
+        $this->assertNotEmpty($fieldFormatted);
+        $clone = array_values($fieldFormatted);
+        $this->assertIsArray(reset($clone));
     }
 }

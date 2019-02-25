@@ -45,4 +45,31 @@ class CloneFormatter extends BaseFormatter
         return $inst;
     }
 
+    /**
+     * Return an array fieldName => fieldValue
+     *
+     * @param array $field
+     * @param bool $isOutputFiltered
+     *
+     * @return array
+     */
+    protected function prepareFieldsForOutput($field, $isOutputFiltered)
+    {
+        if ($isOutputFiltered) {
+            $acfHandler = ACFHandler::getInstance();
+            $subFieldsDefinitions = !empty($field['sub_fields']) ? $field['sub_fields'] : array();
+            $formattedData = [];
+            foreach ($subFieldsDefinitions as $subField) {
+                $currentSubFieldName = $subField['name'];
+                $subField['value'] = !empty($field['value'][$currentSubFieldName]) ? $field['value'][$currentSubFieldName] : array();
+                $formattedData += $acfHandler->formatField($subField);
+            }
+            $returnValue = $formattedData;
+        } else {
+            $returnValue = $field;
+        }
+
+        return [$field['name'] => $returnValue];
+    }
+
 }

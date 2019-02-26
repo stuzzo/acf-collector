@@ -26,7 +26,7 @@
  * Description:       It appends automatically to the current request all the custom fields used in the current content (e.g. Pages, Posts, etc.)
  * Version:           1.0.0
  * Author:            Alfredo Aiello <stuzzo@gmail.com>
- * Author URI:        https://www.google.it
+ * Author URI:        https://github.com/stuzzo
  * License:           GPLv2 or later
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       acf-collector
@@ -37,6 +37,7 @@ use ACFCollector\Handler\ACFHandler;
 use ACFCollector\Handler\RestAPIHandler;
 use ACFCollector\Handler\TemplateHandler;
 use ACFCollector\Main\PluginActivator;
+use ACFCollector\Main\PluginDeactivator;
 use ACFCollector\Main\PluginI18N;
 use ACFCollector\Main\PluginKernel;
 use ACFCollector\Main\PluginLoader;
@@ -74,7 +75,7 @@ add_action('admin_init', 'activate_acf_formatter');
  */
 function deactivate_acf_formatter()
 {
-    //    PluginDeactivator::deactivate();
+    PluginDeactivator::deactivate();
 }
 
 register_deactivation_hook(__FILE__, 'deactivate_acf_formatter');

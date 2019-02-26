@@ -24,6 +24,10 @@ final class PluginDeactivator
     /**
      * @since    1.0.0
      */
-    public static function deactivate() {}
+    public static function deactivate()
+    {
+        \delete_option('acf_collector_field_name');
+        \delete_option('acf_collector_is_output_filtered');
+    }
 
 }

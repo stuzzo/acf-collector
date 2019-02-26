@@ -58,8 +58,8 @@ class RepeaterFormatter extends BaseFormatter
     {
         if ($isOutputFiltered) {
             $acfHandler = ACFHandler::getInstance();
-            $layoutDefinitions = !empty($field['layouts']) ? $field['layouts'] : [];
-            $layoutValues = !empty($field['value']) ? $field['value'] : [];
+            $fieldsDefitions = !empty($field['sub_fields']) ? $field['sub_fields'] : array();
+            $fieldsValues = !empty($field['value']) ? $field['value'] : array();
             $formattedData = [];
 
             foreach ($layoutValues as $layoutValue) {

@@ -130,7 +130,7 @@ final class ACFHandler
      */
     private function getFieldsFromMetaObject($meta, $object)
     {
-        $fields = [];
+        $fields = array();
         // populate vars
         foreach ($meta as $key => $value) {
             // does a field key exist for this value?
@@ -181,7 +181,7 @@ final class ACFHandler
      */
     private function formatFields($fields)
     {
-        $formattedFields = [];
+        $formattedFields = array();
         foreach ($fields as $field) {
             $formattedFields += $this->formatField($field);
         }

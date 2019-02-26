@@ -128,7 +128,7 @@ class PluginOptions
 
     private function enqueueStyle()
     {
-        \wp_enqueue_style('acf_collector_stylesheet', plugins_url('src/Resources/admin/css/acf_collector.css', dirname(__DIR__)) . '', [], ACF_COLLECTOR_VERSION, 'all');
+        \wp_enqueue_style('acf_collector_stylesheet', plugins_url('src/Resources/admin/css/acf_collector.css', dirname(__DIR__)) . '', array(), ACF_COLLECTOR_VERSION, 'all');
     }
 
 }

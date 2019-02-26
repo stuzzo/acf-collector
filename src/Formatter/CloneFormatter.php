@@ -58,7 +58,7 @@ class CloneFormatter extends BaseFormatter
         if ($isOutputFiltered) {
             $acfHandler = ACFHandler::getInstance();
             $subFieldsDefinitions = !empty($field['sub_fields']) ? $field['sub_fields'] : array();
-            $formattedData = [];
+            $formattedData = array();
             foreach ($subFieldsDefinitions as $subField) {
                 $currentSubFieldName = $subField['name'];
                 $subField['value'] = !empty($field['value'][$currentSubFieldName]) ? $field['value'][$currentSubFieldName] : array();

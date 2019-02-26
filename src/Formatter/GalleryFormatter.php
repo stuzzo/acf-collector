@@ -54,7 +54,7 @@ class GalleryFormatter extends BaseFormatter
             return array();
         }
 
-        $images = [];
+        $images = array();
         foreach ($field['value'] as $image) {
             if ($isOutputFiltered) {
                 $images[] = $image['url'];

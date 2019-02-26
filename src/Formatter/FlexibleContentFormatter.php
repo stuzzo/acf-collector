@@ -57,13 +57,13 @@ class FlexibleContentFormatter extends BaseFormatter
     {
         if ($isOutputFiltered) {
             $acfHandler = ACFHandler::getInstance();
-            $layoutDefinitions = !empty($field['layouts']) ? $field['layouts'] : [];
-            $layoutValues = !empty($field['value']) ? $field['value'] : [];
-            $formattedData = [];
+            $layoutDefinitions = !empty($field['layouts']) ? $field['layouts'] : array();
+            $layoutValues = !empty($field['value']) ? $field['value'] : array();
+            $formattedData = array();
 
             foreach ($layoutValues as $layoutValue) {
                 // I get the layout type
-                $currentLayoutValue = [];
+                $currentLayoutValue = array();
                 $currentLayoutValue['acf_fc_layout'] = $layoutValue['acf_fc_layout'];
 
                 // Loop through the definition to get the structure informations
@@ -88,6 +88,6 @@ class FlexibleContentFormatter extends BaseFormatter
             $returnValue = $field;
         }
 
-        return [$field['name'] => $returnValue];
+        return array($field['name'] => $returnValue);
     }
 }

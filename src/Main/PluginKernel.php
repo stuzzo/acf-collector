@@ -71,7 +71,7 @@ class PluginKernel
 
     public function __construct(PluginI18N $i18n, RestAPIHandler $apiHandler, TemplateHandler $templateHandler, PluginLoader $loader, PluginOptions $options)
     {
-        add_action('plugins_loaded', [$this, 'init']);
+        add_action('plugins_loaded', array($this, 'init'));
         $this->i18n = $i18n;
         $this->apiHandler = $apiHandler;
         $this->templateHandler = $templateHandler;

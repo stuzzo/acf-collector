@@ -46,4 +46,50 @@ class RepeaterFormatter extends BaseFormatter
         return $inst;
     }
 
+    /**
+     * Return an array fieldName => fieldValue
+     *
+     * @param array $field
+     * @param bool  $isOutputFiltered
+     *
+     * @return array
+     */
+    protected function prepareFieldsForOutput($field, $isOutputFiltered)
+    {
+        if ($isOutputFiltered) {
+            $acfHandler = ACFHandler::getInstance();
+            $layoutDefinitions = !empty($field['layouts']) ? $field['layouts'] : [];
+            $layoutValues = !empty($field['value']) ? $field['value'] : [];
+            $formattedData = [];
+
+            foreach ($layoutValues as $layoutValue) {
+                // I get the layout type
+                $currentLayoutValue = [];
+                $currentLayoutValue['acf_fc_layout'] = $layoutValue['acf_fc_layout'];
+
+                // Loop through the definition to get the structure informations
+                foreach ($layoutDefinitions as $layoutDefinition) {
+
+                    // Check if the current the definition is on current layout
+                    if ($layoutDefinition['name'] === $currentLayoutValue['acf_fc_layout']) {
+
+                        // Now I have to set the value to definition and call the formatter
+                        foreach ($layoutDefinition['sub_fields'] as $fieldDefinition) {
+                            $fieldDefinition['value'] = $layoutValue[$fieldDefinition['name']];
+                            $currentLayoutValue += $acfHandler->formatField($fieldDefinition);
+                        }
+                    }
+                }
+
+                $formattedData[] = $currentLayoutValue;
+            }
+
+            $returnValue = $formattedData;
+        } else {
+            $returnValue = $field;
+        }
+
+        return array($field['name'] => $returnValue);
+    }
+
 }

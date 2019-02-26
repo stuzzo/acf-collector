@@ -28,7 +28,7 @@ class PluginOptions
      */
     public function init()
     {
-        add_action('admin_menu', [$this, 'setupOptions']);
+        add_action('admin_menu', array($this, 'setupOptions'));
     }
 
     public function setupOptions()
@@ -53,24 +53,24 @@ class PluginOptions
         \add_settings_field(
             'acf_collector_field_name',//ID for the settings field to add
             'Field name', //settings title visible on the page
-            [$this, 'renderTextField'], //callback for displaying the settings field
+            array($this, 'renderTextField'), //callback for displaying the settings field
             $optionsGroup, // settings page to where option is displayed
             $optionsSection,// section id for parent section.
-            ['name' => 'acf_collector_field_name', 'description' => 'This will be the key where you will find the custom fields']
+            array('name' => 'acf_collector_field_name', 'description' => 'This will be the key where you will find the custom fields')
         );
-        \register_setting($optionsGroup, 'acf_collector_field_name', [$this, 'validateCollectorFieldName']);
+        \register_setting($optionsGroup, 'acf_collector_field_name', array($this, 'validateCollectorFieldName'));
 
         \add_settings_field(
             'acf_collector_is_output_filtered',//ID for the settings field to add
             'Do you want to filter output?', //settings title visible on the page
-            [$this, 'renderRadioField'], //callback for displaying the settings field
+            array($this, 'renderRadioField'), //callback for displaying the settings field
             $optionsGroup, // settings page to where option is displayed
             $optionsSection,// section id for parent section.
-            [
+            array(
                 'name' => 'acf_collector_is_output_filtered',
                 'description' => 'Choose if you want to receive all the fields properties or just the value',
-                'options' => [['label' => 'Yes', 'value' => 1], ['label' => 'No', 'value' => 0]]
-            ]
+                'options' => array(array('label' => 'Yes', 'value' => 1), array('label' => 'No', 'value' => 0))
+            )
         );
         \register_setting($optionsGroup, 'acf_collector_is_output_filtered');
 
@@ -115,7 +115,7 @@ class PluginOptions
 
     private function initOptionPage()
     {
-        \add_options_page(__('ACF collector options', 'acf-collector'), __('ACF collector', 'acf-collector'), 'manage_options', 'acf_collector', [$this, 'getSettingPage']);
+        \add_options_page(__('ACF collector options', 'acf-collector'), __('ACF collector', 'acf-collector'), 'manage_options', 'acf_collector', array($this, 'getSettingPage'));
     }
 
     public function getSettingPage()

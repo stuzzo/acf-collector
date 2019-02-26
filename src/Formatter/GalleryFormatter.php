@@ -64,7 +64,7 @@ class GalleryFormatter extends BaseFormatter
 
         }
 
-        return [$field['name'] => $images];
+        return array($field['name'] => $images);
     }
 
 }

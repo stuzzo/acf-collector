@@ -75,7 +75,7 @@ abstract class BaseFormatter implements FormatterInterface
         }
 
 
-        return [$field['name'] => $returnValue];
+        return array($field['name'] => $returnValue);
     }
 
     /**

@@ -61,6 +61,6 @@ class FileFormatter extends BaseFormatter
             $returnValue = $field;
         }
 
-        return [$field['name'] => $returnValue];
+        return array($field['name'] => $returnValue);
     }
 }

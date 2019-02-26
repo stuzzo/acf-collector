@@ -2,6 +2,8 @@
 
 Wordpress plugin that retrieves automatically all the custom fields added by you with the Advanced Custom Fields plugin.
 
+It appends the custom fields in a WP Rest request or inside a template object (such as post, page, etc.).
+
 ## Requirements
 1. Wordpress at least version 4.7
 2. Advanced custom fields at least version 5.0

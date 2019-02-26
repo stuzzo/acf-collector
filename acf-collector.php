@@ -10,20 +10,13 @@
  */
 
 /**
- * The plugin bootstrap file
- *
- * This file is read by WordPress to generate the plugin information in the plugin
- * admin area. This file also includes all of the dependencies used by the plugin,
- * registers the activation and deactivation functions, and defines a function
- * that starts the plugin.
- *
- * @link              https://www.google.it
+ * @link              https://wordpress.org/plugin/acf-collector/
  * @since             1.0.0
  *
  * @wordpress-plugin
- * Plugin Name:       Advanced Custom Fields PRO: API and template fields collector
- * Plugin URI:        https://www.google.it
- * Description:       It appends automatically to the current request all the custom fields used in the current content (e.g. Pages, Posts, etc.)
+ * Plugin Name:       ACF fields collector PRO
+ * Plugin URI:        https://wordpress.org/plugin/acf-collector/
+ * Description:       It appends automatically to the current request (template or API) all the custom fields used in the current content (e.g. Pages, Posts, etc.)
  * Version:           1.0.0
  * Author:            Alfredo Aiello <stuzzo@gmail.com>
  * Author URI:        https://github.com/stuzzo

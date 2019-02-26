@@ -57,31 +57,20 @@ class RepeaterFormatter extends BaseFormatter
     protected function prepareFieldsForOutput($field, $isOutputFiltered)
     {
         if ($isOutputFiltered) {
-            $acfHandler = ACFHandler::getInstance();
-            $fieldsDefitions = !empty($field['sub_fields']) ? $field['sub_fields'] : array();
+            $fieldsDefinitions = !empty($field['sub_fields']) ? $field['sub_fields'] : array();
             $fieldsValues = !empty($field['value']) ? $field['value'] : array();
-            $formattedData = [];
+            $formattedData = array();
+            $acfHandler = ACFHandler::getInstance();
 
-            foreach ($layoutValues as $layoutValue) {
-                // I get the layout type
-                $currentLayoutValue = [];
-                $currentLayoutValue['acf_fc_layout'] = $layoutValue['acf_fc_layout'];
-
-                // Loop through the definition to get the structure informations
-                foreach ($layoutDefinitions as $layoutDefinition) {
-
-                    // Check if the current the definition is on current layout
-                    if ($layoutDefinition['name'] === $currentLayoutValue['acf_fc_layout']) {
-
-                        // Now I have to set the value to definition and call the formatter
-                        foreach ($layoutDefinition['sub_fields'] as $fieldDefinition) {
-                            $fieldDefinition['value'] = $layoutValue[$fieldDefinition['name']];
-                            $currentLayoutValue += $acfHandler->formatField($fieldDefinition);
-                        }
-                    }
+            foreach ($fieldsValues as $fieldsValue) {
+                $index = 0;
+                $currentFormattedRepeaterFields = [];
+                foreach ($fieldsValue as $fieldKey => $fieldValue) {
+                    $currentSubField = $fieldsDefinitions[$index++];
+                    $currentSubField['value'] = $fieldValue;
+                    $currentFormattedRepeaterFields += $acfHandler->formatField($currentSubField);
                 }
-
-                $formattedData[] = $currentLayoutValue;
+                $formattedData[] = $currentFormattedRepeaterFields;
             }
 
             $returnValue = $formattedData;

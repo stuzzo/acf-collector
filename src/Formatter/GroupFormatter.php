@@ -15,11 +15,11 @@ use ACFCollector\Handler\ACFHandler;
 use function var_dump;
 
 /**
- * Class that formats repeater field
+ * Class that formats group field
  *
  * @since      1.0.0
  */
-class RepeaterFormatter extends BaseFormatter
+class GroupFormatter extends BaseFormatter
 {
     /**
      * GoogleMapFormatter constructor.
@@ -57,20 +57,14 @@ class RepeaterFormatter extends BaseFormatter
     protected function prepareFieldsForOutput($field, $isOutputFiltered)
     {
         if ($isOutputFiltered) {
-            $fieldsDefinitions = !empty($field['sub_fields']) ? $field['sub_fields'] : array();
-            $fieldsValues = !empty($field['value']) ? $field['value'] : array();
+            $fieldDefinitions = !empty($field['sub_fields']) ? $field['sub_fields'] : array();
+            $fieldValues = !empty($field['value']) ? $field['value'] : array();
             $formattedData = array();
             $acfHandler = ACFHandler::getInstance();
 
-            foreach ($fieldsValues as $fieldsValue) {
-                $index = 0;
-                $currentFormattedRepeaterFields = [];
-                foreach ($fieldsValue as $fieldKey => $fieldValue) {
-                    $currentSubField = $fieldsDefinitions[$index++];
-                    $currentSubField['value'] = $fieldValue;
-                    $currentFormattedRepeaterFields += $acfHandler->formatField($currentSubField);
-                }
-                $formattedData[] = $currentFormattedRepeaterFields;
+            foreach ($fieldDefinitions as $fieldIndex => $fieldDefinition) {
+                $fieldDefinition['value'] = $fieldValues[$fieldDefinition['name']];
+                $formattedData += $acfHandler->formatField($fieldDefinition);
             }
 
             $returnValue = $formattedData;

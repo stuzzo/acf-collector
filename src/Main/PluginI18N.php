@@ -33,12 +33,6 @@ class PluginI18N
      */
     public static function getPluginTextDomain()
     {
-//        static $inst = null;
-//        if ($inst === null) {
-//            $inst = new self();
-//        }
-//        return self::PLUGIN_TEXT_DOMAIN;
-
         return 'acf-collector';
     }
 

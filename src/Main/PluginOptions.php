@@ -56,7 +56,7 @@ class PluginOptions
             array($this, 'renderTextField'), //callback for displaying the settings field
             $optionsGroup, // settings page to where option is displayed
             $optionsSection,// section id for parent section.
-            array('name' => 'acf_collector_field_name', 'description' => 'This will be the key where you will find the custom fields')
+            array('name' => 'acf_collector_field_name', 'description' => __('This will be the key where you will find the custom fields', PluginI18N::getPluginTextDomain()))
         );
         \register_setting($optionsGroup, 'acf_collector_field_name', array($this, 'validateCollectorFieldName'));
 
@@ -69,7 +69,7 @@ class PluginOptions
             array(
                 'name' => 'acf_collector_is_output_filtered',
                 'description' => 'Choose if you want to receive all the fields properties or just the value',
-                'options' => array(array('label' => 'Yes', 'value' => 1), array('label' => 'No', 'value' => 0))
+                'options' => array(array('label' => __('Yes', PluginI18N::getPluginTextDomain()), 'value' => 1), array('label' => __('No', PluginI18N::getPluginTextDomain()), 'value' => 0))
             )
         );
         \register_setting($optionsGroup, 'acf_collector_is_output_filtered');

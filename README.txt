@@ -20,7 +20,7 @@ Do you want to have all the custom fields on the global `post` that you have on 
 
 The ACF Collector plugin appends your custom fields on pages, posts, taxonomies and all the Wordpress objects supported by the ACF plugin.
 
-You have to do nothing, just activate the plugin.
+You have to do nothing, just activate the plugin and configure which fields you want to be injected.
 
 == Installation ==
 
@@ -68,6 +68,7 @@ You can use the [support section of the plugin](https://wordpress.org/support/pl
 
 1. Rest API example response
 2. Dump post data in template
+3. Field setting to enable injection in api and template response
 
 == Changelog ==
 

@@ -11,6 +11,7 @@
 
 namespace ACFCollector\Main;
 
+use ACFCollector\Handler\AdminACFHandler;
 use ACFCollector\Handler\RestAPIHandler;
 use ACFCollector\Handler\TemplateHandler;
 
@@ -69,7 +70,12 @@ class PluginKernel
      */
     private $options;
 
-    public function __construct(PluginI18N $i18n, RestAPIHandler $apiHandler, TemplateHandler $templateHandler, PluginLoader $loader, PluginOptions $options)
+    /**
+     * @var \ACFCollector\Handler\AdminACFHandler
+     */
+    private $adminACFHandler;
+
+    public function __construct(PluginI18N $i18n, RestAPIHandler $apiHandler, TemplateHandler $templateHandler, PluginLoader $loader, PluginOptions $options, AdminACFHandler $adminACFHandler)
     {
         add_action('plugins_loaded', array($this, 'init'));
         $this->i18n = $i18n;
@@ -77,6 +83,7 @@ class PluginKernel
         $this->templateHandler = $templateHandler;
         $this->loader = $loader;
         $this->options = $options;
+        $this->adminACFHandler = $adminACFHandler;
     }
 
     /**
@@ -99,6 +106,7 @@ class PluginKernel
         $this->loadTextDomain();
         $this->initAPIHandler();
         $this->initTemplateHandler();
+        $this->initAdminACFHandler();
         $this->initLoader();
         $this->initOptionPage();
     }
@@ -131,6 +139,15 @@ class PluginKernel
     private function loadTextDomain()
     {
         $this->i18n->loadPluginTextdomain();
+    }
+
+    /**
+     * Initialize admin ACF handler
+     * @since    1.0.0
+     */
+    private function initAdminACFHandler()
+    {
+        $this->adminACFHandler->init();
     }
 
     /**

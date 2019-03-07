@@ -27,6 +27,7 @@
  */
 
 use ACFCollector\Handler\ACFHandler;
+use ACFCollector\Handler\AdminACFHandler;
 use ACFCollector\Handler\RestAPIHandler;
 use ACFCollector\Handler\TemplateHandler;
 use ACFCollector\Main\PluginActivator;
@@ -110,8 +111,9 @@ function initPlugin()
     $pluginLoader = new PluginLoader();
     $restAPIHandler = new RestAPIHandler($pluginLoader, ACFHandler::getInstance(), $acfCollectorFieldName);
     $templateHandler = new TemplateHandler($pluginLoader, ACFHandler::getInstance(), $acfCollectorFieldName);
+    $adminACFHandler = new AdminACFHandler($pluginLoader);
     $pluginOptions = new PluginOptions();
-    new PluginKernel($pluginI18N, $restAPIHandler, $templateHandler, $pluginLoader, $pluginOptions);
+    new PluginKernel($pluginI18N, $restAPIHandler, $templateHandler, $pluginLoader, $pluginOptions, $adminACFHandler);
 }
 
 initPlugin();

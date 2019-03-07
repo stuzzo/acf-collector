@@ -17,7 +17,7 @@ It appends the custom fields in a WP Rest request or inside a template object (s
 - [Plugin page](https://wordpress.org/plugin/acf-collector/)
 - [Advanced Custom Fields documentation](https://www.advancedcustomfields.com/resources/)
 
-## If you want, buy me a coffee!
+## If you want, buy me a coffee...maybe a beer would be better :)
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.me/stuzzo)
 

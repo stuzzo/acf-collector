@@ -45,7 +45,6 @@ class AdminACFHandler
     public function init()
     {
         $this->loader->addAction('acf/render_field_settings', $this, 'addSettingForShowingInCollectorField');
-        $this->loader->addFilter('acf/load_field', $this, 'verifyIfFieldShouldBeAddedToACFCollectorField');
     }
 
     /**
@@ -67,26 +66,6 @@ class AdminACFHandler
             ),
             true
         );
-    }
-
-    /**
-     * Enable the field to be added to the acf collector field
-     *
-     * @param $field array
-     * @since  1.0.0
-     * @return array|bool
-     */
-    public function verifyIfFieldShouldBeAddedToACFCollectorField($field)
-    {
-        if (is_admin()) {
-            return $field;
-        }
-
-        if (empty($field['add_to_acf_collector_plugin'])) {
-            return false;
-        }
-
-        return $field;
     }
 
 }

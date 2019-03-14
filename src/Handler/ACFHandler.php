@@ -17,6 +17,8 @@ use function get_comment_meta;
 use function get_option;
 use function get_term_meta;
 use function get_user_meta;
+use function is_admin;
+use function remove_filter;
 use function sprintf;
 use function usort;
 
@@ -60,9 +62,35 @@ final class ACFHandler
      */
     public function getFieldsFormattedFromObjectID($objectID)
     {
+        // I don't want to fire any behaviour if I'm in admin
+        if (is_admin()) {
+            return array();
+        }
+        add_filter('acf/load_field', array($this, 'verifyIfFieldShouldBeAddedToACFCollectorField'), 10, 1);
         $fields = get_field_objects($objectID);
+        remove_filter('acf/load_field', array($this, 'verifyIfFieldShouldBeAddedToACFCollectorField'));
 
         return $this->checkFieldsBeforeFormat($fields);
+    }
+
+    /**
+     * Enable the field to be added to the acf collector field
+     *
+     * @param $field array
+     * @since  1.0.0
+     * @return array|bool
+     */
+    public function verifyIfFieldShouldBeAddedToACFCollectorField($field)
+    {
+        if (is_admin()) {
+            return $field;
+        }
+
+        if (empty($field['add_to_acf_collector_plugin'])) {
+            return false;
+        }
+
+        return $field;
     }
 
     /**

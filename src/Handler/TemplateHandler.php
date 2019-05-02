@@ -65,6 +65,7 @@ class TemplateHandler
         $this->loader->addFilter('get_user_custom_fields', $this, 'addFieldsToCurrentUser');
         $this->loader->addFilter('wp_get_nav_menu_object', $this, 'addFieldsToCurrentMenu');
         $this->loader->addFilter('wp_get_nav_menus', $this, 'addFieldsToCurrentMenus', 10, 2);
+        $this->loader->addFilter('acf_collector_get_fields', $this, 'getAllFieldsForCurrentPost');
     }
 
     /**
@@ -172,6 +173,18 @@ class TemplateHandler
         }
 
         return $menus;
+    }
+
+    /**
+     * Returns an array with the custom fields related to the post
+     *
+     * @param int $postId
+     * @return \array
+     * @since  1.0.0
+     */
+    public function getAllFieldsForCurrentPost($postId)
+    {
+        return $this->ACFHandler->getFieldsFormattedFromObjectID($postId);
     }
 
 }

@@ -48,12 +48,7 @@ The same objects supported by the ACF plugin:
 
 = Does the plugin supports all the ACF field types? =
 
-Yes, but in the free version you don't find support for:
-
-- Repeater field
-- Gallery field
-- Flexible content field
-- Clone field
+Yes
 
 = How can I notify an issue or ask for support? =
 

@@ -143,6 +143,9 @@ class RestAPIHandler
      */
     public function getObjectCustomFields($object)
     {
+        if (!isset($object['id'])) {
+            return [];
+        }
         return $this->ACFHandler->getFieldsFormattedFromObjectID($object['id']);
     }
 
@@ -153,6 +156,9 @@ class RestAPIHandler
      */
     public function getTermCustomFields($currentTerm)
     {
+        if (!isset($currentTerm['id'])) {
+            return [];
+        }
         return $this->ACFHandler->getFieldsFormattedFromTerm($currentTerm['id'], $currentTerm['taxonomy']);
     }
 
@@ -163,6 +169,9 @@ class RestAPIHandler
      */
     public function getCommentCustomFields($currentComment)
     {
+        if (!isset($currentComment['id'])) {
+            return [];
+        }
         return $this->ACFHandler->getFieldsFormattedFromCommentID($currentComment['id']);
     }
 
@@ -173,6 +182,9 @@ class RestAPIHandler
      */
     public function getUserCustomFields($currentUser)
     {
+        if (!isset($currentUser['id'])) {
+            return [];
+        }
         return $this->ACFHandler->getFieldsFormattedFromUserID($currentUser['id']);
     }
 

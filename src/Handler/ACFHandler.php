@@ -17,6 +17,7 @@ use function get_comment_meta;
 use function get_option;
 use function get_term_meta;
 use function get_user_meta;
+use function is;
 use function is_admin;
 use function remove_filter;
 use function sprintf;
@@ -27,19 +28,6 @@ use function usort;
  */
 final class ACFHandler
 {
-    /**
-     * @var bool
-     * @since 1.0.0
-     */
-    private $isOutputFiltered;
-
-    /**
-     * @since 1.0.0
-     */
-    private function __construct() {
-        $this->isOutputFiltered = get_option('acf_collector_is_output_filtered', true);
-    }
-
     /**
      * @since 1.0.0
      */
@@ -86,7 +74,7 @@ final class ACFHandler
             return $field;
         }
 
-        if (empty($field['add_to_acf_collector_plugin'])) {
+        if (isset($field['acf_collector_add_field_to_plugin']) && 0 === $field['acf_collector_add_field_to_plugin']) {
             return false;
         }
 
@@ -262,8 +250,9 @@ final class ACFHandler
     {
         /** @var \ACFCollector\Formatter\FormatterInterface $formatter */
         $formatter = FormatterFactory::getFormatter($field['type']);
+        $isOutputFiltered = isset($field['acf_collector_is_output_filtered']) && 1 === $field['acf_collector_is_output_filtered'];
 
-        return $formatter->format($field, $this->isOutputFiltered);
+        return $formatter->format($field, $isOutputFiltered);
     }
 
     /**

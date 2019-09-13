@@ -45,6 +45,7 @@ class AdminACFHandler
     public function init()
     {
         $this->loader->addAction('acf/render_field_settings', $this, 'addSettingForShowingInCollectorField');
+        $this->loader->addAction('acf/render_field_settings', $this, 'addSettingForFilterFieldOutput');
     }
 
     /**
@@ -60,11 +61,32 @@ class AdminACFHandler
             array(
                 'label' => __('Add to ACF collector plugin?', PluginI18N::getPluginTextDomain()),
                 'instructions' => '',
-                'name' => 'add_to_acf_collector_plugin',
+                'name' => 'acf_collector_add_field_to_plugin',
                 'type' => 'true_false',
                 'ui' => 1,
-            ),
-            true
+                'default_value' => true
+            )
+        );
+    }
+
+    /**
+     * Add flag to filter the output field keys
+     *
+     * @param $field array
+     * @since  1.0.0
+     */
+    public function addSettingForFilterFieldOutput($field)
+    {
+        acf_render_field_setting(
+            $field,
+            array(
+                'label' => __('ACF Collector filter Output?', PluginI18N::getPluginTextDomain()),
+                'instructions' => '',
+                'name' => 'acf_collector_is_output_filtered',
+                'type' => 'true_false',
+                'ui' => 1,
+                'default_value' => false
+            )
         );
     }
 

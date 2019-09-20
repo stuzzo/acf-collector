@@ -64,7 +64,7 @@ class AdminACFHandler
                 'name' => 'acf_collector_add_field_to_plugin',
                 'type' => 'true_false',
                 'ui' => 1,
-                'default_value' => true
+                'default_value' => 0
             )
         );
     }
@@ -85,7 +85,7 @@ class AdminACFHandler
                 'name' => 'acf_collector_is_output_filtered',
                 'type' => 'true_false',
                 'ui' => 1,
-                'default_value' => false
+                'default_value' => 0
             )
         );
     }

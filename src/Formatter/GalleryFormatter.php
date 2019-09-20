@@ -57,7 +57,10 @@ class GalleryFormatter extends BaseFormatter
         $images = array();
         foreach ($field['value'] as $image) {
             if ($isOutputFiltered) {
-                $images[] = $image['url'];
+                $images[] = [
+                    'url' => $image['url'],
+                    'sizes' => $image['sizes'],
+                ];
             } else {
                 $images[] = $image;
             }

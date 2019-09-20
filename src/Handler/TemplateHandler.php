@@ -150,7 +150,7 @@ class TemplateHandler
     public function addFieldsToCurrentMenu($menu)
     {
         if (null === $menu || !($menu instanceof \WP_Term) || property_exists($menu, $this->ACFCollectorFieldName)) {
-            return;
+            return $menu;
         }
 
         $fields = $this->ACFHandler->getFieldsFormattedFromTerm($menu->term_id, $menu->taxonomy);

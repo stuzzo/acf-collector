@@ -1,4 +1,4 @@
-# ACF-Collector PRO
+# ACF-Collector
 
 Wordpress plugin that retrieves automatically all the custom fields added by you with the Advanced Custom Fields plugin.
 
